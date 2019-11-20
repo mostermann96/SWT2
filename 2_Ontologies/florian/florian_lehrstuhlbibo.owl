@@ -1,0 +1,318 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://st.inf.tu-dresden.de/lehrbuchbibo"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://st.inf.tu-dresden.de/lehrbuchbibo"
+     versionIRI="http://st.inf.tu-dresden.de/lehrbuchbibo/0.1.0">
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Annotation>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
+        <Literal>An ontology for organizing a faculty library</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/contributor"/>
+        <Literal>Florian Heinrich</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <Literal>faculty library</Literal>
+    </Annotation>
+    <Declaration>
+        <Class IRI="#AdminGruppe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#AusleihGruppe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Ausleihe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#BroschüreMedium"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#BuchMedium"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DatenträgerMedium"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#GastGruppe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Gruppe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Medium"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Nutzer"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ZeitschriftMedium"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#anderesMedium"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#elektronischesMedium"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#ausgeliehenVon"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#ausgeliehenesMedium"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#ausleihe"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isPartOf"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#adminRecht"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ausgeliehen"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ausleihRecht"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#bis"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#inhalt"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#isbn"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#name"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#vorbestellt"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://purl.org/dc/terms/contributor"/>
+    </Declaration>
+    <Declaration>
+        <Datatype abbreviatedIRI="xsd:isbn"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#AdminGruppe"/>
+        <Class IRI="#Gruppe"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AusleihGruppe"/>
+        <Class IRI="#Gruppe"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#BroschüreMedium"/>
+        <Class IRI="#Medium"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#BuchMedium"/>
+        <Class IRI="#Medium"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DatenträgerMedium"/>
+        <Class IRI="#Medium"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#GastGruppe"/>
+        <Class IRI="#Gruppe"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ZeitschriftMedium"/>
+        <Class IRI="#Medium"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#anderesMedium"/>
+        <Class IRI="#Medium"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#elektronischesMedium"/>
+        <Class IRI="#Medium"/>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="#AdminGruppe"/>
+        <Class IRI="#AusleihGruppe"/>
+        <Class IRI="#GastGruppe"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Ausleihe"/>
+        <Class IRI="#Gruppe"/>
+        <Class IRI="#Medium"/>
+        <Class IRI="#Nutzer"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#BroschüreMedium"/>
+        <Class IRI="#BuchMedium"/>
+        <Class IRI="#DatenträgerMedium"/>
+        <Class IRI="#ZeitschriftMedium"/>
+        <Class IRI="#anderesMedium"/>
+        <Class IRI="#elektronischesMedium"/>
+    </DisjointClasses>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#ausgeliehenesMedium"/>
+        <ObjectProperty IRI="#ausleihe"/>
+    </InverseObjectProperties>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#ausgeliehenVon"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#ausgeliehenesMedium"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#ausleihe"/>
+    </FunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="#ausgeliehenesMedium"/>
+    </InverseFunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="#ausleihe"/>
+    </InverseFunctionalObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#ausgeliehenVon"/>
+        <Class IRI="#Ausleihe"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#ausgeliehenesMedium"/>
+        <Class IRI="#Ausleihe"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#ausleihe"/>
+        <Class IRI="#Medium"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#isPartOf"/>
+        <Class IRI="#Nutzer"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#ausgeliehenVon"/>
+        <Class IRI="#Nutzer"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#ausgeliehenesMedium"/>
+        <Class IRI="#Medium"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#ausleihe"/>
+        <Class IRI="#Ausleihe"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#isPartOf"/>
+        <Class IRI="#Gruppe"/>
+    </ObjectPropertyRange>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#adminRecht"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#ausgeliehen"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#ausleihRecht"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#bis"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#inhalt"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#isbn"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#vorbestellt"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <DataPropertyDomain>
+        <DataProperty IRI="#adminRecht"/>
+        <Class IRI="#Gruppe"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ausgeliehen"/>
+        <Class IRI="#Medium"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ausleihRecht"/>
+        <Class IRI="#Gruppe"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#bis"/>
+        <Class IRI="#Ausleihe"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#inhalt"/>
+        <Class IRI="#Medium"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#isbn"/>
+        <Class IRI="#BuchMedium"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#name"/>
+        <Class IRI="#Medium"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#name"/>
+        <Class IRI="#Nutzer"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#vorbestellt"/>
+        <Class IRI="#Ausleihe"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#adminRecht"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ausgeliehen"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ausleihRecht"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#bis"/>
+        <Datatype abbreviatedIRI="xsd:dateTime"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#inhalt"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#isbn"/>
+        <Datatype abbreviatedIRI="xsd:isbn"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#name"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#vorbestellt"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
