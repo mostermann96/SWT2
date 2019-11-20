@@ -7,29 +7,26 @@
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      ontologyIRI="http://st.inf.tu-dresden.de/lehrbuchbibo"
      versionIRI="http://st.inf.tu-dresden.de/lehrbuchbibo/0.1.0">
+    <Prefix name="" IRI="http://st.inf.tu-dresden.de/lehrbuchbibo#"/>
+    <Prefix name="dc" IRI="http://purl.org/dc/elements/1.1/"/>
     <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
     <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
     <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="terms" IRI="http://purl.org/dc/terms/"/>
     <Annotation>
-        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
+        <AnnotationProperty abbreviatedIRI="dc:description"/>
         <Literal>An ontology for organizing a faculty library</Literal>
     </Annotation>
     <Annotation>
-        <AnnotationProperty IRI="http://purl.org/dc/terms/contributor"/>
+        <AnnotationProperty abbreviatedIRI="terms:contributor"/>
         <Literal>Florian Heinrich</Literal>
     </Annotation>
     <Annotation>
         <AnnotationProperty abbreviatedIRI="rdfs:label"/>
         <Literal>faculty library</Literal>
     </Annotation>
-    <Declaration>
-        <Class IRI="#AdminGruppe"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#AusleihGruppe"/>
-    </Declaration>
     <Declaration>
         <Class IRI="#Ausleihe"/>
     </Declaration>
@@ -43,7 +40,7 @@
         <Class IRI="#DatenträgerMedium"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#GastGruppe"/>
+        <Class IRI="#Gast"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Gruppe"/>
@@ -52,7 +49,13 @@
         <Class IRI="#Medium"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#Mitarbeiter"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#Nutzer"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Student"/>
     </Declaration>
     <Declaration>
         <Class IRI="#ZeitschriftMedium"/>
@@ -100,22 +103,14 @@
         <DataProperty IRI="#vorbestellt"/>
     </Declaration>
     <Declaration>
-        <AnnotationProperty IRI="http://purl.org/dc/elements/1.1/description"/>
+        <AnnotationProperty abbreviatedIRI="dc:description"/>
     </Declaration>
     <Declaration>
-        <AnnotationProperty IRI="http://purl.org/dc/terms/contributor"/>
+        <AnnotationProperty abbreviatedIRI="terms:contributor"/>
     </Declaration>
     <Declaration>
         <Datatype abbreviatedIRI="xsd:isbn"/>
     </Declaration>
-    <SubClassOf>
-        <Class IRI="#AdminGruppe"/>
-        <Class IRI="#Gruppe"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#AusleihGruppe"/>
-        <Class IRI="#Gruppe"/>
-    </SubClassOf>
     <SubClassOf>
         <Class IRI="#BroschüreMedium"/>
         <Class IRI="#Medium"/>
@@ -129,8 +124,16 @@
         <Class IRI="#Medium"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#GastGruppe"/>
-        <Class IRI="#Gruppe"/>
+        <Class IRI="#Gast"/>
+        <Class IRI="#Nutzer"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Mitarbeiter"/>
+        <Class IRI="#Nutzer"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Student"/>
+        <Class IRI="#Nutzer"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ZeitschriftMedium"/>
@@ -144,11 +147,6 @@
         <Class IRI="#elektronischesMedium"/>
         <Class IRI="#Medium"/>
     </SubClassOf>
-    <DisjointClasses>
-        <Class IRI="#AdminGruppe"/>
-        <Class IRI="#AusleihGruppe"/>
-        <Class IRI="#GastGruppe"/>
-    </DisjointClasses>
     <DisjointClasses>
         <Class IRI="#Ausleihe"/>
         <Class IRI="#Gruppe"/>
@@ -162,6 +160,10 @@
         <Class IRI="#ZeitschriftMedium"/>
         <Class IRI="#anderesMedium"/>
         <Class IRI="#elektronischesMedium"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Mitarbeiter"/>
+        <Class IRI="#Student"/>
     </DisjointClasses>
     <InverseObjectProperties>
         <ObjectProperty IRI="#ausgeliehenesMedium"/>

@@ -212,22 +212,6 @@
     
 
 
-    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#AdminGruppe -->
-
-    <owl:Class rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#AdminGruppe">
-        <rdfs:subClassOf rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe"/>
-    </owl:Class>
-    
-
-
-    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#AusleihGruppe -->
-
-    <owl:Class rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#AusleihGruppe">
-        <rdfs:subClassOf rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe"/>
-    </owl:Class>
-    
-
-
     <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#Ausleihe -->
 
     <owl:Class rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Ausleihe"/>
@@ -258,10 +242,10 @@
     
 
 
-    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#GastGruppe -->
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#Gast -->
 
-    <owl:Class rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#GastGruppe">
-        <rdfs:subClassOf rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe"/>
+    <owl:Class rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Gast">
+        <rdfs:subClassOf rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
     </owl:Class>
     
 
@@ -278,9 +262,26 @@
     
 
 
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#Mitarbeiter -->
+
+    <owl:Class rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Mitarbeiter">
+        <rdfs:subClassOf rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
+        <owl:disjointWith rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Student"/>
+    </owl:Class>
+    
+
+
     <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer -->
 
     <owl:Class rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#Student -->
+
+    <owl:Class rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Student">
+        <rdfs:subClassOf rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
+    </owl:Class>
     
 
 
@@ -316,14 +317,6 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
-        <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#AdminGruppe"/>
-            <rdf:Description rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#AusleihGruppe"/>
-            <rdf:Description rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#GastGruppe"/>
-        </owl:members>
-    </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
