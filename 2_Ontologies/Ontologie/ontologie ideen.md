@@ -28,29 +28,26 @@ Thing
 - istAusgeliehenVon
 - istVorbestelltVon
 - ID
-- anzahlandererBücherDiesesTitels:int
-- ausleihdauer:Duration
+- anzahlAndererBücherDiesesTitels:int
+- ausleihdauer : Duration
+- ausgeliehenVon: Nutzer
+- ausgeliehenBis: Date
+- vorbestellt: bool
+- vorbestelltVon: Nutzer
 - +Untertypspezifische Properties (zB ISBN, Ausgabe, Herausgabedatum, Autor, Verlag etc.)
 
-####AnalogMedium:
-- TODO
-
-####DigitalMedium
-- TODO
+#### AnalogMedium:
+- ?
 
 #### Nutzer:
 - gehörtZu:Gruppe
 - Name:String
+- ausgelieheneMedien: Medium
+
+#### Student:
+- Matrikelnummer
 
 #### Gruppe:
 - ausleihRecht:bool
 - adminRecht:bool
 - ausleihModifier:Duration
-
-#### Ausleihe:
-_entfernen, in Medium und Nutzer einordnen_
-- ausgeliehenesMedium: Medium
-- ausgeliehenVon: Nutzer
-- bis: Date
-- vorbestellt: bool
-- vonbestelltVon: Nutzer
