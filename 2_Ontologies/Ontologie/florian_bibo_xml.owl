@@ -28,9 +28,6 @@
         <Literal>faculty library</Literal>
     </Annotation>
     <Declaration>
-        <Class IRI="#Ausleihe"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#BroschüreMedium"/>
     </Declaration>
     <Declaration>
@@ -61,34 +58,19 @@
         <Class IRI="#ZeitschriftMedium"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#analogesMedium"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#anderesMedium"/>
     </Declaration>
     <Declaration>
         <Class IRI="#elektronischesMedium"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#ausgeliehenVon"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#ausgeliehenesMedium"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#ausleihe"/>
-    </Declaration>
-    <Declaration>
         <ObjectProperty IRI="#isPartOf"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#adminRecht"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#ausgeliehen"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#ausleihRecht"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#bis"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#inhalt"/>
@@ -98,9 +80,6 @@
     </Declaration>
     <Declaration>
         <DataProperty IRI="#name"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#vorbestellt"/>
     </Declaration>
     <Declaration>
         <AnnotationProperty abbreviatedIRI="dc:description"/>
@@ -113,15 +92,15 @@
     </Declaration>
     <SubClassOf>
         <Class IRI="#BroschüreMedium"/>
-        <Class IRI="#Medium"/>
+        <Class IRI="#analogesMedium"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#BuchMedium"/>
-        <Class IRI="#Medium"/>
+        <Class IRI="#analogesMedium"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#DatenträgerMedium"/>
-        <Class IRI="#Medium"/>
+        <Class IRI="#analogesMedium"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Gast"/>
@@ -137,22 +116,20 @@
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ZeitschriftMedium"/>
+        <Class IRI="#analogesMedium"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#analogesMedium"/>
         <Class IRI="#Medium"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#anderesMedium"/>
-        <Class IRI="#Medium"/>
+        <Class IRI="#analogesMedium"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#elektronischesMedium"/>
         <Class IRI="#Medium"/>
     </SubClassOf>
-    <DisjointClasses>
-        <Class IRI="#Ausleihe"/>
-        <Class IRI="#Gruppe"/>
-        <Class IRI="#Medium"/>
-        <Class IRI="#Nutzer"/>
-    </DisjointClasses>
     <DisjointClasses>
         <Class IRI="#BroschüreMedium"/>
         <Class IRI="#BuchMedium"/>
@@ -165,71 +142,16 @@
         <Class IRI="#Mitarbeiter"/>
         <Class IRI="#Student"/>
     </DisjointClasses>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#ausgeliehenesMedium"/>
-        <ObjectProperty IRI="#ausleihe"/>
-    </InverseObjectProperties>
-    <FunctionalObjectProperty>
-        <ObjectProperty IRI="#ausgeliehenVon"/>
-    </FunctionalObjectProperty>
-    <FunctionalObjectProperty>
-        <ObjectProperty IRI="#ausgeliehenesMedium"/>
-    </FunctionalObjectProperty>
-    <FunctionalObjectProperty>
-        <ObjectProperty IRI="#ausleihe"/>
-    </FunctionalObjectProperty>
-    <InverseFunctionalObjectProperty>
-        <ObjectProperty IRI="#ausgeliehenesMedium"/>
-    </InverseFunctionalObjectProperty>
-    <InverseFunctionalObjectProperty>
-        <ObjectProperty IRI="#ausleihe"/>
-    </InverseFunctionalObjectProperty>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#ausgeliehenVon"/>
-        <Class IRI="#Ausleihe"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#ausgeliehenesMedium"/>
-        <Class IRI="#Ausleihe"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#ausleihe"/>
-        <Class IRI="#Medium"/>
-    </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#isPartOf"/>
         <Class IRI="#Nutzer"/>
     </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#ausgeliehenVon"/>
-        <Class IRI="#Nutzer"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#ausgeliehenesMedium"/>
-        <Class IRI="#Medium"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#ausleihe"/>
-        <Class IRI="#Ausleihe"/>
-    </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#isPartOf"/>
         <Class IRI="#Gruppe"/>
     </ObjectPropertyRange>
     <SubDataPropertyOf>
         <DataProperty IRI="#adminRecht"/>
-        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
-    </SubDataPropertyOf>
-    <SubDataPropertyOf>
-        <DataProperty IRI="#ausgeliehen"/>
-        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
-    </SubDataPropertyOf>
-    <SubDataPropertyOf>
-        <DataProperty IRI="#ausleihRecht"/>
-        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
-    </SubDataPropertyOf>
-    <SubDataPropertyOf>
-        <DataProperty IRI="#bis"/>
         <DataProperty abbreviatedIRI="owl:topDataProperty"/>
     </SubDataPropertyOf>
     <SubDataPropertyOf>
@@ -240,25 +162,9 @@
         <DataProperty IRI="#isbn"/>
         <DataProperty abbreviatedIRI="owl:topDataProperty"/>
     </SubDataPropertyOf>
-    <SubDataPropertyOf>
-        <DataProperty IRI="#vorbestellt"/>
-        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
-    </SubDataPropertyOf>
     <DataPropertyDomain>
         <DataProperty IRI="#adminRecht"/>
         <Class IRI="#Gruppe"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#ausgeliehen"/>
-        <Class IRI="#Medium"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#ausleihRecht"/>
-        <Class IRI="#Gruppe"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#bis"/>
-        <Class IRI="#Ausleihe"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#inhalt"/>
@@ -276,25 +182,9 @@
         <DataProperty IRI="#name"/>
         <Class IRI="#Nutzer"/>
     </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#vorbestellt"/>
-        <Class IRI="#Ausleihe"/>
-    </DataPropertyDomain>
     <DataPropertyRange>
         <DataProperty IRI="#adminRecht"/>
         <Datatype abbreviatedIRI="xsd:boolean"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#ausgeliehen"/>
-        <Datatype abbreviatedIRI="xsd:boolean"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#ausleihRecht"/>
-        <Datatype abbreviatedIRI="xsd:boolean"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#bis"/>
-        <Datatype abbreviatedIRI="xsd:dateTime"/>
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#inhalt"/>
@@ -307,10 +197,6 @@
     <DataPropertyRange>
         <DataProperty IRI="#name"/>
         <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#vorbestellt"/>
-        <Datatype abbreviatedIRI="xsd:boolean"/>
     </DataPropertyRange>
 </Ontology>
 

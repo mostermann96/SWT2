@@ -51,3 +51,6 @@ Thing
 - ausleihRecht:bool
 - adminRecht:bool
 - ausleihModifier:Duration
+
+# noch offene Fragen:
+- wenn man über den Inhalt von Dokumenten suchen können soll, muss dann der Inhalt nicht auch als Property irgendwo in den Medien auftauchen?
