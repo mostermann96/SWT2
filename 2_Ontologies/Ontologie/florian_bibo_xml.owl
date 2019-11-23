@@ -136,6 +136,27 @@
         <DataProperty IRI="#titel"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#Gruppe_Lehrstuhlmitarbeiter"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Gruppe_Student"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Lehrbuch_der_Softwaretechnik"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Martin_Morgenstern"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Max_Mustermann"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Nature"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Objektorientierte_Softwaretechnik"/>
+    </Declaration>
+    <Declaration>
         <AnnotationProperty abbreviatedIRI="dc:description"/>
     </Declaration>
     <Declaration>
@@ -202,6 +223,213 @@
         <Class IRI="#Mitarbeiter"/>
         <Class IRI="#Student"/>
     </DisjointClasses>
+    <ClassAssertion>
+        <Class IRI="#Gruppe"/>
+        <NamedIndividual IRI="#Gruppe_Lehrstuhlmitarbeiter"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Gruppe"/>
+        <NamedIndividual IRI="#Gruppe_Student"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BuchMedium"/>
+        <NamedIndividual IRI="#Lehrbuch_der_Softwaretechnik"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Mitarbeiter"/>
+        <NamedIndividual IRI="#Martin_Morgenstern"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Nutzer"/>
+        <NamedIndividual IRI="#Max_Mustermann"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Student"/>
+        <NamedIndividual IRI="#Max_Mustermann"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ZeitschriftMedium"/>
+        <NamedIndividual IRI="#Nature"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#BuchMedium"/>
+        <NamedIndividual IRI="#Objektorientierte_Softwaretechnik"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#istAusgeliehenVon"/>
+        <NamedIndividual IRI="#Lehrbuch_der_Softwaretechnik"/>
+        <NamedIndividual IRI="#Max_Mustermann"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#ausgeliehenesMedium"/>
+        <NamedIndividual IRI="#Martin_Morgenstern"/>
+        <NamedIndividual IRI="#Objektorientierte_Softwaretechnik"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#gehörtZu"/>
+        <NamedIndividual IRI="#Martin_Morgenstern"/>
+        <NamedIndividual IRI="#Gruppe_Lehrstuhlmitarbeiter"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#ausgeliehenesMedium"/>
+        <NamedIndividual IRI="#Max_Mustermann"/>
+        <NamedIndividual IRI="#Lehrbuch_der_Softwaretechnik"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#gehörtZu"/>
+        <NamedIndividual IRI="#Max_Mustermann"/>
+        <NamedIndividual IRI="#Gruppe_Student"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#istAusgeliehenVon"/>
+        <NamedIndividual IRI="#Objektorientierte_Softwaretechnik"/>
+        <NamedIndividual IRI="#Martin_Morgenstern"/>
+    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#adminRecht"/>
+        <NamedIndividual IRI="#Gruppe_Lehrstuhlmitarbeiter"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ausleihdauer"/>
+        <NamedIndividual IRI="#Gruppe_Lehrstuhlmitarbeiter"/>
+        <Literal>1 week</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ausleihrecht"/>
+        <NamedIndividual IRI="#Gruppe_Lehrstuhlmitarbeiter"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#adminRecht"/>
+        <NamedIndividual IRI="#Gruppe_Student"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ausleihModifier"/>
+        <NamedIndividual IRI="#Gruppe_Student"/>
+        <Literal>0 weeks</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ausleihrecht"/>
+        <NamedIndividual IRI="#Gruppe_Student"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Verlag"/>
+        <NamedIndividual IRI="#Lehrbuch_der_Softwaretechnik"/>
+        <Literal>Spektrum Akademischer Verlag</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ausgabe"/>
+        <NamedIndividual IRI="#Lehrbuch_der_Softwaretechnik"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">2</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ausgeliehenBis"/>
+        <NamedIndividual IRI="#Lehrbuch_der_Softwaretechnik"/>
+        <Literal>2019/12/21</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ausleihdauer"/>
+        <NamedIndividual IRI="#Lehrbuch_der_Softwaretechnik"/>
+        <Literal>4 weeks</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#autor"/>
+        <NamedIndividual IRI="#Lehrbuch_der_Softwaretechnik"/>
+        <Literal>Helmut Balzert</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#istAusgeliehen"/>
+        <NamedIndividual IRI="#Lehrbuch_der_Softwaretechnik"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#istVorbestellt"/>
+        <NamedIndividual IRI="#Lehrbuch_der_Softwaretechnik"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#titel"/>
+        <NamedIndividual IRI="#Lehrbuch_der_Softwaretechnik"/>
+        <Literal>Lehrbuch der Softwaretechnik</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#name"/>
+        <NamedIndividual IRI="#Martin_Morgenstern"/>
+        <Literal>Martin Morgenstern</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Matrikelnummer"/>
+        <NamedIndividual IRI="#Max_Mustermann"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">12345</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#name"/>
+        <NamedIndividual IRI="#Max_Mustermann"/>
+        <Literal>Max Mustermann</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ausleihdauer"/>
+        <NamedIndividual IRI="#Nature"/>
+        <Literal>3 weeks</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#istAusgeliehen"/>
+        <NamedIndividual IRI="#Nature"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#istVorbestellt"/>
+        <NamedIndividual IRI="#Nature"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Verlag"/>
+        <NamedIndividual IRI="#Objektorientierte_Softwaretechnik"/>
+        <Literal>Pearson Studium</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#anzahlAndererMedienDiesesTitels"/>
+        <NamedIndividual IRI="#Objektorientierte_Softwaretechnik"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">0</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ausgeliehenBis"/>
+        <NamedIndividual IRI="#Objektorientierte_Softwaretechnik"/>
+        <Literal>2019/12/28</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ausleihdauer"/>
+        <NamedIndividual IRI="#Objektorientierte_Softwaretechnik"/>
+        <Literal>4 weeks</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#autor"/>
+        <NamedIndividual IRI="#Objektorientierte_Softwaretechnik"/>
+        <Literal>Allen Henry Dutoit</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#autor"/>
+        <NamedIndividual IRI="#Objektorientierte_Softwaretechnik"/>
+        <Literal>Bernd Brügge</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#istAusgeliehen"/>
+        <NamedIndividual IRI="#Objektorientierte_Softwaretechnik"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#istVorbestellt"/>
+        <NamedIndividual IRI="#Objektorientierte_Softwaretechnik"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#titel"/>
+        <NamedIndividual IRI="#Objektorientierte_Softwaretechnik"/>
+        <Literal>Objektorientierte Softwaretechnik : mit UML, Entwurfsmustern und Java</Literal>
+    </DataPropertyAssertion>
     <SubObjectPropertyOf>
         <ObjectProperty IRI="#ausgeliehenesMedium"/>
         <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>

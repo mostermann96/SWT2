@@ -285,6 +285,81 @@ terms:contributor rdf:type owl:AnnotationProperty .
 
 
 #################################################################
+#    Individuals
+#################################################################
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe_Lehrstuhlmitarbeiter
+:Gruppe_Lehrstuhlmitarbeiter rdf:type owl:NamedIndividual ,
+                                      :Gruppe ;
+                             :adminRecht "true"^^xsd:boolean ;
+                             :ausleihdauer "1 week" ;
+                             :ausleihrecht "true"^^xsd:boolean .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe_Student
+:Gruppe_Student rdf:type owl:NamedIndividual ,
+                         :Gruppe ;
+                :adminRecht "false"^^xsd:boolean ;
+                :ausleihModifier "0 weeks" ;
+                :ausleihrecht "true"^^xsd:boolean .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#Lehrbuch_der_Softwaretechnik
+:Lehrbuch_der_Softwaretechnik rdf:type owl:NamedIndividual ,
+                                       :BuchMedium ;
+                              :istAusgeliehenVon :Max_Mustermann ;
+                              :Verlag "Spektrum Akademischer Verlag" ;
+                              :ausgabe 2 ;
+                              :ausgeliehenBis "2019/12/21" ;
+                              :ausleihdauer "4 weeks" ;
+                              :autor "Helmut Balzert" ;
+                              :istAusgeliehen "true"^^xsd:boolean ;
+                              :istVorbestellt "false"^^xsd:boolean ;
+                              :titel "Lehrbuch der Softwaretechnik" .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#Martin_Morgenstern
+:Martin_Morgenstern rdf:type owl:NamedIndividual ,
+                             :Mitarbeiter ;
+                    :ausgeliehenesMedium :Objektorientierte_Softwaretechnik ;
+                    :gehörtZu :Gruppe_Lehrstuhlmitarbeiter ;
+                    :name "Martin Morgenstern" .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#Max_Mustermann
+:Max_Mustermann rdf:type owl:NamedIndividual ,
+                         :Nutzer ,
+                         :Student ;
+                :ausgeliehenesMedium :Lehrbuch_der_Softwaretechnik ;
+                :gehörtZu :Gruppe_Student ;
+                :Matrikelnummer 12345 ;
+                :name "Max Mustermann" .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#Nature
+:Nature rdf:type owl:NamedIndividual ,
+                 :ZeitschriftMedium ;
+        :ausleihdauer "3 weeks" ;
+        :istAusgeliehen "false"^^xsd:boolean ;
+        :istVorbestellt "false"^^xsd:boolean .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#Objektorientierte_Softwaretechnik
+:Objektorientierte_Softwaretechnik rdf:type owl:NamedIndividual ,
+                                            :BuchMedium ;
+                                   :istAusgeliehenVon :Martin_Morgenstern ;
+                                   :Verlag "Pearson Studium" ;
+                                   :anzahlAndererMedienDiesesTitels 0 ;
+                                   :ausgeliehenBis "2019/12/28" ;
+                                   :ausleihdauer "4 weeks" ;
+                                   :autor "Allen Henry Dutoit" ,
+                                          "Bernd Brügge" ;
+                                   :istAusgeliehen "true"^^xsd:boolean ;
+                                   :istVorbestellt "false"^^xsd:boolean ;
+                                   :titel "Objektorientierte Softwaretechnik : mit UML, Entwurfsmustern und Java" .
+
+
+#################################################################
 #    General axioms
 #################################################################
 

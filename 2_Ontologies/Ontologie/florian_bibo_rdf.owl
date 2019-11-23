@@ -440,6 +440,109 @@
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe_Lehrstuhlmitarbeiter -->
+
+    <owl:NamedIndividual rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe_Lehrstuhlmitarbeiter">
+        <rdf:type rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe"/>
+        <adminRecht rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</adminRecht>
+        <ausleihdauer>1 week</ausleihdauer>
+        <ausleihrecht rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ausleihrecht>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe_Student -->
+
+    <owl:NamedIndividual rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe_Student">
+        <rdf:type rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe"/>
+        <adminRecht rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</adminRecht>
+        <ausleihModifier>0 weeks</ausleihModifier>
+        <ausleihrecht rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</ausleihrecht>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#Lehrbuch_der_Softwaretechnik -->
+
+    <owl:NamedIndividual rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Lehrbuch_der_Softwaretechnik">
+        <rdf:type rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#BuchMedium"/>
+        <istAusgeliehenVon rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Max_Mustermann"/>
+        <Verlag>Spektrum Akademischer Verlag</Verlag>
+        <ausgabe rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</ausgabe>
+        <ausgeliehenBis>2019/12/21</ausgeliehenBis>
+        <ausleihdauer>4 weeks</ausleihdauer>
+        <autor>Helmut Balzert</autor>
+        <istAusgeliehen rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</istAusgeliehen>
+        <istVorbestellt rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</istVorbestellt>
+        <titel>Lehrbuch der Softwaretechnik</titel>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#Martin_Morgenstern -->
+
+    <owl:NamedIndividual rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Martin_Morgenstern">
+        <rdf:type rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Mitarbeiter"/>
+        <ausgeliehenesMedium rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Objektorientierte_Softwaretechnik"/>
+        <gehörtZu rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe_Lehrstuhlmitarbeiter"/>
+        <name>Martin Morgenstern</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#Max_Mustermann -->
+
+    <owl:NamedIndividual rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Max_Mustermann">
+        <rdf:type rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
+        <rdf:type rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Student"/>
+        <ausgeliehenesMedium rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Lehrbuch_der_Softwaretechnik"/>
+        <gehörtZu rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe_Student"/>
+        <Matrikelnummer rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">12345</Matrikelnummer>
+        <name>Max Mustermann</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#Nature -->
+
+    <owl:NamedIndividual rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Nature">
+        <rdf:type rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#ZeitschriftMedium"/>
+        <ausleihdauer>3 weeks</ausleihdauer>
+        <istAusgeliehen rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</istAusgeliehen>
+        <istVorbestellt rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</istVorbestellt>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#Objektorientierte_Softwaretechnik -->
+
+    <owl:NamedIndividual rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Objektorientierte_Softwaretechnik">
+        <rdf:type rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#BuchMedium"/>
+        <istAusgeliehenVon rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Martin_Morgenstern"/>
+        <Verlag>Pearson Studium</Verlag>
+        <anzahlAndererMedienDiesesTitels rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</anzahlAndererMedienDiesesTitels>
+        <ausgeliehenBis>2019/12/28</ausgeliehenBis>
+        <ausleihdauer>4 weeks</ausleihdauer>
+        <autor>Allen Henry Dutoit</autor>
+        <autor>Bernd Brügge</autor>
+        <istAusgeliehen rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</istAusgeliehen>
+        <istVorbestellt rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</istVorbestellt>
+        <titel>Objektorientierte Softwaretechnik : mit UML, Entwurfsmustern und Java</titel>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
     // General axioms
     //
     ///////////////////////////////////////////////////////////////////////////////////////
