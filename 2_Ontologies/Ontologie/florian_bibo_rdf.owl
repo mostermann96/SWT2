@@ -51,9 +51,21 @@
     
 
 
-    <!-- http://www.w3.org/2001/XMLSchema#isbn -->
+    <!-- http://www.java2s.com/Code/XML/XML-Schema/ISBNtypebypattern.htm#isbn -->
 
-    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#isbn"/>
+    <rdfs:Datatype rdf:about="http://www.java2s.com/Code/XML/XML-Schema/ISBNtypebypattern.htm#isbn"/>
+    
+
+
+    <!-- https://www.w3.org/TR/xmlschema-2/#ID -->
+
+    <rdfs:Datatype rdf:about="https://www.w3.org/TR/xmlschema-2/#ID"/>
+    
+
+
+    <!-- https://www.w3.org/TR/xmlschema-2/#duration -->
+
+    <rdfs:Datatype rdf:about="https://www.w3.org/TR/xmlschema-2/#duration"/>
     
 
 
@@ -68,11 +80,58 @@
     
 
 
-    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#isPartOf -->
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#ausgeliehenesMedium -->
 
-    <owl:ObjectProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#isPartOf">
+    <owl:ObjectProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#ausgeliehenesMedium">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#istAusgeliehenVon"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
+        <rdfs:range rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Medium"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#gehörtZu -->
+
+    <owl:ObjectProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#gehörtZu">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
         <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
         <rdfs:range rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#istAusgeliehenVon -->
+
+    <owl:ObjectProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#istAusgeliehenVon">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Medium"/>
+        <rdfs:range rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#istVorbestelltVon -->
+
+    <owl:ObjectProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#istVorbestelltVon">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#vorbestelltesMedium"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Medium"/>
+        <rdfs:range rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#vorbestelltesMedium -->
+
+    <owl:ObjectProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#vorbestelltesMedium">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
+        <rdfs:range rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Medium"/>
     </owl:ObjectProperty>
     
 
@@ -88,12 +147,123 @@
     
 
 
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#Matrikelnummer -->
+
+    <owl:DatatypeProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Matrikelnummer">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Student"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#positiveInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#Verlag -->
+
+    <owl:DatatypeProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Verlag">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#BuchMedium"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#ZeitschriftMedium"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#adminRecht -->
 
     <owl:DatatypeProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#adminRecht">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
         <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#anzahlAndererMedienDiesesTitels -->
+
+    <owl:DatatypeProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#anzahlAndererMedienDiesesTitels">
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Medium"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#positiveInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#ausgabe -->
+
+    <owl:DatatypeProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#ausgabe">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#BuchMedium"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#ZeitschriftMedium"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#ausgeliehenBis -->
+
+    <owl:DatatypeProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#ausgeliehenBis">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Medium"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#ausleihModifier -->
+
+    <owl:DatatypeProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#ausleihModifier">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe"/>
+        <rdfs:range rdf:resource="https://www.w3.org/TR/xmlschema-2/#duration"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#ausleihdauer -->
+
+    <owl:DatatypeProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#ausleihdauer">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Medium"/>
+        <rdfs:range rdf:resource="https://www.w3.org/TR/xmlschema-2/#duration"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#ausleihrecht -->
+
+    <owl:DatatypeProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#ausleihrecht">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#autor -->
+
+    <owl:DatatypeProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#autor">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Medium"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#herausgabedatum -->
+
+    <owl:DatatypeProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#herausgabedatum">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Medium"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#id -->
+
+    <owl:DatatypeProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#id">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Medium"/>
+        <rdfs:range rdf:resource="https://www.w3.org/TR/xmlschema-2/#ID"/>
     </owl:DatatypeProperty>
     
 
@@ -113,7 +283,27 @@
     <owl:DatatypeProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#isbn">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
         <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#BuchMedium"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#isbn"/>
+        <rdfs:range rdf:resource="http://www.java2s.com/Code/XML/XML-Schema/ISBNtypebypattern.htm#isbn"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#istAusgeliehen -->
+
+    <owl:DatatypeProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#istAusgeliehen">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Medium"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#istVorbestellt -->
+
+    <owl:DatatypeProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#istVorbestellt">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Medium"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
     </owl:DatatypeProperty>
     
 
@@ -121,8 +311,17 @@
     <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#name -->
 
     <owl:DatatypeProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#name">
-        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Medium"/>
         <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#titel -->
+
+    <owl:DatatypeProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#titel">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Medium"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     

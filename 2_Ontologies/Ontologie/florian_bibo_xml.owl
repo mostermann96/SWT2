@@ -67,10 +67,55 @@
         <Class IRI="#elektronischesMedium"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#isPartOf"/>
+        <ObjectProperty IRI="#ausgeliehenesMedium"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#gehörtZu"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#istAusgeliehenVon"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#istVorbestelltVon"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#vorbestelltesMedium"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#Matrikelnummer"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#Verlag"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#adminRecht"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#anzahlAndererMedienDiesesTitels"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ausgabe"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ausgeliehenBis"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ausleihModifier"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ausleihdauer"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ausleihrecht"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#autor"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#herausgabedatum"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#id"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#inhalt"/>
@@ -79,7 +124,16 @@
         <DataProperty IRI="#isbn"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#istAusgeliehen"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#istVorbestellt"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#name"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#titel"/>
     </Declaration>
     <Declaration>
         <AnnotationProperty abbreviatedIRI="dc:description"/>
@@ -88,7 +142,13 @@
         <AnnotationProperty abbreviatedIRI="terms:contributor"/>
     </Declaration>
     <Declaration>
-        <Datatype abbreviatedIRI="xsd:isbn"/>
+        <Datatype IRI="http://www.java2s.com/Code/XML/XML-Schema/ISBNtypebypattern.htm#isbn"/>
+    </Declaration>
+    <Declaration>
+        <Datatype IRI="https://www.w3.org/TR/xmlschema-2/#ID"/>
+    </Declaration>
+    <Declaration>
+        <Datatype IRI="https://www.w3.org/TR/xmlschema-2/#duration"/>
     </Declaration>
     <SubClassOf>
         <Class IRI="#BroschüreMedium"/>
@@ -142,16 +202,128 @@
         <Class IRI="#Mitarbeiter"/>
         <Class IRI="#Student"/>
     </DisjointClasses>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#ausgeliehenesMedium"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#gehörtZu"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#istAusgeliehenVon"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#istVorbestelltVon"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#vorbestelltesMedium"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#ausgeliehenesMedium"/>
+        <ObjectProperty IRI="#istAusgeliehenVon"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#istVorbestelltVon"/>
+        <ObjectProperty IRI="#vorbestelltesMedium"/>
+    </InverseObjectProperties>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#istAusgeliehenVon"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#istVorbestelltVon"/>
+    </FunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="#ausgeliehenesMedium"/>
+    </InverseFunctionalObjectProperty>
+    <InverseFunctionalObjectProperty>
+        <ObjectProperty IRI="#vorbestelltesMedium"/>
+    </InverseFunctionalObjectProperty>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isPartOf"/>
+        <ObjectProperty IRI="#ausgeliehenesMedium"/>
+        <Class IRI="#Nutzer"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#gehörtZu"/>
+        <Class IRI="#Nutzer"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#istAusgeliehenVon"/>
+        <Class IRI="#Medium"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#istVorbestelltVon"/>
+        <Class IRI="#Medium"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#vorbestelltesMedium"/>
         <Class IRI="#Nutzer"/>
     </ObjectPropertyDomain>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#isPartOf"/>
+        <ObjectProperty IRI="#ausgeliehenesMedium"/>
+        <Class IRI="#Medium"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#gehörtZu"/>
         <Class IRI="#Gruppe"/>
     </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#istAusgeliehenVon"/>
+        <Class IRI="#Nutzer"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#istVorbestelltVon"/>
+        <Class IRI="#Nutzer"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#vorbestelltesMedium"/>
+        <Class IRI="#Medium"/>
+    </ObjectPropertyRange>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#Matrikelnummer"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#Verlag"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
     <SubDataPropertyOf>
         <DataProperty IRI="#adminRecht"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#ausgabe"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#ausgeliehenBis"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#ausleihModifier"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#ausleihdauer"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#ausleihrecht"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#autor"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#herausgabedatum"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#id"/>
         <DataProperty abbreviatedIRI="owl:topDataProperty"/>
     </SubDataPropertyOf>
     <SubDataPropertyOf>
@@ -162,9 +334,73 @@
         <DataProperty IRI="#isbn"/>
         <DataProperty abbreviatedIRI="owl:topDataProperty"/>
     </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#istAusgeliehen"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#istVorbestellt"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#titel"/>
+        <DataProperty abbreviatedIRI="owl:topDataProperty"/>
+    </SubDataPropertyOf>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Matrikelnummer"/>
+        <Class IRI="#Student"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Verlag"/>
+        <Class IRI="#BuchMedium"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#Verlag"/>
+        <Class IRI="#ZeitschriftMedium"/>
+    </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#adminRecht"/>
         <Class IRI="#Gruppe"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#anzahlAndererMedienDiesesTitels"/>
+        <Class IRI="#Medium"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ausgabe"/>
+        <Class IRI="#BuchMedium"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ausgabe"/>
+        <Class IRI="#ZeitschriftMedium"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ausgeliehenBis"/>
+        <Class IRI="#Medium"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ausleihModifier"/>
+        <Class IRI="#Gruppe"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ausleihdauer"/>
+        <Class IRI="#Medium"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#ausleihrecht"/>
+        <Class IRI="#Gruppe"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#autor"/>
+        <Class IRI="#Medium"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#herausgabedatum"/>
+        <Class IRI="#Medium"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#id"/>
+        <Class IRI="#Medium"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#inhalt"/>
@@ -175,16 +411,68 @@
         <Class IRI="#BuchMedium"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
-        <DataProperty IRI="#name"/>
+        <DataProperty IRI="#istAusgeliehen"/>
+        <Class IRI="#Medium"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#istVorbestellt"/>
         <Class IRI="#Medium"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#name"/>
         <Class IRI="#Nutzer"/>
     </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#titel"/>
+        <Class IRI="#Medium"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#Matrikelnummer"/>
+        <Datatype abbreviatedIRI="xsd:positiveInteger"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#Verlag"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#adminRecht"/>
         <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#anzahlAndererMedienDiesesTitels"/>
+        <Datatype abbreviatedIRI="xsd:positiveInteger"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ausgabe"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ausgeliehenBis"/>
+        <Datatype abbreviatedIRI="xsd:dateTime"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ausleihModifier"/>
+        <Datatype IRI="https://www.w3.org/TR/xmlschema-2/#duration"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ausleihdauer"/>
+        <Datatype IRI="https://www.w3.org/TR/xmlschema-2/#duration"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ausleihrecht"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#autor"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#herausgabedatum"/>
+        <Datatype abbreviatedIRI="xsd:dateTime"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#id"/>
+        <Datatype IRI="https://www.w3.org/TR/xmlschema-2/#ID"/>
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#inhalt"/>
@@ -192,10 +480,22 @@
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#isbn"/>
-        <Datatype abbreviatedIRI="xsd:isbn"/>
+        <Datatype IRI="http://www.java2s.com/Code/XML/XML-Schema/ISBNtypebypattern.htm#isbn"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#istAusgeliehen"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#istVorbestellt"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#name"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#titel"/>
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
 </Ontology>

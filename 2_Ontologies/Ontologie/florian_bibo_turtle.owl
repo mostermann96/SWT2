@@ -30,29 +30,150 @@ terms:contributor rdf:type owl:AnnotationProperty .
 #    Datatypes
 #################################################################
 
-###  http://www.w3.org/2001/XMLSchema#isbn
-xsd:isbn rdf:type rdfs:Datatype .
+###  http://www.java2s.com/Code/XML/XML-Schema/ISBNtypebypattern.htm#isbn
+<http://www.java2s.com/Code/XML/XML-Schema/ISBNtypebypattern.htm#isbn> rdf:type rdfs:Datatype .
+
+
+###  https://www.w3.org/TR/xmlschema-2/#ID
+<https://www.w3.org/TR/xmlschema-2/#ID> rdf:type rdfs:Datatype .
+
+
+###  https://www.w3.org/TR/xmlschema-2/#duration
+<https://www.w3.org/TR/xmlschema-2/#duration> rdf:type rdfs:Datatype .
 
 
 #################################################################
 #    Object Properties
 #################################################################
 
-###  http://st.inf.tu-dresden.de/lehrbuchbibo#isPartOf
-:isPartOf rdf:type owl:ObjectProperty ;
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#ausgeliehenesMedium
+:ausgeliehenesMedium rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf owl:topObjectProperty ;
+                     owl:inverseOf :istAusgeliehenVon ;
+                     rdf:type owl:InverseFunctionalProperty ;
+                     rdfs:domain :Nutzer ;
+                     rdfs:range :Medium .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#gehörtZu
+:gehörtZu rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
           rdfs:domain :Nutzer ;
           rdfs:range :Gruppe .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#istAusgeliehenVon
+:istAusgeliehenVon rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf owl:topObjectProperty ;
+                   rdf:type owl:FunctionalProperty ;
+                   rdfs:domain :Medium ;
+                   rdfs:range :Nutzer .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#istVorbestelltVon
+:istVorbestelltVon rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf owl:topObjectProperty ;
+                   owl:inverseOf :vorbestelltesMedium ;
+                   rdf:type owl:FunctionalProperty ;
+                   rdfs:domain :Medium ;
+                   rdfs:range :Nutzer .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#vorbestelltesMedium
+:vorbestelltesMedium rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf owl:topObjectProperty ;
+                     rdf:type owl:InverseFunctionalProperty ;
+                     rdfs:domain :Nutzer ;
+                     rdfs:range :Medium .
 
 
 #################################################################
 #    Data properties
 #################################################################
 
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#Matrikelnummer
+:Matrikelnummer rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdfs:domain :Student ;
+                rdfs:range xsd:positiveInteger .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#Verlag
+:Verlag rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf owl:topDataProperty ;
+        rdfs:domain :BuchMedium ,
+                    :ZeitschriftMedium ;
+        rdfs:range xsd:string .
+
+
 ###  http://st.inf.tu-dresden.de/lehrbuchbibo#adminRecht
 :adminRecht rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf owl:topDataProperty ;
             rdfs:domain :Gruppe ;
             rdfs:range xsd:boolean .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#anzahlAndererMedienDiesesTitels
+:anzahlAndererMedienDiesesTitels rdf:type owl:DatatypeProperty ;
+                                 rdfs:domain :Medium ;
+                                 rdfs:range xsd:positiveInteger .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#ausgabe
+:ausgabe rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf owl:topDataProperty ;
+         rdfs:domain :BuchMedium ,
+                     :ZeitschriftMedium ;
+         rdfs:range xsd:string .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#ausgeliehenBis
+:ausgeliehenBis rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdfs:domain :Medium ;
+                rdfs:range xsd:dateTime .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#ausleihModifier
+:ausleihModifier rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty ;
+                 rdfs:domain :Gruppe ;
+                 rdfs:range <https://www.w3.org/TR/xmlschema-2/#duration> .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#ausleihdauer
+:ausleihdauer rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf owl:topDataProperty ;
+              rdfs:domain :Medium ;
+              rdfs:range <https://www.w3.org/TR/xmlschema-2/#duration> .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#ausleihrecht
+:ausleihrecht rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf owl:topDataProperty ;
+              rdfs:domain :Gruppe ;
+              rdfs:range xsd:boolean .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#autor
+:autor rdf:type owl:DatatypeProperty ;
+       rdfs:subPropertyOf owl:topDataProperty ;
+       rdfs:domain :Medium ;
+       rdfs:range xsd:string .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#herausgabedatum
+:herausgabedatum rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty ;
+                 rdfs:domain :Medium ;
+                 rdfs:range xsd:dateTime .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#id
+:id rdf:type owl:DatatypeProperty ;
+    rdfs:subPropertyOf owl:topDataProperty ;
+    rdfs:domain :Medium ;
+    rdfs:range <https://www.w3.org/TR/xmlschema-2/#ID> .
 
 
 ###  http://st.inf.tu-dresden.de/lehrbuchbibo#inhalt
@@ -66,14 +187,34 @@ xsd:isbn rdf:type rdfs:Datatype .
 :isbn rdf:type owl:DatatypeProperty ;
       rdfs:subPropertyOf owl:topDataProperty ;
       rdfs:domain :BuchMedium ;
-      rdfs:range xsd:isbn .
+      rdfs:range <http://www.java2s.com/Code/XML/XML-Schema/ISBNtypebypattern.htm#isbn> .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#istAusgeliehen
+:istAusgeliehen rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdfs:domain :Medium ;
+                rdfs:range xsd:boolean .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#istVorbestellt
+:istVorbestellt rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdfs:domain :Medium ;
+                rdfs:range xsd:boolean .
 
 
 ###  http://st.inf.tu-dresden.de/lehrbuchbibo#name
 :name rdf:type owl:DatatypeProperty ;
-      rdfs:domain :Medium ,
-                  :Nutzer ;
+      rdfs:domain :Nutzer ;
       rdfs:range xsd:string .
+
+
+###  http://st.inf.tu-dresden.de/lehrbuchbibo#titel
+:titel rdf:type owl:DatatypeProperty ;
+       rdfs:subPropertyOf owl:topDataProperty ;
+       rdfs:domain :Medium ;
+       rdfs:range xsd:string .
 
 
 #################################################################

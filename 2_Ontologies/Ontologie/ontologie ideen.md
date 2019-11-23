@@ -18,22 +18,17 @@ Thing
 ~~~
 # Properties
 
-
-
 #### Medium:
 - Titel:String
 - Inhalt:String
-- ausleihe:Ausleihe
-- ausleihStatus: bool
-- istAusgeliehenVon
-- istVorbestelltVon
-- ID
-- anzahlAndererBücherDiesesTitels:int
+- ID:UUID
+- anzahlAndererMedienDiesesTitels:int
 - ausleihdauer : Duration
-- ausgeliehenVon: Nutzer
+- istAusgeliehen: bool
+- istAusgeliehenVon: Nutzer
 - ausgeliehenBis: Date
-- vorbestellt: bool
-- vorbestelltVon: Nutzer
+- istVorbestellt: bool
+- istVorbestelltVon: Nutzer
 - +Untertypspezifische Properties (zB ISBN, Ausgabe, Herausgabedatum, Autor, Verlag etc.)
 
 #### AnalogMedium:
@@ -51,6 +46,3 @@ Thing
 - ausleihRecht:bool
 - adminRecht:bool
 - ausleihModifier:Duration
-
-# noch offene Fragen:
-- wenn man über den Inhalt von Dokumenten suchen können soll, muss dann der Inhalt nicht auch als Property irgendwo in den Medien auftauchen?
