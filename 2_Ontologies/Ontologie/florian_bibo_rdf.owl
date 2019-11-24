@@ -7,6 +7,7 @@
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
      xmlns:terms="http://purl.org/dc/terms/">
     <owl:Ontology rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo">
         <owl:versionIRI rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo/0.1.0"/>
@@ -37,6 +38,12 @@
     <!-- http://purl.org/dc/terms/contributor -->
 
     <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/contributor"/>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#definition -->
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2004/02/skos/core#definition"/>
     
 
 
@@ -365,7 +372,23 @@
     <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#Gast -->
 
     <owl:Class rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Gast">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
+                    <owl:Class>
+                        <owl:complementOf>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#gehörtZu"/>
+                                <owl:someValuesFrom rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe"/>
+                            </owl:Restriction>
+                        </owl:complementOf>
+                    </owl:Class>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
+        <skos:definition xml:lang="en">Any external visitor to the chair&apos;s library. Neither student nor staff.</skos:definition>
     </owl:Class>
     
 
@@ -385,8 +408,20 @@
     <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#Mitarbeiter -->
 
     <owl:Class rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Mitarbeiter">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#gehörtZu"/>
+                        <owl:hasValue rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe_Lehrstuhlmitarbeiter"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
         <owl:disjointWith rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Student"/>
+        <skos:definition xml:lang="en">Any member of staff, working for the chair</skos:definition>
     </owl:Class>
     
 
@@ -400,7 +435,19 @@
     <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#Student -->
 
     <owl:Class rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Student">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#gehörtZu"/>
+                        <owl:hasValue rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe_Student"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
+        <skos:definition xml:lang="en">Any student of the university, at which the chair is present</skos:definition>
     </owl:Class>
     
 
@@ -416,7 +463,18 @@
     <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#analogesMedium -->
 
     <owl:Class rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#analogesMedium">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#Medium"/>
+                    <owl:Class>
+                        <owl:complementOf rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#elektronischesMedium"/>
+                    </owl:Class>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Medium"/>
+        <skos:definition xml:lang="de">Alle Medien die in physischer Form vorhanden sind. Beispielsweise Bücher, Zeitschriften, CDs etc.</skos:definition>
     </owl:Class>
     
 
@@ -433,6 +491,7 @@
 
     <owl:Class rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#elektronischesMedium">
         <rdfs:subClassOf rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Medium"/>
+        <skos:definition xml:lang="de">Medium, welches nicht in physischer Form verfügbar ist. Z.B. PDFs oder ausschließlich online verfügbare Dateien.</skos:definition>
     </owl:Class>
     
 
