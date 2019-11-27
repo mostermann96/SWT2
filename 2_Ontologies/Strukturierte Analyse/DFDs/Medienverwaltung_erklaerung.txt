@@ -1,0 +1,20 @@
+.3 Verwalte Medien
+-.1 Einfüge, Lösche, Bearbeite Medium
+--.1 Einfüge Medium 
+--.2 Lösche Medium 
+--.3 Bearbeite Medium
+-.2 Verwalte Medienanfragen
+--.1 Bearbeite Ausleihmediumanfragen
+--.2 Bearbeite Mediensuchanfragen
+
+Medienanfragen sind Anfragen am Katalog von einem Benutzer. Anfragen beinhalten Filterparameter/Suchparameter u.a. Titel, Jahr, Author usw.
+
+Mediumdaten sind Daten, die zum Lösch-, Bearbeite-, Einfügvorgang von Medien nötig sind. Sie werden durch Admin(Mitarbeiter?) eingegeben, wenn eine Änderung im Katalog vorgenommen wird.
+
+Medienauskünfte sind Antworten auf Medienanfragen. Es können mehrere Mediumeinträge beinhalten (falls mehrere Exemplare von gleichem Medium) oder nur ein.
+
+Ausleihmediumanfragen sind Anfragen aus dem Prozess .2 Verwalte Ausleihen und führe Monitoring durch (Verwalte Anfragen), die das Titel vom gewünschten Ausleihmedium beinhaltet.
+
+Ausleihmediumauskünfte sind Antoworte auf Ausleihmediumanfragen und geben eine Liste von Ids (vom gewünschten Titel) zurück. Ids werden später im Datenbasis Ausleihen auf die Verfügbarkeit geprüft.
+
+Mediendaten sind jegliche Daten, die mit Medien zu tun haben.
