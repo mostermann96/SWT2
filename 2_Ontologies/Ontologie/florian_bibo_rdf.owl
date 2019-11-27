@@ -103,8 +103,18 @@
 
     <owl:ObjectProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#gehörtZu">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <owl:inverseOf rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#hatMitglied"/>
         <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
         <rdfs:range rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://st.inf.tu-dresden.de/lehrbuchbibo#hatMitglied -->
+
+    <owl:ObjectProperty rdf:about="http://st.inf.tu-dresden.de/lehrbuchbibo#hatMitglied">
+        <rdfs:domain rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Gruppe"/>
+        <rdfs:range rdf:resource="http://st.inf.tu-dresden.de/lehrbuchbibo#Nutzer"/>
     </owl:ObjectProperty>
     
 

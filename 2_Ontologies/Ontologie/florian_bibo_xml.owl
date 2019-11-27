@@ -14,6 +14,7 @@
     <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="skos" IRI="http://www.w3.org/2004/02/skos/core#"/>
     <Prefix name="terms" IRI="http://purl.org/dc/terms/"/>
     <Annotation>
         <AnnotationProperty abbreviatedIRI="dc:description"/>
@@ -71,6 +72,9 @@
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#gehörtZu"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hatMitglied"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#istAusgeliehenVon"/>
@@ -163,6 +167,9 @@
         <AnnotationProperty abbreviatedIRI="terms:contributor"/>
     </Declaration>
     <Declaration>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+    </Declaration>
+    <Declaration>
         <Datatype IRI="http://www.java2s.com/Code/XML/XML-Schema/ISBNtypebypattern.htm#isbn"/>
     </Declaration>
     <Declaration>
@@ -171,6 +178,47 @@
     <Declaration>
         <Datatype IRI="https://www.w3.org/TR/xmlschema-2/#duration"/>
     </Declaration>
+    <EquivalentClasses>
+        <Class IRI="#Gast"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Nutzer"/>
+            <ObjectComplementOf>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#gehörtZu"/>
+                    <Class IRI="#Gruppe"/>
+                </ObjectSomeValuesFrom>
+            </ObjectComplementOf>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Mitarbeiter"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Nutzer"/>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#gehörtZu"/>
+                <NamedIndividual IRI="#Gruppe_Lehrstuhlmitarbeiter"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Student"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Nutzer"/>
+            <ObjectHasValue>
+                <ObjectProperty IRI="#gehörtZu"/>
+                <NamedIndividual IRI="#Gruppe_Student"/>
+            </ObjectHasValue>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#analogesMedium"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Medium"/>
+            <ObjectComplementOf>
+                <Class IRI="#elektronischesMedium"/>
+            </ObjectComplementOf>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
     <SubClassOf>
         <Class IRI="#BroschüreMedium"/>
         <Class IRI="#analogesMedium"/>
@@ -323,12 +371,12 @@
     <DataPropertyAssertion>
         <DataProperty IRI="#ausgabe"/>
         <NamedIndividual IRI="#Lehrbuch_der_Softwaretechnik"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">2</Literal>
+        <Literal>ausgabe 2</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#ausgeliehenBis"/>
         <NamedIndividual IRI="#Lehrbuch_der_Softwaretechnik"/>
-        <Literal>2019/12/21</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2019-11-18T00:00:00</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#ausleihdauer"/>
@@ -398,7 +446,7 @@
     <DataPropertyAssertion>
         <DataProperty IRI="#ausgeliehenBis"/>
         <NamedIndividual IRI="#Objektorientierte_Softwaretechnik"/>
-        <Literal>2019/12/28</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2019-11-18T00:00:00</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#ausleihdauer"/>
@@ -455,6 +503,10 @@
         <ObjectProperty IRI="#istAusgeliehenVon"/>
     </InverseObjectProperties>
     <InverseObjectProperties>
+        <ObjectProperty IRI="#gehörtZu"/>
+        <ObjectProperty IRI="#hatMitglied"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
         <ObjectProperty IRI="#istVorbestelltVon"/>
         <ObjectProperty IRI="#vorbestelltesMedium"/>
     </InverseObjectProperties>
@@ -479,6 +531,10 @@
         <Class IRI="#Nutzer"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hatMitglied"/>
+        <Class IRI="#Gruppe"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
         <ObjectProperty IRI="#istAusgeliehenVon"/>
         <Class IRI="#Medium"/>
     </ObjectPropertyDomain>
@@ -497,6 +553,10 @@
     <ObjectPropertyRange>
         <ObjectProperty IRI="#gehörtZu"/>
         <Class IRI="#Gruppe"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hatMitglied"/>
+        <Class IRI="#Nutzer"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#istAusgeliehenVon"/>
@@ -668,7 +728,7 @@
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#anzahlAndererMedienDiesesTitels"/>
-        <Datatype abbreviatedIRI="xsd:positiveInteger"/>
+        <Datatype abbreviatedIRI="xsd:nonNegativeInteger"/>
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#ausgabe"/>
@@ -726,6 +786,31 @@
         <DataProperty IRI="#titel"/>
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+        <IRI>#Gast</IRI>
+        <Literal xml:lang="en">Any external visitor to the chair&apos;s library. Neither student nor staff.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+        <IRI>#Mitarbeiter</IRI>
+        <Literal xml:lang="en">Any member of staff, working for the chair</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+        <IRI>#Student</IRI>
+        <Literal xml:lang="en">Any student of the university, at which the chair is present</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+        <IRI>#analogesMedium</IRI>
+        <Literal xml:lang="de">Alle Medien die in physischer Form vorhanden sind. Beispielsweise Bücher, Zeitschriften, CDs etc.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+        <IRI>#elektronischesMedium</IRI>
+        <Literal xml:lang="de">Medium, welches nicht in physischer Form verfügbar ist. Z.B. PDFs oder ausschließlich online verfügbare Dateien.</Literal>
+    </AnnotationAssertion>
 </Ontology>
 
 
