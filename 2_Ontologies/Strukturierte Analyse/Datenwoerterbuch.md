@@ -39,3 +39,12 @@ ID = Nummer
 - Anfragen zur Verwaltung der Nutzerdaten = [Anfragen zur Änderung der Mitarbeiter-/Gastdaten|Anfragen zur Änderung der Studentendaten|Anfragen zum
 Löschen/Einfügen von Nutzerdaten]
 - Nutzer- und Gruppenauskünfte = [Auskünfte über Gruppendaten|Auskünfte über Gruppenzugehörigkeit von Nutzern|Auskünfte über Nutzerdaten]
+
+## Dictionary Max	(Medien)
+
+- Mediendaten  = [Mediendaten|Medienanfragen|Medienauskünfte]
+- Medienanfragen = [Medienanfragen|Ausleihmedienanfragen]
+- Medienauskünfte = [Medienauskünfte|Ausleihmedienauskünfte]
+- Anfrage zur Änderung der Mediendaten = [Anfrage zum Einfügen von Medien|Anfrage zum Bearbeiten von Medien|Anfrage zum Löschen von Medien]
+
+
