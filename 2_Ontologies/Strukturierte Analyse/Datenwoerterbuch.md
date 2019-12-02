@@ -12,7 +12,7 @@
 ## Lehrstuhlbibliothek
 Medium = Medien-ID + 1{Autor}* + Titel + Erscheinungsjahr + Art des Mediums + (Auflage) + (Seitenanzahl) + (Länge) + (Inhalt)  
 Nutzer = Nutzer-ID + Personenname + Lehrstuhlangehörigkeit + Gebührenstand + {Gruppen-ID} + {Ausleihe-ID}  
-Nutzergruppe = Nutzergruppenname + 1{Recht-ID}\*  
+Gruppe = Gruppenname + 1{Recht-ID}\*  
 Recht = Rechte-ID + Rechtbeschreibung
 
 Autor = Personenname + (akademischer Titel)  
@@ -25,3 +25,17 @@ Medien-ID = ID
 Ausleihe-ID = ID    
 Rechte-ID = ID  
 ID = Nummer  
+
+## Dictionary Florian (Nutzer & Gruppen):
+
+- Nutzer- und Gruppendaten = [Nutzerdaten|Gruppendaten|Gruppenzugehörigkeiten von Nutzern]
+
+- Nutzerdaten = [Studentendaten|Mitarbeiter/Gastdaten]
+- Nutzer- und Gruppenanfragen = [Anfragen von Gruppendaten|Anfragen zum Verwalten von Gruppen
+ und Gruppenzugehörigkeiten|Anfragen über Gruppenzugehörigkeit von Nutzern|Anfragen zur Verwaltung der Nutzerdaten|Anfragen von Nutzerdaten]
+- Anfragen zum Verwalten von Gruppen
+ und Gruppenzugehörigkeiten = [Anfragen zum Zuweisen/Löschen/Ändern der
+ Gruppenzugehörigkeit von Nutzern|Anfragen zum Erstellen/Ändern/Löschen der Gruppendaten]
+- Anfragen zur Verwaltung der Nutzerdaten = [Anfragen zur Änderung der Mitarbeiter-/Gastdaten|Anfragen zur Änderung der Studentendaten|Anfragen zum
+Löschen/Einfügen von Nutzerdaten]
+- Nutzer- und Gruppenauskünfte = [Auskünfte über Gruppendaten|Auskünfte über Gruppenzugehörigkeit von Nutzern|Auskünfte über Nutzerdaten]
