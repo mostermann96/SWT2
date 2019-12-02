@@ -12,7 +12,7 @@
 ## Lehrstuhlbibliothek
 Medium = Medien-ID + 1{Autor}* + Titel + Erscheinungsjahr + Art des Mediums + (Auflage) + (Seitenanzahl) + (Länge) + (Inhalt)  
 Nutzer = Nutzer-ID + Personenname + Lehrstuhlangehörigkeit + {Gruppen-ID} + {Ausleihe-ID}  
-Nutzergruppe = Nutzergruppenname + 1{Recht-ID}*
+Nutzergruppe = Nutzergruppenname + 1{Recht-ID}\*  
 Recht = Rechte-ID + Rechtbeschreibung
 
 Autor = Personenname + (akademischer Titel)  
