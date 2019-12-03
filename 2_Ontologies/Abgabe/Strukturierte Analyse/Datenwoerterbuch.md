@@ -1,5 +1,5 @@
 # Datenwörterbuch
-## Notation (siehe Balzert S.247):
+## Notation
 | Symbol        | Bedeutung     |
 | :-----------: |---------------|
 | = | ist äquivalent zu |
@@ -10,8 +10,6 @@
 | n{}m | Wiederholung von n bis m (inklusive) |
 
 ## Lehrstuhlbibliothek
-
-#### Basis (feinste Datenströme in diese aufsplitten, notfalls ergänzen)
 - Medium = Medien-ID + 1{Autor}* + Titel + Erscheinungsjahr + Art des Mediums + (Auflage) + (Seitenanzahl) + (Länge) + (Inhalt)  
 - Student = Nutzer + Matrikelnummer
 - Mitarbeiter = Nutzer + Personalnummer
@@ -23,7 +21,6 @@
 - Mahnung = Ausleihe-ID + Mahnungsdatum  
 - Vormerkung = Ausleihe-ID + Nutzer-ID + Vormerkungsdatum  
 - Verlängerung = Ausleihe-ID + Verlängerungsdatum
-
 - Autor = Personenname + (akademischer Titel)  
 - Art des Mediums = ["Buch" | "Zeitschrift" | "Datenträger" | "Elektronisch" | "Broschüre" | "Anderes"]  
 - Inhalt = unterstützte Datenformate  
@@ -37,13 +34,10 @@
 - Matrikelnummer = 7{[0|1|2|3|4|5|6|7|8|9]}7
 - Personalnummer = Nummer
 
-#### Kontextdia (hier vorkommende Datenströme werden in Ströme der Ebene darunter (DFD-0) augesplittet)
 - Anfragen = Nutzer- und Gruppenanfragen + Medienanfragen + Mediendaten + Ausleihanfragen + Monitoringanfragen    
 - Auskünfte = Nutzer- und Gruppenauskünfte + Ausleihauskünfte + Medienauskünfte + Monitoringauskünfte    
 - Nutzeranfragen = Ausleihanfragen + Medienanfragen   
 - Nutzerauskünfte = Ausleihauskünfte + Medienauskünfte  
-
-## Patrick (Ausleihen, Monitoring):
 - Ausleihe- und Monitoringdaten = {Ausleihe} + {Warnung} + {Mahnung} + {Vormerkung}    
 - Statusanfrage = Medium-ID  
 - Statusauskunft = 0{Ausleihe-ID}1 + {Warnung} + {Mahnung} + {Vormerkung}  
@@ -65,8 +59,6 @@
 - Monitoringauskünfte = Statusauskunft + Mahnungen und Warnungen
 - Anfragen zu ausgeliehenen Medien = Ausleihmedienanfragen
 - Auskünfte über ausgeliehene Medien = Ausleihmedienauskünfte
-
-## Dictionary Florian (Nutzer & Gruppen):
 - Nutzer- und Gruppendaten = Nutzerdaten + Gruppendaten + Gruppenzugehörigkeiten von Nutzern
 - Nutzerdaten = Studentendaten + Mitarbeiter/Gastdaten
 - Nutzer- und Gruppenanfragen = Anfragen von Gruppendaten + Anfragen zum Verwalten von Gruppen
@@ -89,9 +81,6 @@
 - Auskünfte über Gruppenzugehörigkeit von Nutzern = {Nutzer + 1{Gruppe}\*}
 - Auskünfte über Nutzerdaten = {Nutzer}
 - Datenbasis Nutzer und Gruppen = {Nutzer} + {Gruppe}
-
-## Dictionary Max	(Medien)
-
 - Verwalte Medien = Mediendaten + Medienanfragen + Medienauskünfte
 - Medienanfragen = Mediensuchanfragen + Ausleihmedienanfragen
 - Medienauskünfte = Mediensuchauskünfte + Ausleihmedienauskünfte
