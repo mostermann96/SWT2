@@ -10,10 +10,13 @@
 | n{}m | Wiederholung von n bis m (inklusive) |
 
 ## Lehrstuhlbibliothek
+
+#### Basis (feinste Datenströme in diese aufsplitten, notfalls ergänzen)
 Medium = Medien-ID + 1{Autor}* + Titel + Erscheinungsjahr + Art des Mediums + (Auflage) + (Seitenanzahl) + (Länge) + (Inhalt)  
 Nutzer = Nutzer-ID + Personenname + Lehrstuhlangehörigkeit + Gebührenstand + {Gruppen-ID} + {Ausleihe-ID}  
-Gruppe = Gruppenname + 1{Rechte-ID}\*  
-Recht = Rechte-ID + Rechtbeschreibung
+Gruppe = Gruppenname + 1{Rechte-ID}\* + {Nutzer-ID}  
+Recht = Rechte-ID + Rechtbeschreibung  
+Ausleihe = Ausleihe-ID + Medium-ID + Nutzer-ID + Ausleihdatum + Ausleihdauer  
 
 Autor = Personenname + (akademischer Titel)  
 Art des Mediums = ["Buch" | "Zeitschrift" | "Datenträger" | "Elektronisch" | "Broschüre" | "Anderes"]  
@@ -25,6 +28,17 @@ Medien-ID = ID
 Ausleihe-ID = ID    
 Rechte-ID = ID  
 ID = Nummer  
+
+#### Kontextdia (hier vorkommende Datenströme werden in Ströme der Ebene darunter (DFD-0) augesplittet)
+Anfragen = Nutzer- und Gruppenanfragen + Medienanfragen + Mediendaten + Ausleihanfragen + Ausleihdaten  
+Auskünfte = Nutzer- und Gruppenauskünfte + Ausleihauskünfte + Medienauskünfte  
+Nutzeranfragen = Ausleihanfragen + Medienanfragen   
+Nutzerauskünfte = Ausleihauskünfte + Medienauskünfte  
+
+#### DFD-0
+Nutzer- und Gruppenanfragen = ...
+
+
 
 ## Dictionary Florian (Nutzer & Gruppen):
 
