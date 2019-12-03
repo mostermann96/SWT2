@@ -97,7 +97,14 @@
 - Medienauskünfte = Mediensuchauskünfte + Ausleihmedienauskünfte
 - Mediendaten = {(Art des Mediums) + (Medium)+ (Inhalt)}
 - Anfrage zur Änderung der Mediendaten = Anfrage zum Einfügen von Medien + Anfrage zum Bearbeiten von Medien + Anfrage zum Löschen von Medien
+<<<<<<< HEAD
 - Mediensuchanfragen = String
 - Ausleihmedienanfragen = {Medien-ID}
 - Mediensuchauskünfte = {Medium}  
 - Ausleihmedienauskünfte = {Medium}
+=======
+- Mediensuchanfragen =(Medium)
+- Ausleihmedienanfragen = Medium + Nutzer
+- Mediensuchauskünfte = {(Medium)}
+- Ausleihmedienauskünfte = {(Medien + Ausleihe)} 
+>>>>>>> f324a1dc39d7e94b119e0fc8c69a5c80412db08e
