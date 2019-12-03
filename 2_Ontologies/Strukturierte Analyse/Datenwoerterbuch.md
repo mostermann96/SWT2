@@ -12,7 +12,7 @@
 ## Lehrstuhlbibliothek
 Medium = Medien-ID + 1{Autor}* + Titel + Erscheinungsjahr + Art des Mediums + (Auflage) + (Seitenanzahl) + (Länge) + (Inhalt)  
 Nutzer = Nutzer-ID + Personenname + Lehrstuhlangehörigkeit + Gebührenstand + {Gruppen-ID} + {Ausleihe-ID}  
-Gruppe = Gruppenname + 1{Recht-ID}\*  
+Gruppe = Gruppenname + 1{Rechte-ID}\*  
 Recht = Rechte-ID + Rechtbeschreibung
 
 Autor = Personenname + (akademischer Titel)  
@@ -46,5 +46,3 @@ Löschen/Einfügen von Nutzerdaten]
 - Medienanfragen = [Medienanfragen|Ausleihmedienanfragen]
 - Medienauskünfte = [Medienauskünfte|Ausleihmedienauskünfte]
 - Anfrage zur Änderung der Mediendaten = [Anfrage zum Einfügen von Medien|Anfrage zum Bearbeiten von Medien|Anfrage zum Löschen von Medien]
-
-
