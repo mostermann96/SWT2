@@ -13,6 +13,8 @@
 
 #### Basis (feinste Datenströme in diese aufsplitten, notfalls ergänzen)
 Medium = Medien-ID + 1{Autor}* + Titel + Erscheinungsjahr + Art des Mediums + (Auflage) + (Seitenanzahl) + (Länge) + (Inhalt)  
+Student = Nutzer + Matrikelnummer
+Mitarbeiter = Nutzer + Personalnummer
 Nutzer = Nutzer-ID + Personenname + Lehrstuhlangehörigkeit + Gebührenstand + {Gruppen-ID} + {Ausleihe-ID}  
 Gruppe = Gruppenname + 1{Rechte-ID}* + {Nutzer-ID}  
 Recht = Rechte-ID + Rechtbeschreibung  
@@ -32,6 +34,8 @@ Medien-ID = ID
 Ausleihe-ID = ID    
 Rechte-ID = ID  
 ID = Nummer  
+Matrikelnummer = 7{[0|1|2|3|4|5|6|7|8|9]}7
+Personalnummer = Nummer
 
 #### Kontextdia (hier vorkommende Datenströme werden in Ströme der Ebene darunter (DFD-0) augesplittet)
 Anfragen = Nutzer- und Gruppenanfragen + Medienanfragen + Mediendaten + Ausleihanfragen + Monitoringanfragen    
@@ -72,21 +76,35 @@ Auskünfte über ausgeliehene Medien =
 
 ## Dictionary Florian (Nutzer & Gruppen):
 
-- Nutzer- und Gruppendaten = [Nutzerdaten|Gruppendaten|Gruppenzugehörigkeiten von Nutzern]
+- Nutzer- und Gruppendaten = Nutzerdaten + Gruppendaten + Gruppenzugehörigkeiten von Nutzern
+- Nutzerdaten = Studentendaten + Mitarbeiter/Gastdaten
+- Nutzer- und Gruppenanfragen = Anfragen von Gruppendaten + Anfragen zum Verwalten von Gruppen
+ und Gruppenzugehörigkeiten + Anfragen über Gruppenzugehörigkeit von Nutzern + Anfragen zur Verwaltung der Nutzerdaten + Anfragen von Nutzerdaten
+- Anfragen zum Verwalten von Gruppen und Gruppenzugehörigkeiten = Anfragen zum Zuweisen/Löschen/Ändern der Gruppenzugehörigkeit von Nutzern + Anfragen zum Erstellen/Ändern/Löschen der Gruppendaten
+- Anfragen zur Verwaltung der Nutzerdaten = Anfragen zur Änderung der Mitarbeiter-/Gastdaten + Anfragen zur Änderung der Studentendaten + Anfragen zum Löschen/Einfügen von Nutzerdaten
+- Nutzer- und Gruppenauskünfte = Auskünfte über Gruppendaten + Auskünfte über Gruppenzugehörigkeit von Nutzern + Auskünfte über Nutzerdaten
 
-- Nutzerdaten = [Studentendaten|Mitarbeiter/Gastdaten]
-- Nutzer- und Gruppenanfragen = [Anfragen von Gruppendaten|Anfragen zum Verwalten von Gruppen
- und Gruppenzugehörigkeiten|Anfragen über Gruppenzugehörigkeit von Nutzern|Anfragen zur Verwaltung der Nutzerdaten|Anfragen von Nutzerdaten]
-- Anfragen zum Verwalten von Gruppen
- und Gruppenzugehörigkeiten = [Anfragen zum Zuweisen/Löschen/Ändern der
- Gruppenzugehörigkeit von Nutzern|Anfragen zum Erstellen/Ändern/Löschen der Gruppendaten]
-- Anfragen zur Verwaltung der Nutzerdaten = [Anfragen zur Änderung der Mitarbeiter-/Gastdaten|Anfragen zur Änderung der Studentendaten|Anfragen zum
-Löschen/Einfügen von Nutzerdaten]
-- Nutzer- und Gruppenauskünfte = [Auskünfte über Gruppendaten|Auskünfte über Gruppenzugehörigkeit von Nutzern|Auskünfte über Nutzerdaten]
+- Gruppendaten = {Gruppe}
+- Studentendaten = {Student}
+- Mitarbeiter/Gastdaten = {[Mitarbeiter|Nutzer]}
+- Gruppenzugehörigkeiten von Nutzern = {Nutzer + 1{Gruppe}\*}
+- Anfragen von Gruppendaten = {Gruppe}
+- Anfragen über Gruppenzugehörigkeit von Nutzern = {Nutzer + 1{Gruppe}\*}
+- Anfragen zum Zuweisen/Löschen/Ändern der Gruppenzugehörigkeit von Nutzern = {Nutzer + 1{Gruppe}\*}
+- Anfragen zum Erstellen/Ändern/Löschen der Gruppendaten = Gruppe
+- Anfragen zur Änderung der Mitarbeiter-/Gastdaten = [Mitarbeiter|Nutzer]
+- Anfragen zur Änderung der Studentendaten = Student
+- Anfragen zum Löschen/Einfügen von Nutzerdaten = Nutzer
+- Auskünfte über Gruppendaten = {Gruppe}
+- Auskünfte über Gruppenzugehörigkeit von Nutzern = {Nutzer + 1{Gruppe}\*}
+- Auskünfte über Nutzerdaten = {Nutzer}
+
+- Datenbasis Nutzer und Gruppen = {Nutzer} + {Gruppe}
 
 ## Dictionary Max	(Medien)
 
-- Mediendaten  = [Mediendaten|Medienanfragen|Medienauskünfte]
-- Medienanfragen = [Medienanfragen|Ausleihmedienanfragen]
-- Medienauskünfte = [Medienauskünfte|Ausleihmedienauskünfte]
-- Anfrage zur Änderung der Mediendaten = [Anfrage zum Einfügen von Medien|Anfrage zum Bearbeiten von Medien|Anfrage zum Löschen von Medien]
+- Verwalte Medien = Mediendaten + Medienanfragen + Medienauskünfte
+- Medienanfragen = Mediensuchanfragen + Ausleihmedienanfragen
+- Medienauskünfte = Mediensuchauskünfte + Ausleihmedienauskünfte
+- Mediendaten = {(Art des Mediums) + (Medium)+ (Inhalt)}
+- Anfrage zur Änderung der Mediendaten = Anfrage zum Einfügen von Medien + Anfrage zum Bearbeiten von Medien + Anfrage zum Löschen von Medien
