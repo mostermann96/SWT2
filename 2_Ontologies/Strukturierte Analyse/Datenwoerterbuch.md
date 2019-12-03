@@ -56,7 +56,8 @@ Löschen/Einfügen von Nutzerdaten]
 
 ## Dictionary Max	(Medien)
 
-- Mediendaten  = [Mediendaten|Medienanfragen|Medienauskünfte]
-- Medienanfragen = [Medienanfragen|Ausleihmedienanfragen]
-- Medienauskünfte = [Medienauskünfte|Ausleihmedienauskünfte]
+- Verwalte Medien = [Mediendaten|Medienanfragen|Medienauskünfte]
+- Medienanfragen = [Mediensuchanfragen|Ausleihmedienanfragen]
+- Medienauskünfte = [Mediensuchauskünfte|Ausleihmedienauskünfte]
+- Mediendaten = [{(Art des Mediums) + (Medium)+ (Inhalt)}] 
 - Anfrage zur Änderung der Mediendaten = [Anfrage zum Einfügen von Medien|Anfrage zum Bearbeiten von Medien|Anfrage zum Löschen von Medien]
