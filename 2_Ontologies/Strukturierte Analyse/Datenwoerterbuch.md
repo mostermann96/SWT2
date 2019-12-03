@@ -97,3 +97,7 @@
 - Medienauskünfte = Mediensuchauskünfte + Ausleihmedienauskünfte
 - Mediendaten = {(Art des Mediums) + (Medium)+ (Inhalt)}
 - Anfrage zur Änderung der Mediendaten = Anfrage zum Einfügen von Medien + Anfrage zum Bearbeiten von Medien + Anfrage zum Löschen von Medien
+- Mediensuchanfragen =(Medium)
+- Ausleihmedienanfragen = Medium + Nutzer
+- Mediensuchauskünfte = {(Medium)}
+- Ausleihmedienauskünfte = {(Medien + Ausleihe)} 
