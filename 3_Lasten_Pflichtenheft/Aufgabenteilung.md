@@ -8,7 +8,7 @@ __Name__ am Anfang der Aufgabe einfügen
 * __Jeder__ - Einlesen ins Thema (Balzert-Buch und Folien, siehe Aufgabenstellung)
 
 ### Lastenheft
-* Anlegen der Datei (LaTex) mit Inhaltsverzeichnis und Punkten nach Aufgabenstellung
+* __Patrick__ - Anlegen der Datei (LaTex) mit Inhaltsverzeichnis und Punkten nach Aufgabenstellung
 * Formulierung von: Punkt 1 Zielbestimmung, Punkt 2 Produkteinsatz
 * Umweltdiagramm (siehe Balzert) für Punkt 3
 * Punkt 4, Produktfunktionen (nur Textform)
