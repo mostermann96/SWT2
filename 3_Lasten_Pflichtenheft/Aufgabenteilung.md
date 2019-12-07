@@ -9,9 +9,9 @@ __Name__ am Anfang der Aufgabe einfügen
 
 ### Lastenheft
 * __Patrick__ - Anlegen der Datei (LaTex) mit Inhaltsverzeichnis und Punkten nach Aufgabenstellung
-* Formulierung von: Punkt 1 Zielbestimmung, Punkt 2 Produkteinsatz
+* __Max__ Formulierung von: Punkt 1 Zielbestimmung, Punkt 2 Produkteinsatz
 * Umweltdiagramm (siehe Balzert) für Punkt 3
-* Punkt 4, Produktfunktionen (nur Textform)
+* __Max__ Punkt 4, Produktfunktionen (nur Textform)
 * __Lidia__ - Use-Case-Diagramm für Punkt 4
 * Punkte 5 und 7
 * sobald Punkte 4 und 5 ausgearbeitet sind: Punkt 6
