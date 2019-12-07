@@ -2,6 +2,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
 
 \title{Lastenheft}
 
@@ -13,11 +14,53 @@
 \pagebreak
 
 \section{Zielbestimmung}
+
+Im Dezember 2019 erteilte der Lehrstuhl für Softwaretechnologie der TU Dresden(im Folgenden auch Auftraggeber genannt) den Auftrag für die Software zur Verwaltung der Lehrstuhlbibliothek an eine Übungsgruppe(im Folgenden auch Auftragnehmer genannt). Die bis jetzt analog verwaltete Bibliothek mit <50.000 physischen und digitalen Medien, soll auf eine vollständig digitale Verwaltung umgestellt werden, wobei das Ausleihen und Zurückgeben physischer Medien weiterhin von Hand eingetragen werden muss.
+
 \section{Produkteinsatz}
+Die Software ist vorerst nur für den Auftraggeber geplant, es soll aber die Möglichkeit bestehen, diese mit relativ geringem Zeitaufwand um andere Lehrstühle zu erweitern.
+Die Benutzer der Software werden die Mitarbeiter des Lehrstuhls, Studenten und Gäste des Lehrstuhls sein. Dabei soll es möglich sein, dass mehrere Nutzer gleichzeitig auf die Software zugreifen können. Verwaltungsrelevante Aktionen soll die Software ohne äußere Eingaben ausführen können. 
+
 \section{Produktübersicht}
 \section{Produktfunktionen}
+Das Software soll in der Lage sein, die Verwaltung einer Bibliothek durchzuführen. Das heißt, dass
+
+- /LF10/ das Ausleihen und Zurückgeben von physischen Medien unterschiedlicher Arten möglich ist
+
+- /LF20/ digitale Medien zum Download/Einsicht verfügbar sind
+
+- /LF30/ Mahnungen und Rückgabeerinnerungen automatisch versendet werden
+
+- /LF40/ Lehrstuhlmitarbeiter eine Übersicht über die aktuell ausgeliehen Medien erhalten können 
+
+- /LF50/ das Ausleihen nur Studenten und Mitarbeitern möglich ist
+
+- /LF60/ Ausleihen verlängert werden können, wenn das Medium nicht vorbestellt ist
+
+- /LF70/ eine Mediensuche über sämtliche Metadaten möglich ist
 \section{Produktdaten}
+
+- /LD10/ die Bibliothek wird auf längere Sicht <50.000 Medien umfassen
+
+
+Die innerhalb eines Jahres voraussichtlich abzuspeichernden Daten sind:
+
+- /LD20/ Nutzer- und Gruppeninformationen mit <1.000 Einträgen
+
+- /LD30/ Ausleihe- und Monitoringdaten mit <50.000 Einträgen
 \section{Produktleistungen}
+Die Ansprüche an Anfragedauer und Genauigkeit sind:
+
+- /LL10/ Anfragezeiten von <2sec für Mediensuchen
+
+- /LL20/ Anfragezeiten von <1sec für Nutzer- und Gruppensuchen
+
+- /LL30/ Anfragezeiten von <2sec für Ausleihe- und Monitoringdaten
+
+- /LL40/ Zeitliche Fristen sind auf 24-Stunden-Basis beschränkt, also reicht eine zeitliche Genauigkeit von 1 min
+
+- /LL50/ Abmahngebühren müssen in korrekten Euro-Werten angegeben werden
+
 \section{Qualitätsanforderungen}
 
 \end{document}
