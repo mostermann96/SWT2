@@ -13,7 +13,7 @@ __Name__ am Anfang der Aufgabe einfügen
 * Umweltdiagramm (siehe Balzert) für Punkt 3
 * __Max__ Punkt 4, Produktfunktionen (nur Textform)
 * __Lidia__ - Use-Case-Diagramm für Punkt 4
-* Punkte 5 und 7
+* __Max__ Punkte 5 und 7
 * sobald Punkte 4 und 5 ausgearbeitet sind: Punkt 6
 * Zusammenführung des Dokuments
 
