@@ -10,7 +10,7 @@ __Name__ am Anfang der Aufgabe einfügen
 ### Lastenheft
 * __Patrick__ - Anlegen der Datei (LaTex) mit Inhaltsverzeichnis und Punkten nach Aufgabenstellung
 * __Max__ Formulierung von: Punkt 1 Zielbestimmung, Punkt 2 Produkteinsatz
-* Umweltdiagramm (siehe Balzert) für Punkt 3
+* __Florian__ Umweltdiagramm (siehe Balzert) für Punkt 3
 * __Max__ Punkt 4, Produktfunktionen (nur Textform)
 * __Lidia__ - Use-Case-Diagramm für Punkt 4
 * __Max__ Punkte 5 und 7
@@ -20,3 +20,7 @@ __Name__ am Anfang der Aufgabe einfügen
 ### Pflichtenheft
 
 ### ZOPP
+* Problembaum erstellen
+* Zielbaum erstellen
+* Beide in geeigneter Form darstellen (drawio?)
+* Beide priorisieren

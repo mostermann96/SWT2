@@ -4,3 +4,7 @@
 *.pdf
 *.synctex.gz
 *.toc
+
+# added by Flo. Those are files created by my latex package when building.
+*.fls
+*.fdb_latexmk
