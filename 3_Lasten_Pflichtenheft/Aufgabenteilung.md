@@ -18,6 +18,7 @@ __Name__ am Anfang der Aufgabe einfügen
 * Zusammenführung des Dokuments
 
 ### Pflichtenheft
+Aufteilung nach Kapiteln
 
 ### ZOPP
 * Problembaum erstellen
