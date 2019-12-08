@@ -4,6 +4,7 @@
 \usepackage[ngerman]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
+\usepackage{pifont}% http://ctan.org/pkg/pifont
 
 \title{Lastenheft}
 
@@ -64,5 +65,29 @@ Die Ansprüche an Anfragedauer und Genauigkeit sind:
 \end{itemize}
 
 \section{Qualitätsanforderungen}
-
+\newcommand{\xmark}{\ding{55}}%
+\begin{table}[h]
+	\centering
+\begin{tabular}{ || c | c | c | c | c || }
+	\hline
+	Systemqualität & sehr gut & gut & normal & nicht relevant  \\ \hline
+	Funktionalität &  & \xmark &  &  \\ \hline
+	Zuverlässigkeit &  & \xmark &  &  \\ \hline
+	Benutzbarkeit &  & \xmark &  &  \\ \hline
+	Effizienz &  & \xmark &  &  \\ \hline
+	Wartbarkeit &  &  & \xmark &  \\ \hline
+	Portabilität &  &  &  & \xmark \\ 
+	\hline	
+\end{tabular}
+\caption{Qualitätszielbestimmung}
+\label{table:qualitätsanforderungen}
+\end{table}
+\begin{itemize}
+	\item /LQB10/ Qualitätsanforderung zur Benutzbarkeit des Systems
+	\item /LQE10/ Qualitätsanforderung zur Effizienz des Systems
+	\item /LQF10/ Qualitätsanforderung zur Funktionalität des Systems
+	\item /LQP10/ Qualitätsanforderung zur Portabilität des Systems
+	\item /LQW10/ Qualitätsanforderung zur Wartbarkeit des Systems
+	\item /LQZ10/ Qualitätsanforderung zur Zuverlässigkeit des Systems
+\end{itemize}
 \end{document}
