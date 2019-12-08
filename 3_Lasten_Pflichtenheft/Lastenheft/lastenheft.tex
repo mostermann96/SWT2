@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage[T1]{fontenc}
+\usepackage{graphicx}
 
 \title{Lastenheft}
 
@@ -19,16 +20,23 @@ Im Dezember 2019 erteilte der Lehrstuhl für Softwaretechnologie der TU Dresden(
 
 \section{Produkteinsatz}
 Die Software ist vorerst nur für den Auftraggeber geplant, es soll aber die Möglichkeit bestehen, diese mit relativ geringem Zeitaufwand um andere Lehrstühle zu erweitern.
-Die Benutzer der Software werden die Mitarbeiter des Lehrstuhls, Studenten und Gäste des Lehrstuhls sein. Dabei soll es möglich sein, dass mehrere Nutzer gleichzeitig auf die Software zugreifen können. Verwaltungsrelevante Aktionen soll die Software ohne äußere Eingaben ausführen können. 
+Die Benutzer der Software werden die Mitarbeiter des Lehrstuhls, Studenten und Gäste des Lehrstuhls sein. Dabei soll es möglich sein, dass mehrere Nutzer gleichzeitig auf die Software zugreifen können. Verwaltungsrelevante Aktionen soll die Software ohne äußere Eingaben ausführen können.
 
 \section{Produktübersicht}
+
+	\begin{figure}[h!]
+		\includegraphics[width=\linewidth]{diagrams/umweltdiagramm.png}
+		\caption{Umweltdiagramm}
+		\label{fig:umweltdiagramm}
+	\end{figure}
+
 \section{Produktfunktionen}
 Das Software soll in der Lage sein, die Verwaltung einer Bibliothek durchzuführen. Das heißt, dass
 \begin{itemize}
 	\item /LF10/ das Ausleihen und Zurückgeben von physischen Medien unterschiedlicher Arten möglich ist
 	\item /LF20/ digitale Medien zum Download/Einsicht verfügbar sind
 	\item /LF30/ Mahnungen und Rückgabeerinnerungen automatisch versendet werden
-	\item /LF40/ Lehrstuhlmitarbeiter eine Übersicht über die aktuell ausgeliehen Medien erhalten können 
+	\item /LF40/ Lehrstuhlmitarbeiter eine Übersicht über die aktuell ausgeliehen Medien erhalten können
 	\item /LF50/ das Ausleihen nur Studenten und Mitarbeitern möglich ist
 	\item /LF60/ Ausleihen verlängert werden können, wenn das Medium nicht vorbestellt ist
 	\item /LF70/ eine Mediensuche über sämtliche Metadaten möglich ist
