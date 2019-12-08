@@ -14,7 +14,7 @@ __Name__ am Anfang der Aufgabe einfügen
 * __Max__ Punkt 4, Produktfunktionen (nur Textform)
 * __Lidia__ - Use-Case-Diagramm für Punkt 4
 * __Max__ Punkte 5 und 6
-* Punkt 7 Qualitätsanforderungen
+* __Maria__ Punkt 7 Qualitätsanforderungen
 * Zusammenführung des Dokuments
 
 ### Pflichtenheft
