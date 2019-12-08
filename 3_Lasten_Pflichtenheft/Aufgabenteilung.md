@@ -19,6 +19,7 @@ __Name__ am Anfang der Aufgabe einfügen
 
 ### Pflichtenheft
 Aufteilung nach Kapiteln
+* __Maria__ Punkt 7 Benutzungsoberache
 
 ### ZOPP
 * Problembaum erstellen
