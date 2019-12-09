@@ -15,7 +15,7 @@ __Name__ am Anfang der Aufgabe einfügen
 * __Lidia__ - Use-Case-Diagramm für Punkt 4
 * __Max__ Punkte 5 und 6
 * __Maria__ Punkt 7 Qualitätsanforderungen
-* Zusammenführung des Dokuments
+* __Dilyara__ Zusammenführung des Dokuments
 
 ### Pflichtenheft
 Aufteilung nach Kapiteln
