@@ -22,7 +22,6 @@ Aufteilung nach Kapiteln
 * __Maria__ Punkt 7 Benutzungsoberache
 
 ### ZOPP
-* Problembaum erstellen
-* Zielbaum erstellen
-* Beide in geeigneter Form darstellen (drawio?)
+* __Patrick__ Problembaum erstellen
+* __Patrick__ Zielbaum erstellen
 * Beide priorisieren
