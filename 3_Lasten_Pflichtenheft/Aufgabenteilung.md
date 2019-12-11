@@ -19,9 +19,14 @@ __Name__ am Anfang der Aufgabe einfügen
 
 ### Pflichtenheft
 Aufteilung nach Kapiteln
+* __Lidia__ Punkt 1 und 9
+* __Max__ Punkte 4,5,6
+* __Dilyara__ Punkte 2,8
+* __Patrick__ Punkt 3
 * __Maria__ Punkt 7 Benutzungsoberache
+* __Florian__ Glossar & alles Korrekturlesen
 
 ### ZOPP
 * __Patrick__ Problembaum erstellen
 * __Patrick__ Zielbaum erstellen
-* Beide priorisieren
+* __Patrick__ Beide priorisieren
