@@ -9,3 +9,6 @@
 # added by Flo. Those are files created by my latex package when building.
 *.fls
 *.fdb_latexmk
+
+# Pdf for the use case diagram for the better quality
+!anwendungsfalldiagramm.pdf
