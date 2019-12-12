@@ -21,8 +21,66 @@
 
 \section{Zielbestimmung}
 \subsection{Musskriterien}
+\paragraph{Allgemein}
+\begin{itemize}
+	\item /M01/ Akteure: Gast, Nutzer, wobei Gast \< Nutzer (Vererbung)
+	\item /M02/ Die Bibliothek soll von Nutzern, also von Lehrstuhlmitarbeitern und Studenten benutzt werden.
+	\item /M03/ Es gibt drei Gruppen von Nutzern mit verschiedenen Rechten: Lehrstuhlmitarbeiter, Studenten, Administratoren, wobei Studenten \< Lehrstuhlmitarbeiter \< Administratoren (Vererbung)
+	\item /M04/ Jeder Nutzer soll zu einer Gruppe gehören
+	\item /M05/ Studenten sollen nur zur Gruppe Studenten gehören.
+	\item /M06/ Lehrstuhlmitarbeiter sollen entweder zur Gruppe Lehrstuhlmitarbeiter oder Administratoren gehören.
+	\item /M07/ Es muss immer mindestens ein Nutzer innerhalb Gruppe Administratoren existieren
+	\item /M08/ Eine intuitive, rechnergestützte GUI soll umgesetzt werden
+	\item /M09/ Die Produktleistungswerten sollen eingehalten werden
+	\item /M10/ Alle Produktdateneinträge sollen gespeichert werden
+	\item /M11/ Das System soll von jedem Rechnersystem am Lehrstuhl erreichbar sein
+	\item /M12/ Mehrere Nutzer können gleichzeitig auf die Software zugreifen
+	\item /M13/ Das System soll Bücher, Zeitschriften und Datenträger aller Art sowie elektronische Medien verwalten können
+	\item /M14/ Automatisches Versenden von Mahnungen ist möglich
+	\item /M15/ Automatisches Versenden von Rückgabeerinnerungen ist möglich
+\end{itemize}
+\paragraph{Gast kann ...}
+\begin{itemize}
+	\item /M16/ eine Suche nach einem Medium über Metadaten ausführen
+	\item /M17/ eine Suche nach einem digitalen Medium über den Inhalt ausführen
+\end{itemize}
+\paragraph{Nutzer kann ...}
+\begin{itemize} 
+	\item /M18/ sich einloggen
+	\item /M19/ sich ausloggen
+	\item /M20/ physische Medien ausleihen 
+	\item /M21/ physische Medien vormerken 
+	\item /M22/ physische Medien verlängern 
+	\item /M23/ physische Medien zurückgeben
+	\item /M24/ digitale Medien ansehen 
+	\item /M25/ digitale Medien herunterladen 
+\end{itemize}	
+\paragraph{Nutzer aus der Gruppe Lehrstuhlmitarbeiter kann ...}
+\begin{itemize}
+	\item /M26/ eine Übersicht über die aktuell ausgeliehenen Medien erhalten
+	\item /M27/ ein neues Medium hinzufügen
+	\item /M28/ Daten von Medien ändern  
+	\item /M29/ einen neuen Nutzer zur Gruppe Studenten hinzufügen
+	\item /M30/ Daten von Nutzern aus der Gruppe Studenten ändern
+\end{itemize}	
+\paragraph{Nutzer aus der Gruppe Administratoren kann ...}
+\begin{itemize}
+	\item /M31/ einen neuen Nutzer zur Gruppe Studenten, Lehrstuhlmitarbeiter oder Administratoren hinzufügen
+	\item /M32/ Daten von allen Nutzern ändern
+	\item /M33/ Rechte von Gruppen ändern  	 	
+\end{itemize}	
 \subsection{Wunschkriterien}
+\begin{itemize}
+	\item /K01/ Einführung einer neuen Medium-Kategorie durch Lehrstuhlmitarbeiter
+	\item /K02/ Explizite Änderung vom Ausleihdauer für jede Ausleihe 
+	\item /K03/ System für das Zurücksetzen vom Passwort
+	\item /K04/ Skalierbarkeit vom System, um es leicht um weitere Lehrstühle erweitern zu können
+\end{itemize}
 \subsection{Abgrenzungskriterien}
+\begin{itemize}
+	\item /A01/ keine Unterstützung für Touchscreens
+	\item /A02/ kein großer Fokus auf das Sicherheitssystem des Systems, nicht immun gegen Hacker-Angriffe 
+\end{itemize}
 \pagebreak
 
 \section{Produkteinsatz}
@@ -70,6 +128,44 @@
 \pagebreak
 
 \section{Globale Testszenarien/Akzeptanztestfälle}
+\begin{table}{\linewidth}
+	\begin{tabular}{3*p}
+		\textbf{Id} & \textbf{Beschreibung} & \textbf{Erwartetes Ergebnis}\\
+		\hline
+		/T01/ & Zugang auf die Webseite außerhalb des Lehrstuhls & Seite nicht verfügbar\\
+		/T02/ & Einloggen mit unkorrekten Daten & Einloggen fehlgeschlagen\\
+		/T03/ & Einloggen mit korrekten Daten & Einloggen erfolgreich\\
+		/T04/ & Ausloggen & Ausloggen erfolgreich\\
+		/T05/ & Ein paar Testpersonen gleichzeitig greifen auf die Seite zu & Kein Absturz\\
+		/T06/ & Hinzufügen vom Student zur Gruppe Studenten durch Lehrstuhlmitarbeiter & Der Student wird Nutzer\\
+		/T07/ & Löschen vom letzten Administrator durch diesen Administrator & Fehlermeldung\\
+		/T08/ & Hinzufügen vom Lehrstuhlmitarbeiter zur Gruppe Administratoren durch Administrator & Der Lehrstuhlmitarbeiter wird Administrator\\
+		/T09/ & Löschen vom einen Administrator durch Administrator & der Nutzer wird zur Gruppe Lehrstuhlmitarbeiter gehören\\
+		/T10/ & Hinzufügen vom Student zur Gruppe Administratoren & Fehlermeldung\\
+		/T11/ & Hinzufügen vom Lehrstuhlmitarbeiter durch Administrator zur Gruppe Studenten & Fehlermeldung\\
+		/T12/ & Hinzufügen eines Buches vom Titel \"Buch1\" (ohne andere Metadaten) zum System & Fehlermeldung bei der Validierung\\
+		/T13/ & Hinzufügen eines Buches vom Titel \"Buch1\" (mit anderen Metadaten) zum System & Ein Buch vom Titel \"Buch1\" wurde zum Katalog hinzugefügt\\
+		/T14/ & Hinzufügen eines E-Books vom Titel \"Buch2\" und Inhalt \"...lorem ipsum\" (mit anderen Metadaten) zum System & Ein E-Book wurde zum Katalog hinzugefügt\\
+		/T15/ & Suchen über das Wort \"Buch\" & Zwei Einträge gefunden\\
+		/T16/ & Suchen über das Wort \"Buch1\" & Ein Eintrag gefunden\\
+		/T17/ & Suchen über das Wort \"lorem\" & Ein Eintrag gefunden\\
+		/T18/ & Anschauen vom E-Book \"Buch2\" & Anschauen war möglich\\
+		/T19/ & Herunterladen vom E-Book \"Buch2\" & Herunterladen wurde erfolgreich abgeschlossen\\
+		/T20/ & Ausleihen vom Buch \"Buch1\" & Ausleihe erfolgreich abgeschlossen\\
+		/T21/ & Änderung von der Ausleihedauer für die Gruppe Studenten auf 3 Tage durch Administrator & Erfolgreiche Änderung\\
+		/T22/ & Drei Tage vor der erwarteten Abgabe für ein Medium & Versand einer Rückgabeerinnerung zum Student über \"Buch1\" \\
+		/T23/ & Änderung vom Titel vom \"Buch1\" zum \"Buch3\" & Änderung erfolgreich\\
+		/T24/ & Abrufen von einer Übersicht über die aktuell ausgeliehenen Medien erhalten & korrekte Daten angezeigt (\"Buch 3\" ist ausgeliehen)\\
+		/T25/ & das Ausleihdatum ist vorbei & Versand einer Mahnung zum Student über \"Buch1\" mit der Strafangaben in Euros \\
+		/T26/ & Rückgabe vom Buch \"Buch1\" & Rückgabe erfolgreich abgeschlossen\\
+		/T27/ & Abrufen von einer Übersicht über die aktuell ausgeliehenen Medien erhalten & korrekte Daten angezeigt (leer)\\
+		/T28/ & [mehrere Medien hinzugefügt] Schicken einer Anfrage für ein Medium & Anfragezeit von\<2sec\\
+		/T29/ & [mehrere Nutzer hinzugefügt] Schicken einer Anfrage für ein Nutzer & Anfragezeit von\<1sec\\
+		/T30/ & Schicken einer Anfrage für eine Gruppe & Anfragezeit von\<1sec\\
+		/T31/ & [mehrere Ausleihen durchgeführt] Schicken einer Anfrage für eine Ausleihe & Anfragezeit von\<2sec\\
+    \end{tabular}
+    \caption{Akzeptanztestfälle}
+\end{table}
 \pagebreak
 
 \section{Glossar}
