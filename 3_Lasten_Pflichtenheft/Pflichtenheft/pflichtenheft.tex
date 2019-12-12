@@ -71,10 +71,10 @@
 \end{itemize}	
 \subsection{Wunschkriterien}
 \begin{itemize}
-	\item /K01/ Einführung einer neuen Medium-Kategorie durch Lehrstuhlmitarbeiter
-	\item /K02/ Explizite Änderung vom Ausleihdauer für jede Ausleihe 
-	\item /K03/ System für das Zurücksetzen vom Passwort
-	\item /K04/ Skalierbarkeit vom System, um es leicht um weitere Lehrstühle erweitern zu können
+	\item /W01/ Einführung einer neuen Medium-Kategorie durch Lehrstuhlmitarbeiter
+	\item /W02/ Explizite Änderung vom Ausleihdauer für jede Ausleihe 
+	\item /W03/ System für das Zurücksetzen vom Passwort
+	\item /W04/ Skalierbarkeit vom System, um es leicht um weitere Lehrstühle erweitern zu können
 \end{itemize}
 \subsection{Abgrenzungskriterien}
 \begin{itemize}
@@ -128,43 +128,79 @@
 \pagebreak
 
 \section{Globale Testszenarien/Akzeptanztestfälle}
-\begin{table}{\linewidth}
-	\begin{tabular}{3*p}
+\begin{table}[h]
+	\begin{tabular}{p{1.2cm}|p{6.5cm}|p{5.5cm}}
 		\textbf{Id} & \textbf{Beschreibung} & \textbf{Erwartetes Ergebnis}\\
 		\hline
 		/T01/ & Zugang auf die Webseite außerhalb des Lehrstuhls & Seite nicht verfügbar\\
-		/T02/ & Einloggen mit unkorrekten Daten & Einloggen fehlgeschlagen\\
+		\hline
+		/T02/ & Einloggen mit unkorrekten Daten & Einloggen fehlgeschlagen\\		
+		\hline
 		/T03/ & Einloggen mit korrekten Daten & Einloggen erfolgreich\\
+		\hline
 		/T04/ & Ausloggen & Ausloggen erfolgreich\\
+		\hline
 		/T05/ & Ein paar Testpersonen gleichzeitig greifen auf die Seite zu & Kein Absturz\\
+		\hline
 		/T06/ & Hinzufügen vom Student zur Gruppe Studenten durch Lehrstuhlmitarbeiter & Der Student wird Nutzer\\
+		\hline
 		/T07/ & Löschen vom letzten Administrator durch diesen Administrator & Fehlermeldung\\
+		\hline
 		/T08/ & Hinzufügen vom Lehrstuhlmitarbeiter zur Gruppe Administratoren durch Administrator & Der Lehrstuhlmitarbeiter wird Administrator\\
+		\hline
 		/T09/ & Löschen vom einen Administrator durch Administrator & der Nutzer wird zur Gruppe Lehrstuhlmitarbeiter gehören\\
+		\hline
 		/T10/ & Hinzufügen vom Student zur Gruppe Administratoren & Fehlermeldung\\
 		/T11/ & Hinzufügen vom Lehrstuhlmitarbeiter durch Administrator zur Gruppe Studenten & Fehlermeldung\\
-		/T12/ & Hinzufügen eines Buches vom Titel \"Buch1\" (ohne andere Metadaten) zum System & Fehlermeldung bei der Validierung\\
-		/T13/ & Hinzufügen eines Buches vom Titel \"Buch1\" (mit anderen Metadaten) zum System & Ein Buch vom Titel \"Buch1\" wurde zum Katalog hinzugefügt\\
-		/T14/ & Hinzufügen eines E-Books vom Titel \"Buch2\" und Inhalt \"...lorem ipsum\" (mit anderen Metadaten) zum System & Ein E-Book wurde zum Katalog hinzugefügt\\
-		/T15/ & Suchen über das Wort \"Buch\" & Zwei Einträge gefunden\\
-		/T16/ & Suchen über das Wort \"Buch1\" & Ein Eintrag gefunden\\
-		/T17/ & Suchen über das Wort \"lorem\" & Ein Eintrag gefunden\\
-		/T18/ & Anschauen vom E-Book \"Buch2\" & Anschauen war möglich\\
-		/T19/ & Herunterladen vom E-Book \"Buch2\" & Herunterladen wurde erfolgreich abgeschlossen\\
-		/T20/ & Ausleihen vom Buch \"Buch1\" & Ausleihe erfolgreich abgeschlossen\\
-		/T21/ & Änderung von der Ausleihedauer für die Gruppe Studenten auf 3 Tage durch Administrator & Erfolgreiche Änderung\\
-		/T22/ & Drei Tage vor der erwarteten Abgabe für ein Medium & Versand einer Rückgabeerinnerung zum Student über \"Buch1\" \\
-		/T23/ & Änderung vom Titel vom \"Buch1\" zum \"Buch3\" & Änderung erfolgreich\\
-		/T24/ & Abrufen von einer Übersicht über die aktuell ausgeliehenen Medien erhalten & korrekte Daten angezeigt (\"Buch 3\" ist ausgeliehen)\\
-		/T25/ & das Ausleihdatum ist vorbei & Versand einer Mahnung zum Student über \"Buch1\" mit der Strafangaben in Euros \\
-		/T26/ & Rückgabe vom Buch \"Buch1\" & Rückgabe erfolgreich abgeschlossen\\
-		/T27/ & Abrufen von einer Übersicht über die aktuell ausgeliehenen Medien erhalten & korrekte Daten angezeigt (leer)\\
-		/T28/ & [mehrere Medien hinzugefügt] Schicken einer Anfrage für ein Medium & Anfragezeit von\<2sec\\
-		/T29/ & [mehrere Nutzer hinzugefügt] Schicken einer Anfrage für ein Nutzer & Anfragezeit von\<1sec\\
-		/T30/ & Schicken einer Anfrage für eine Gruppe & Anfragezeit von\<1sec\\
-		/T31/ & [mehrere Ausleihen durchgeführt] Schicken einer Anfrage für eine Ausleihe & Anfragezeit von\<2sec\\
+		\hline
+		/T12/ & Hinzufügen eines Buches vom Titel  'Buch1'  (ohne andere Metadaten) zum System & Fehlermeldung bei der Validierung\\
+		\hline
+		/T13/ & Hinzufügen eines Buches vom Titel  'Buch1'  (mit anderen Metadaten) zum System & Ein Buch vom Titel  'Buch1'  wurde zum Katalog hinzugefügt\\
     \end{tabular}
-    \caption{Akzeptanztestfälle}
+\end{table}
+    
+\begin{table}
+	\begin{tabular}{p{1.2cm}|p{6.5cm}|p{5.5cm}}
+		\hline
+		/T14/ & Hinzufügen eines E-Books vom Titel  'Buch2'  und Inhalt  '...lorem ipsum'  (mit anderen Metadaten) zum System & Ein E-Book wurde zum Katalog hinzugefügt\\
+		\hline
+		/T15/ & Suchen über das Wort  'Buch'  & Zwei Einträge gefunden\\
+		/T16/ & Suchen über das Wort  'Buch1'  & Ein Eintrag gefunden\\
+		\hline
+		/T17/ & Suchen über das Wort  'lorem'  & Ein Eintrag gefunden\\
+		\hline
+		/T18/ & Anschauen vom E-Book  'Buch2'  & Anschauen war möglich\\
+		\hline
+		/T19/ & Herunterladen vom E-Book  'Buch2'  & Herunterladen wurde erfolgreich abgeschlossen\\
+		\hline
+		/T20/ & Ausleihen vom Buch  'Buch1'  & Ausleihe erfolgreich abgeschlossen\\
+		\hline
+		/T21/ & Änderung von der Ausleihedauer für die Gruppe Studenten auf 3 Tage durch Administrator & Erfolgreiche Änderung\\
+		\hline
+		/T22/ & Drei Tage vor der erwarteten Abgabe für ein Medium & Versand einer Rückgabeerinnerung zum Student über 'Buch1' \\
+		\hline
+		/T23/ & Änderung vom Titel vom  'Buch1'  zum  'Buch3'  & Änderung erfolgreich\\
+		\hline
+		/T24/ & Abrufen von einer Übersicht über die aktuell ausgeliehenen Medien erhalten & korrekte Daten angezeigt ( 'Buch 3'  ist ausgeliehen)\\
+		\hline
+		/T25/ & Vormerken vom Buch 'Buch3' durch anderen Nutzer & Das Buch wurde vorgemerkt\\
+		\hline
+		/T26/ & Verlängern vom Buch 'Buch3' & Verlängerung nicht möglich, weil es schon vorgemerkt wurde\\
+		\hline
+		/T27/ & das Ausleihdatum ist vorbei & Versand einer Mahnung zum Student über  'Buch1'  mit der Strafangaben in Euros \\
+		\hline
+		/T28/ & Rückgabe vom Buch  'Buch1'  & Rückgabe erfolgreich abgeschlossen\\
+		\hline
+		/T29/ & Abrufen von einer Übersicht über die aktuell ausgeliehenen Medien erhalten & korrekte Daten angezeigt (leer)\\
+		\hline
+		/T30/ & [mehrere Medien hinzugefügt] Schicken einer Anfrage für ein Medium & Anfragezeit von \textless 2sec\\
+		\hline
+		/T31/ & [mehrere Nutzer hinzugefügt] Schicken einer Anfrage für ein Nutzer & Anfragezeit von \textless 1sec\\
+		\hline
+		/T32/ & Schicken einer Anfrage für eine Gruppe & Anfragezeit von \textless 1sec\\
+		\hline
+		/T33/ & [mehrere Ausleihen durchgeführt] Schicken einer Anfrage für eine Ausleihe & Anfragezeit von \textless 2sec\\
+    \end{tabular}
 \end{table}
 \pagebreak
 
