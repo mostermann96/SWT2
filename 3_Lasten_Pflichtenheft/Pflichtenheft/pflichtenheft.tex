@@ -93,12 +93,58 @@
 \pagebreak
 
 \section{Produktfunktionen}
+
+Die Software soll in der Lage sein, die Verwaltung einer Bibliothek durchzuführen. Hier werden die Punkte aus dem Lastenheft erneut aufgeführt und sofern weiter möglich näher erklärt.
+\begin{itemize}
+	\item /LF10/ das Ausleihen und Zurückgeben von physischen Medien unterschiedlicher Arten ist möglich 
+	
+		Das Ausleihen und Zurückgeben erfolgt über die Eingabe der Medien-ID oder das Auswählen des Mediums in der Suche, bzw. bei der Rückgabe durch Auswahl im Account.
+		Bei digitalen Medien ist keine Zurückgabe notwendig, hier wird nur der Zugriff in der Ausleihhistorie vermerkt.
+	\item /LF20/ digitale Medien sind zum Download/zur Einsicht verfügbar 
+	
+	Digitale Medien sind über die Suche aufrufbar, dem Nutzer soll dann die Wahl bleiben, ob er das Medium vollständig herunterladen oder sich nur kurzfristig anzeigen lassen möchte
+	\item /LF30/ Mahnungen und Rückgabeerinnerungen werden automatisch versendet 
+	
+	Die Bestätigung des Versands dieser Erinnerungen soll in der Monitoringübersicht einsehbar sein.
+	
+	\item /LF40/ Lehrstuhlmitarbeiter können eine Übersicht über die aktuell ausgeliehenen Medien erhalten 
+	
+	\item /LF50/ das Ausleihen ist nur Studenten und Mitarbeitern möglich 
+	
+	Dies wird über die Gruppenrechte kontrolliert, Gastnutzer erhalten die notwendigen Rechte nicht.
+	\item /LF60/ Ausleihen können verlängert werden, wenn das Medium nicht vorbestellt ist
+	\item /LF70/ eine Mediensuche ist über sämtliche Metadaten und den Inhalt möglich 
+	
+	Die Metadaten sind unter \textit{5 Produktdaten /PD11/} aufgeführt
+\end{itemize}
 \pagebreak
 
 \section{Produktdaten}
+\begin{itemize}
+	\item /LD10/ die Bibliothek wird auf längere Sicht <50.000 Medien umfassen
+	\item /PD11/ die Metadaten eine Mediums sind Name, Veröffentlichungsdatum, Autor, Kategorie/Genre und Verfügbarkeit sowie optional der Verlag 
+\end{itemize}
+
+Die innerhalb eines Jahres voraussichtlich abzuspeichernden Daten sind:
+\begin{itemize}
+	\item /LD20/ Nutzer- und Gruppeninformationen mit <1.000 Einträgen
+	\item /PD21/ Nutzerinformationen umfassen Namen, Logininformationen, Mitarbeiter-/Matrikelnummer, Gruppenzugehörigkeit und aktuelle Ausleihen
+	\item /PD22/ Gruppendaten umfassen den Namen, Rechte zur Ausleihe und Verwaltung und die mögliche Ausleihdauer
+	\item /LD30/ Ausleihe- und Monitoringdaten mit <50.000 Einträgen
+	\item /PD31/ die Ausleihdaten beinhalten die Ausleihhistorie aller Medien und der zugehörigen Nutzer, sowie alle aktuellen Ausleihen 
+	\item /PD32/ die Monitoringdaten beinhalten die Informationen zu gezahlten und ausstehenden Mahngebühren
+\end{itemize}
 \pagebreak
 
 \section{Produktleistungen}
+Solange die unter "5 Produktdaten" genannten Datenmengen nicht überschritten werden, gelten die Leistungsansprüche aus dem Lastenheft. Ansonsten steigen die zu akzeptierenden Leistungseinbußen proportional zu der zusätzlichen Datenmenge.
+\begin{itemize}
+	\item /LL10/ Anfragezeiten von <2sec für Mediensuchen
+	\item /LL20/ Anfragezeiten von <1sec für Nutzer- und Gruppensuchen
+	\item /LL30/ Anfragezeiten von <2sec für Ausleihe- und Monitoringdaten
+	\item /LL40/ Zeitliche Fristen sind auf 24-Stunden-Basis beschränkt, also reicht eine zeitliche Genauigkeit von 1 min
+	\item /LL50/ Abmahngebühren müssen in korrekten Euro-Werten angegeben werden
+\end{itemize}
 \pagebreak
 
 \section{Qualitätsanforderungen}
