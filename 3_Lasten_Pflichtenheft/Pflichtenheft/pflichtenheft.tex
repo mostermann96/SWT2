@@ -6,9 +6,9 @@
 \usepackage{pifont}% http://ctan.org/pkg/pifont
 \title{Pflichtenheft}
 
-% Kapitel 1 bis 12 sind von Balzert übernommen, 13 und 14 stammen aus der 
+% Kapitel 1 bis 12 sind von Balzert übernommen, 13 und 14 stammen aus der
 % Aufgabenstellung. Ich habe also erstmal alle Punkte übernommen, wir können
-% dann noch schauen, ob alle sinnvoll sind oder ob wir uns nur an Balzert 
+% dann noch schauen, ob alle sinnvoll sind oder ob wir uns nur an Balzert
 % halten.
 
 
@@ -45,41 +45,41 @@
 	\item /M17/ eine Suche nach einem digitalen Medium über den Inhalt ausführen
 \end{itemize}
 \paragraph{Nutzer kann ...}
-\begin{itemize} 
+\begin{itemize}
 	\item /M18/ sich einloggen
 	\item /M19/ sich ausloggen
-	\item /M20/ physische Medien ausleihen 
-	\item /M21/ physische Medien vormerken 
-	\item /M22/ physische Medien verlängern 
+	\item /M20/ physische Medien ausleihen
+	\item /M21/ physische Medien vormerken
+	\item /M22/ physische Medien verlängern
 	\item /M23/ physische Medien zurückgeben
-	\item /M24/ digitale Medien ansehen 
-	\item /M25/ digitale Medien herunterladen 
-\end{itemize}	
+	\item /M24/ digitale Medien ansehen
+	\item /M25/ digitale Medien herunterladen
+\end{itemize}
 \paragraph{Nutzer aus der Gruppe Lehrstuhlmitarbeiter kann ...}
 \begin{itemize}
 	\item /M26/ eine Übersicht über die aktuell ausgeliehenen Medien erhalten
 	\item /M27/ ein neues Medium hinzufügen
-	\item /M28/ Daten von Medien ändern  
+	\item /M28/ Daten von Medien ändern
 	\item /M29/ einen neuen Nutzer zur Gruppe Studenten hinzufügen
 	\item /M30/ Daten von Nutzern aus der Gruppe Studenten ändern
-\end{itemize}	
+\end{itemize}
 \paragraph{Nutzer aus der Gruppe Administratoren kann ...}
 \begin{itemize}
 	\item /M31/ einen neuen Nutzer zur Gruppe Studenten, Lehrstuhlmitarbeiter oder Administratoren hinzufügen
 	\item /M32/ Daten von allen Nutzern ändern
-	\item /M33/ Rechte von Gruppen ändern  	 	
-\end{itemize}	
+	\item /M33/ Rechte von Gruppen ändern
+\end{itemize}
 \subsection{Wunschkriterien}
 \begin{itemize}
 	\item /W01/ Einführung einer neuen Medium-Kategorie durch Lehrstuhlmitarbeiter
-	\item /W02/ Explizite Änderung vom Ausleihdauer für jede Ausleihe 
+	\item /W02/ Explizite Änderung vom Ausleihdauer für jede Ausleihe
 	\item /W03/ System für das Zurücksetzen vom Passwort
 	\item /W04/ Skalierbarkeit vom System, um es leicht um weitere Lehrstühle erweitern zu können
 \end{itemize}
 \subsection{Abgrenzungskriterien}
 \begin{itemize}
 	\item /A01/ keine Unterstützung für Touchscreens
-	\item /A02/ kein großer Fokus auf das Sicherheitssystem des Systems, nicht immun gegen Hacker-Angriffe 
+	\item /A02/ kein großer Fokus auf das Sicherheitssystem des Systems, nicht immun gegen Hacker-Angriffe
 \end{itemize}
 \pagebreak
 
@@ -98,32 +98,36 @@ Dieses System soll folgende Bediengungen erfüllen:
 \end{itemize}
 \pagebreak
 
-\section{Produktübersicht}
+\section{Technische Produktumgebung}
+\subsection{Software}
+\subsection{Hardware}
+\subsection{Orgware}
+\subsection{Produktschnittstellen}
 \pagebreak
 
 \section{Produktfunktionen}
 
 Die Software soll in der Lage sein, die Verwaltung einer Bibliothek durchzuführen. Hier werden die Punkte aus dem Lastenheft erneut aufgeführt und sofern weiter möglich näher erklärt.
 \begin{itemize}
-	\item /LF10/ das Ausleihen und Zurückgeben von physischen Medien unterschiedlicher Arten ist möglich 
-	
+	\item /LF10/ das Ausleihen und Zurückgeben von physischen Medien unterschiedlicher Arten ist möglich
+
 		Das Ausleihen und Zurückgeben erfolgt über die Eingabe der Medien-ID oder das Auswählen des Mediums in der Suche, bzw. bei der Rückgabe durch Auswahl im Account.
 		Bei digitalen Medien ist keine Zurückgabe notwendig, hier wird nur der Zugriff in der Ausleihhistorie vermerkt.
-	\item /LF20/ digitale Medien sind zum Download/zur Einsicht verfügbar 
-	
+	\item /LF20/ digitale Medien sind zum Download/zur Einsicht verfügbar
+
 	Digitale Medien sind über die Suche aufrufbar, dem Nutzer soll dann die Wahl bleiben, ob er das Medium vollständig herunterladen oder sich nur kurzfristig anzeigen lassen möchte
-	\item /LF30/ Mahnungen und Rückgabeerinnerungen werden automatisch versendet 
-	
+	\item /LF30/ Mahnungen und Rückgabeerinnerungen werden automatisch versendet
+
 	Die Bestätigung des Versands dieser Erinnerungen soll in der Monitoringübersicht einsehbar sein.
-	
-	\item /LF40/ Lehrstuhlmitarbeiter können eine Übersicht über die aktuell ausgeliehenen Medien erhalten 
-	
-	\item /LF50/ das Ausleihen ist nur Studenten und Mitarbeitern möglich 
-	
+
+	\item /LF40/ Lehrstuhlmitarbeiter können eine Übersicht über die aktuell ausgeliehenen Medien erhalten
+
+	\item /LF50/ das Ausleihen ist nur Studenten und Mitarbeitern möglich
+
 	Dies wird über die Gruppenrechte kontrolliert, Gastnutzer erhalten die notwendigen Rechte nicht.
 	\item /LF60/ Ausleihen können verlängert werden, wenn das Medium nicht vorbestellt ist
-	\item /LF70/ eine Mediensuche ist über sämtliche Metadaten und den Inhalt möglich 
-	
+	\item /LF70/ eine Mediensuche ist über sämtliche Metadaten und den Inhalt möglich
+
 	Die Metadaten sind unter \textit{5 Produktdaten /PD11/} aufgeführt
 \end{itemize}
 \pagebreak
@@ -131,7 +135,7 @@ Die Software soll in der Lage sein, die Verwaltung einer Bibliothek durchzuführ
 \section{Produktdaten}
 \begin{itemize}
 	\item /LD10/ die Bibliothek wird auf längere Sicht <50.000 Medien umfassen
-	\item /PD11/ die Metadaten eine Mediums sind Name, Veröffentlichungsdatum, Autor, Kategorie/Genre und Verfügbarkeit sowie optional der Verlag 
+	\item /PD11/ die Metadaten eine Mediums sind Name, Veröffentlichungsdatum, Autor, Kategorie/Genre und Verfügbarkeit sowie optional der Verlag
 \end{itemize}
 
 Die innerhalb eines Jahres voraussichtlich abzuspeichernden Daten sind:
@@ -140,7 +144,7 @@ Die innerhalb eines Jahres voraussichtlich abzuspeichernden Daten sind:
 	\item /PD21/ Nutzerinformationen umfassen Namen, Logininformationen, Mitarbeiter-/Matrikelnummer, Gruppenzugehörigkeit und aktuelle Ausleihen
 	\item /PD22/ Gruppendaten umfassen den Namen, Rechte zur Ausleihe und Verwaltung und die mögliche Ausleihdauer
 	\item /LD30/ Ausleihe- und Monitoringdaten mit <50.000 Einträgen
-	\item /PD31/ die Ausleihdaten beinhalten die Ausleihhistorie aller Medien und der zugehörigen Nutzer, sowie alle aktuellen Ausleihen 
+	\item /PD31/ die Ausleihdaten beinhalten die Ausleihhistorie aller Medien und der zugehörigen Nutzer, sowie alle aktuellen Ausleihen
 	\item /PD32/ die Monitoringdaten beinhalten die Informationen zu gezahlten und ausstehenden Mahngebühren
 \end{itemize}
 \pagebreak
@@ -154,6 +158,9 @@ Solange die unter "5 Produktdaten" genannten Datenmengen nicht überschritten we
 	\item /LL40/ Zeitliche Fristen sind auf 24-Stunden-Basis beschränkt, also reicht eine zeitliche Genauigkeit von 1 min
 	\item /LL50/ Abmahngebühren müssen in korrekten Euro-Werten angegeben werden
 \end{itemize}
+\pagebreak
+
+\section{Benutzeroberfläche}
 \pagebreak
 
 \section{Qualitätsanforderungen}
@@ -184,29 +191,6 @@ Solange die unter "5 Produktdaten" genannten Datenmengen nicht überschritten we
 \end{itemize}
 \pagebreak
 
-\section{Benutzeroberfläche}
-\pagebreak
-
-\section{Nichtfunktionale Anforderungen}
-\pagebreak
-
-\section{Technische Produktumgebung}
-\subsection{Software}
-\subsection{Hardware}
-\subsection{Orgware}
-\subsection{Produkt-Schnittstellen}
-\pagebreak
-
-\section{Spezielle Anforderungen an die Entwicklungs-Umgebung}
-\subsection{Software}
-\subsection{Hardware}
-\subsection{Orgware}
-\subsection{Entwicklungs-Schnittstellen}
-\pagebreak
-
-\section{Gliederung in Teilprodukte}
-\pagebreak
-
 \section{Globale Testszenarien/Akzeptanztestfälle}
 \begin{table}[h]
 	\begin{tabular}{p{1.2cm}|p{6.5cm}|p{5.5cm}}
@@ -214,7 +198,7 @@ Solange die unter "5 Produktdaten" genannten Datenmengen nicht überschritten we
 		\hline
 		/T01/ & Zugang auf die Webseite außerhalb des Lehrstuhls & Seite nicht verfügbar\\
 		\hline
-		/T02/ & Einloggen mit unkorrekten Daten & Einloggen fehlgeschlagen\\		
+		/T02/ & Einloggen mit unkorrekten Daten & Einloggen fehlgeschlagen\\
 		\hline
 		/T03/ & Einloggen mit korrekten Daten & Einloggen erfolgreich\\
 		\hline
@@ -238,7 +222,7 @@ Solange die unter "5 Produktdaten" genannten Datenmengen nicht überschritten we
 		/T13/ & Hinzufügen eines Buches vom Titel  'Buch1'  (mit anderen Metadaten) zum System & Ein Buch vom Titel  'Buch1'  wurde zum Katalog hinzugefügt\\
     \end{tabular}
 \end{table}
-    
+
 \begin{table}
 	\begin{tabular}{p{1.2cm}|p{6.5cm}|p{5.5cm}}
 		\hline
