@@ -3,7 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage[T1]{fontenc}
-
+\usepackage{pifont}% http://ctan.org/pkg/pifont
 \title{Pflichtenheft}
 
 % Kapitel 1 bis 12 sind von Balzert übernommen, 13 und 14 stammen aus der 
@@ -85,8 +85,17 @@
 
 \section{Produkteinsatz}
 \subsection{Anwendungsbereiche}
+Der Dienst wird für die Benutzung der Lehrstuhlbibliothek für die Softwaretechnologie verwendet.  Das System soll mehrere Optionen anbieten, wie z.B Suche nach den Medien, Ausleihe, Verlängern, Monitoring.Das System verwaltet sowie physische als auch digitale Medien.
 \subsection{Zielgruppen}
+Personengruppen, die Lehrstuhlmitarbeiter und Studenten sind, können die Bibliothek benutzen. Gäste können nur nach den Medien suchen. Die Nutzer, die der Gruppe "Lehrstuhlmitarbeiter" gehören, können auch Administrator-Rechte haben.
 \subsection{Betriebsbedingungen}
+Dieses System soll folgende Bediengungen erfüllen:
+\begin{itemize}
+\item Betriebsdauer: täglich, 24 Stunden
+\item Wartungsfrei
+\item Die Sicherung der Datenbank muss manuell vom Administrator durchgefuhrt werden
+\item Das System soll auf allen Betriebssystemen operabel sein/Das System soll von jedem Rechnersystem am Lehrstuhl erreichbar sei
+\end{itemize}
 \pagebreak
 
 \section{Produktübersicht}
@@ -148,6 +157,31 @@ Solange die unter "5 Produktdaten" genannten Datenmengen nicht überschritten we
 \pagebreak
 
 \section{Qualitätsanforderungen}
+\newcommand{\xmark}{\ding{55}}%
+\begin{table}[h]
+	\centering
+\begin{tabular}{ || c | c | c | c | c || }
+	\hline
+	Systemqualität & sehr gut & gut & normal & nicht relevant  \\ \hline
+	Funktionalität &  & \xmark &  &  \\ \hline
+	Zuverlässigkeit &  & \xmark &  &  \\ \hline
+	Benutzbarkeit &  \xmark & &  &  \\ \hline
+	Effizienz &  &  & \xmark  &  \\ \hline
+	Wartbarkeit &  &  & \xmark &  \\ \hline
+	Portabilität &  &  &  & \xmark \\
+	\hline
+\end{tabular}
+\caption{Qualitätszielbestimmung}
+\label{table:qualitätsanforderungen}
+\end{table}
+\begin{itemize}
+	\item /LQB10/ Qualitätsanforderung zur Benutzbarkeit des Systems
+	\item /LQE10/ Qualitätsanforderung zur Effizienz des Systems
+	\item /LQF10/ Qualitätsanforderung zur Funktionalität des Systems
+	\item /LQP10/ Qualitätsanforderung zur Portabilität des Systems
+	\item /LQW10/ Qualitätsanforderung zur Wartbarkeit des Systems
+	\item /LQZ10/ Qualitätsanforderung zur Zuverlässigkeit des Systems
+\end{itemize}
 \pagebreak
 
 \section{Benutzeroberfläche}
