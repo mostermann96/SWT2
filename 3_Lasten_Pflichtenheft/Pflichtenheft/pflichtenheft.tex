@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage[T1]{fontenc}
+\usepackage{float}
 \usepackage{graphicx}
 \graphicspath{ {./GUI imgs/} }
 \usepackage{pifont}% http://ctan.org/pkg/pifont
@@ -25,78 +26,79 @@
 \subsection{Musskriterien}
 \paragraph{Allgemein}
 \begin{itemize}
-	\item /M01/ Akteure: Gast, Nutzer, wobei Gast \textless Nutzer (Vererbung)
+	\item /M01/ Akteure: Gast, Nutzer, wobei Gast \textless  Nutzer (a \textless b bedeutet b erbt von a).
 	\item /M02/ Die Bibliothek soll von Nutzern, also von Lehrstuhlmitarbeitern und Studenten benutzt werden.
-	\item /M03/ Es gibt drei Gruppen von Nutzern mit verschiedenen Rechten: Lehrstuhlmitarbeiter, Studenten, Administratoren, wobei Studenten \textless Lehrstuhlmitarbeiter \textless Administratoren (Vererbung)
-	\item /M04/ Jeder Nutzer soll zu einer Gruppe gehören
+	\item /M03/ Es gibt drei Gruppen von Nutzern mit verschiedenen Rechten: Lehrstuhlmitarbeiter, Studenten und Administratoren, wobei Studenten \textless Lehrstuhlmitarbeiter \textless Administratoren
+	\item /M04/ Jeder Nutzer soll zu genau einer Gruppe gehören.
 	\item /M05/ Studenten sollen nur zur Gruppe Studenten gehören.
 	\item /M06/ Lehrstuhlmitarbeiter sollen entweder zur Gruppe Lehrstuhlmitarbeiter oder Administratoren gehören.
-	\item /M07/ Es muss immer mindestens ein Nutzer innerhalb Gruppe Administratoren existieren
+	\item /M07/ Es muss immer mindestens ein Nutzer innerhalb der Gruppe Administratoren existieren
 	\item /M08/ Eine intuitive, rechnergestützte GUI soll umgesetzt werden
-	\item /M09/ Die Produktleistungswerten sollen eingehalten werden
-	\item /M10/ Alle Produktdateneinträge sollen gespeichert werden
-	\item /M11/ Das System soll von jedem Rechnersystem am Lehrstuhl erreichbar sein
-	\item /M12/ Mehrere Nutzer können gleichzeitig auf die Software zugreifen
-	\item /M13/ Das System soll Bücher, Zeitschriften und Datenträger aller Art sowie elektronische Medien verwalten können
-	\item /M14/ Automatisches Versenden von Mahnungen ist möglich
-	\item /M15/ Automatisches Versenden von Rückgabeerinnerungen ist möglich
+	\item /M09/ Die Produktleistungswerte (siehe 6 Produktleistungen) sollen eingehalten werden.
+	\item /M10/ Alle Produktdateneinträge sollen persistent gespeichert werden.
+	\item /M11/ Das System soll von jedem Rechnersystem des Lehrstuhls erreichbar sein.
+	\item /M12/ Mehrere Nutzer können gleichzeitig auf die Software zugreifen.
+	\item /M13/ Das System soll Bücher, Zeitschriften und Datenträger aller Art sowie elektronische Medien verwalten können.
+	\item /M14/ Automatisches Versenden von Mahnungen und Verwarnungen ist möglich.
+	\item /M15/ Automatisches Versenden von Rückgabeerinnerungen ist möglich.
 \end{itemize}
-\paragraph{Gast kann ...}
+\paragraph{jeder Gast kann ...}
 \begin{itemize}
-	\item /M16/ eine Suche nach einem Medium über Metadaten ausführen
-	\item /M17/ eine Suche nach einem digitalen Medium über den Inhalt ausführen
+	\item /M16/ eine Suche nach einem Medium über Metadaten ausführen.
+	\item /M17/ eine Suche nach einem Medium über den Inhalt ausführen, falls  dieser im System elektronisch vorhanden ist.
 \end{itemize}
-\paragraph{Nutzer kann ...}
+\paragraph{jeder Nutzer kann ...}
 \begin{itemize}
-	\item /M18/ sich einloggen
-	\item /M19/ sich ausloggen
-	\item /M20/ physische Medien ausleihen
-	\item /M21/ physische Medien vormerken
-	\item /M22/ physische Medien verlängern
-	\item /M23/ physische Medien zurückgeben
-	\item /M24/ digitale Medien ansehen
-	\item /M25/ digitale Medien herunterladen
+	\item /M18/ sich einloggen.
+	\item /M19/ sich ausloggen.
+	\item /M20/ physische Medien ausleihen.
+	\item /M21/ physische Medien vormerken.
+	\item /M22/ physische Medien verlängern.
+	\item /M23/ physische Medien zurückgeben.
+	\item /M24/ digitale Medien ansehen.
+	\item /M25/ digitale Medien herunterladen.
 \end{itemize}
-\paragraph{Nutzer aus der Gruppe Lehrstuhlmitarbeiter kann ...}
+\paragraph{jeder Nutzer aus der Gruppe Lehrstuhlmitarbeiter kann ...}
 \begin{itemize}
-	\item /M26/ eine Übersicht über die aktuell ausgeliehenen Medien erhalten
-	\item /M27/ ein neues Medium hinzufügen
-	\item /M28/ Daten von Medien ändern
-	\item /M29/ einen neuen Nutzer zur Gruppe Studenten hinzufügen
-	\item /M30/ Daten von Nutzern aus der Gruppe Studenten ändern
+	\item /M26/ eine Übersicht über die aktuell ausgeliehenen Medien erhalten.
+	\item /M27/ ein neues Medium hinzufügen.
+	\item /M28/ Daten von Medien ändern.
+	\item /M29/ einen neuen Nutzer zur Gruppe Studenten hinzufügen.
+	\item /M30/ Daten von Nutzern aus der Gruppe Studenten ändern.
 \end{itemize}
-\paragraph{Nutzer aus der Gruppe Administratoren kann ...}
+\paragraph{jeder Nutzer aus der Gruppe Administratoren kann ...}
 \begin{itemize}
-	\item /M31/ einen neuen Nutzer zur Gruppe Studenten, Lehrstuhlmitarbeiter oder Administratoren hinzufügen
-	\item /M32/ Daten von allen Nutzern ändern
-	\item /M33/ Rechte von Gruppen ändern
+	\item /M31/ einen neuen Nutzer zur Gruppe Studenten, Lehrstuhlmitarbeiter oder Administratoren hinzufügen.
+	\item /M32/ Daten von allen Nutzern ändern.
+	\item /M33/ Rechte von Gruppen ändern.
 \end{itemize}
 \subsection{Wunschkriterien}
 \begin{itemize}
-	\item /W01/ Einführung einer neuen Medium-Kategorie durch Lehrstuhlmitarbeiter
-	\item /W02/ Explizite Änderung vom Ausleihdauer für jede Ausleihe
-	\item /W03/ System für das Zurücksetzen vom Passwort
-	\item /W04/ Skalierbarkeit vom System, um es leicht um weitere Lehrstühle erweitern zu können
+	\item /W01/ Einführung von neuen Medien-Kategorien durch Lehrstuhlmitarbeiter.
+	\item /W02/ Explizite Änderung der Ausleihdauer für jede einzelne Ausleihe.
+	\item /W03/ System für das Zurücksetzen von Passwörtern.
+	\item /W04/ Skalierbarkeit vom System, um es leicht um weitere Lehrstühle erweitern zu können.
+	\item /W05/ Möglichkeit des Hinzufügens neuer Gruppen durch Administratoren
 \end{itemize}
 \subsection{Abgrenzungskriterien}
 \begin{itemize}
-	\item /A01/ keine Unterstützung für Touchscreens
-	\item /A02/ kein großer Fokus auf das Sicherheitssystem des Systems, nicht immun gegen Hacker-Angriffe
+	\item /A01/ keine Unterstützung für Touchscreens.
+	\item /A02/ kein Fokus auf das Sicherheitssystem des Systems,  Immunität des Systems gegen Hacker-Angriffe ist also unter Umständen nicht gewährleistet.
 \end{itemize}
 \pagebreak
 
 \section{Produkteinsatz}
 \subsection{Anwendungsbereiche}
-Der Dienst wird für die Benutzung der Lehrstuhlbibliothek für die Softwaretechnologie verwendet.  Das System soll mehrere Optionen anbieten, wie z.B Suche nach den Medien, Ausleihe, Verlängern, Monitoring.Das System verwaltet sowie physische als auch digitale Medien.
+Der Dienst wird für die Benutzung der Lehrstuhlbibliothek für die Softwaretechnologie verwendet.  Das System soll mehrere Optionen anbieten, wie z.B Suche nach den Medien, Ausleihe, Verlängern und Monitoring. Das System verwaltet sowohl physische als auch digitale Medien.
 \subsection{Zielgruppen}
-Personengruppen, die Lehrstuhlmitarbeiter und Studenten sind, können die Bibliothek benutzen. Gäste können nur nach den Medien suchen. Die Nutzer, die der Gruppe "Lehrstuhlmitarbeiter" gehören, können auch Administrator-Rechte haben.
+Personengruppen, die entweder Lehrstuhlmitarbeiter oder Studenten sind, können die Bibliothek benutzen. Gäste können nur nach den Medien suchen.
 \subsection{Betriebsbedingungen}
-Dieses System soll folgende Bediengungen erfüllen:
+Dieses System soll folgende Bedingungen erfüllen:
 \begin{itemize}
-\item Betriebsdauer: täglich, 24 Stunden
+\item Betriebsdauer: 24 Stunden täglich
 \item Wartungsfrei
 \item Die Sicherung der Datenbank muss manuell vom Administrator durchgefuhrt werden
-\item Das System soll auf allen Betriebssystemen operabel sein/Das System soll von jedem Rechnersystem am Lehrstuhl erreichbar sei
+\item Das System soll von jedem Rechnersystem des Lehrstuhls erreichbar sein
 \end{itemize}
 \pagebreak
 
@@ -182,7 +184,7 @@ Solange die unter "5 Produktdaten" genannten Datenmengen nicht überschritten we
 \end{figure}
 \pagebreak
 \begin{itemize}
-	\item Gast stellt Suchtanfragen 
+	\item Gast stellt Suchtanfragen
 \end{itemize}
 \begin{figure}[h]
 	\includegraphics[width=\textwidth]{GUIs/such_Gast.jpg}
@@ -191,7 +193,7 @@ Solange die unter "5 Produktdaten" genannten Datenmengen nicht überschritten we
 \end{figure}
 \pagebreak
 \begin{itemize}
-	\item Angemeldeter Nutzer stellt Suchtanfragen 
+	\item Angemeldeter Nutzer stellt Suchtanfragen
 \end{itemize}
 \begin{figure}[h]
 	\includegraphics[width=\textwidth]{GUIs/such_angemNutzer.jpg}
@@ -226,13 +228,13 @@ Solange die unter "5 Produktdaten" genannten Datenmengen nicht überschritten we
 \begin{tabular}{ || c | c | c | c | c || }
 	\hline
 	Produktqualität & sehr gut & gut & normal & nicht relevant  \\ \hline
-	\textbf{Funktionalität} \\  \hline 
+	\textbf{Funktionalität} \\  \hline
 	Angemessenheit & & \xmark &  &  \\ \hline
 	Richtigkeit &  & \xmark &  &  \\ \hline
 	Interoperabeltät &  & \xmark &  &  \\ \hline
 	Ordnungsgemäßigkeit &  & \xmark &  &  \\ \hline
 	Sicherheit &  & \xmark &  &  \\ \hline
-	\textbf{Zuverlässigkeit} \\ \hline 
+	\textbf{Zuverlässigkeit} \\ \hline
 	Reife & & & \xmark  &  \\ \hline
 	Fehlertoleranz & & & \xmark  &  \\ \hline
 	Wiederherstellbarkeit & & & \xmark  &  \\ \hline
@@ -261,74 +263,75 @@ Solange die unter "5 Produktdaten" genannten Datenmengen nicht überschritten we
 \pagebreak
 
 \section{Globale Testszenarien/Akzeptanztestfälle}
-\begin{table}[h]
+\begin{table}[H]
 	\begin{tabular}{p{1.2cm}|p{6.5cm}|p{5.5cm}}
 		\textbf{Id} & \textbf{Beschreibung} & \textbf{Erwartetes Ergebnis}\\
 		\hline
-		/T01/ & Zugang auf die Webseite außerhalb des Lehrstuhls & Seite nicht verfügbar\\
+		/T01/ & Zugang auf die Webseite von außerhalb des Lehrstuhls & Seite nicht verfügbar\\
 		\hline
-		/T02/ & Einloggen mit unkorrekten Daten & Einloggen fehlgeschlagen\\
+		/T02/ & Einloggen mit inkorrekten Daten & Einloggen fehlgeschlagen\\
 		\hline
 		/T03/ & Einloggen mit korrekten Daten & Einloggen erfolgreich\\
 		\hline
 		/T04/ & Ausloggen & Ausloggen erfolgreich\\
 		\hline
-		/T05/ & Ein paar Testpersonen gleichzeitig greifen auf die Seite zu & Kein Absturz\\
+		/T05/ & mehrere Nutzer greifen gleichzeitig auf die Seite zu & Kein Absturz\\
 		\hline
-		/T06/ & Hinzufügen vom Student zur Gruppe Studenten durch Lehrstuhlmitarbeiter & Der Student wird Nutzer\\
+		/T06/ & Hinzufügen eines Studenten zur Gruppe Studenten durch Lehrstuhlmitarbeiter & Der Student gehört zur Gruppe Studenten\\
 		\hline
-		/T07/ & Löschen vom letzten Administrator durch diesen Administrator & Fehlermeldung\\
+		/T07/ & Löschen des letzten Administrators durch diesen Administrator & Fehler; Löschen darf nicht möglich sein\\
 		\hline
-		/T08/ & Hinzufügen vom Lehrstuhlmitarbeiter zur Gruppe Administratoren durch Administrator & Der Lehrstuhlmitarbeiter wird Administrator\\
+		/T08/ & Hinzufügen eines Lehrstuhlmitarbeiters zur Gruppe Administratoren durch Administrator & Der Lehrstuhlmitarbeiter wird Administrator\\
 		\hline
-		/T09/ & Löschen vom einen Administrator durch Administrator & der Nutzer wird zur Gruppe Lehrstuhlmitarbeiter gehören\\
+		/T09/ & Löschen eines Administrators durch Administrator & der Nutzer wird zur Gruppe Lehrstuhlmitarbeiter gehören\\
 		\hline
-		/T10/ & Hinzufügen vom Student zur Gruppe Administratoren & Fehlermeldung\\
-		/T11/ & Hinzufügen vom Lehrstuhlmitarbeiter durch Administrator zur Gruppe Studenten & Fehlermeldung\\
+		/T10/ & Hinzufügen eines Studenten zur Gruppe Administratoren & Fehlermeldung\\
+		/T11/ & Hinzufügen eines Lehrstuhlmitarbeiters durch Administrator zur Gruppe Studenten & Fehlermeldung\\
 		\hline
-		/T12/ & Hinzufügen eines Buches vom Titel  'Buch1'  (ohne andere Metadaten) zum System & Fehlermeldung bei der Validierung\\
+		/T12/ & Hinzufügen eines Buches mit Titel  'Buch1'  (ohne andere Metadaten) zum System & Fehlermeldung bei der Validierung\\
 		\hline
-		/T13/ & Hinzufügen eines Buches vom Titel  'Buch1'  (mit anderen Metadaten) zum System & Ein Buch vom Titel  'Buch1'  wurde zum Katalog hinzugefügt\\
+		/T13/ & Hinzufügen eines Buches mit Titel  'Buch1'  (mit anderen Metadaten) zum System & Ein Buch vom Titel  'Buch1'  wurde zum Katalog hinzugefügt\\
+		\hline
+		/T14/ & Hinzufügen eines E-Books mit Titel  'Buch2'  und Inhalt  '...lorem ipsum'  (mit anderen Metadaten) zum System & Ein E-Book wurde zum Katalog hinzugefügt\\
     \end{tabular}
 \end{table}
 
 \begin{table}
 	\begin{tabular}{p{1.2cm}|p{6.5cm}|p{5.5cm}}
-		\hline
-		/T14/ & Hinzufügen eines E-Books vom Titel  'Buch2'  und Inhalt  '...lorem ipsum'  (mit anderen Metadaten) zum System & Ein E-Book wurde zum Katalog hinzugefügt\\
+
 		\hline
 		/T15/ & Suchen über das Wort  'Buch'  & Zwei Einträge gefunden\\
 		/T16/ & Suchen über das Wort  'Buch1'  & Ein Eintrag gefunden\\
 		\hline
 		/T17/ & Suchen über das Wort  'lorem'  & Ein Eintrag gefunden\\
 		\hline
-		/T18/ & Anschauen vom E-Book  'Buch2'  & Anschauen war möglich\\
+		/T18/ & Anschauen von E-Book  'Buch2'  & Anschauen war möglich\\
 		\hline
-		/T19/ & Herunterladen vom E-Book  'Buch2'  & Herunterladen wurde erfolgreich abgeschlossen\\
+		/T19/ & Herunterladen von E-Book  'Buch2'  & Herunterladen wurde erfolgreich abgeschlossen\\
 		\hline
-		/T20/ & Ausleihen vom Buch  'Buch1'  & Ausleihe erfolgreich abgeschlossen\\
+		/T20/ & Ausleihen von Buch  'Buch1'  & Ausleihe erfolgreich abgeschlossen\\
 		\hline
-		/T21/ & Änderung von der Ausleihedauer für die Gruppe Studenten auf 3 Tage durch Administrator & Erfolgreiche Änderung\\
+		/T21/ & Änderung der Ausleihedauer für die Gruppe Studenten auf 3 Tage durch Administrator & Änderung erfolgreich\\
 		\hline
-		/T22/ & Drei Tage vor der erwarteten Abgabe für ein Medium & Versand einer Rückgabeerinnerung zum Student über 'Buch1' \\
+		/T22/ & Es ist drei Tage vor der erwarteten Abgabe für  'Buch1' & Versand einer Rückgabeerinnerung zum Studenten über 'Buch1' \\
 		\hline
-		/T23/ & Änderung vom Titel vom  'Buch1'  zum  'Buch3'  & Änderung erfolgreich\\
+		/T23/ & Änderung des Titels von  'Buch1'  zu  'Buch3' durch einen Lehrstuhlmitarbeiter & Änderung erfolgreich\\
 		\hline
-		/T24/ & Abrufen von einer Übersicht über die aktuell ausgeliehenen Medien erhalten & korrekte Daten angezeigt ( 'Buch 3'  ist ausgeliehen)\\
+		/T24/ & Abrufen einer Übersicht über die aktuell ausgeliehenen Medien & korrekte Daten werden angezeigt ( 'Buch 3'  ist ausgeliehen)\\
 		\hline
-		/T25/ & Vormerken vom Buch 'Buch3' durch anderen Nutzer & Das Buch wurde vorgemerkt\\
+		/T25/ & Vormerken des Buches 'Buch3' durch anderen Nutzer & Das Buch wurde vorgemerkt\\
 		\hline
-		/T26/ & Verlängern vom Buch 'Buch3' & Verlängerung nicht möglich, weil es schon vorgemerkt wurde\\
+		/T26/ & Verlängern des Buches 'Buch3' & Verlängerung nicht möglich, weil es schon vorgemerkt wurde\\
 		\hline
-		/T27/ & das Ausleihdatum ist vorbei & Versand einer Mahnung zum Student über  'Buch1'  mit der Strafangaben in Euros \\
+		/T27/ & das Ausleihdatum von  'Buch1'  ist vorbei & Versand einer Mahnung zum Student über  'Buch1'  mit der Strafangaben in Euros \\
 		\hline
-		/T28/ & Rückgabe vom Buch  'Buch1'  & Rückgabe erfolgreich abgeschlossen\\
+		/T28/ & Rückgabe von Buch  'Buch1'  & Rückgabe erfolgreich abgeschlossen\\
 		\hline
-		/T29/ & Abrufen von einer Übersicht über die aktuell ausgeliehenen Medien erhalten & korrekte Daten angezeigt (leer)\\
+		/T29/ & Abrufen einer Übersicht über die aktuell ausgeliehenen Medien & korrekte Daten angezeigt (leer)\\
 		\hline
 		/T30/ & [mehrere Medien hinzugefügt] Schicken einer Anfrage für ein Medium & Anfragezeit von \textless 2sec\\
 		\hline
-		/T31/ & [mehrere Nutzer hinzugefügt] Schicken einer Anfrage für ein Nutzer & Anfragezeit von \textless 1sec\\
+		/T31/ & [mehrere Nutzer hinzugefügt] Schicken einer Anfrage zu einem Nutzer & Anfragezeit von \textless 1sec\\
 		\hline
 		/T32/ & Schicken einer Anfrage für eine Gruppe & Anfragezeit von \textless 1sec\\
 		\hline
