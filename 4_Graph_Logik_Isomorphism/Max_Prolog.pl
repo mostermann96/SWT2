@@ -47,6 +47,7 @@ modul(b_420, [ecg]).
 modul(b_510, [vert1, vert2]).
 modul(b_520, [spez1, spez2]).
 modul(b_610, [liste1, liste2]).
+
 modulliste([b_110, b_120, b_210, b_230, b_240, b_260, b_290, b_270, b_310, b_320, b_330, b_370, b_390, b_3A0, b_3B0, b_410, b_420, b_510, b_520, b_610]).
 
 abgelegt(bob, theolog, 1.0, 1).
@@ -78,27 +79,46 @@ abgelegt(bob, vert2, 1.0, 1).
 abgelegt(bob, spez1, 1.0, 1).
 abgelegt(bob, spez2, 1.0, 1).
 
-modulsuche(ModulName):-
-	modul(ModulName, [Head|Tail]),
-	print(Tail),
-	print(Head).
+abgelegt(alice, theolog, 1.0, 1).
+abgelegt(alice, mathe11, 1.0, 2).
+abgelegt(alice, mathe12, 4.0, 1).
+abgelegt(alice, mathe21, 1.0, 1).
+abgelegt(alice, mathe22, 1.0, 1).
+abgelegt(alice, aud, 1.0, 1).
+abgelegt(alice, robolab, 1.0, 1).
+abgelegt(alice, prog, 1.0, 1).
+abgelegt(alice, ikt, 1.0, 1).
+abgelegt(alice, tgi, 1.0, 1).
+abgelegt(alice, fs, 1.0, 1).
+abgelegt(alice, swt, 1.0, 1).
+abgelegt(alice, swp, 1.0, 0).
+abgelegt(alice, hwp, 1.0, 0).
+abgelegt(alice, ra, 1.0, 1).
+abgelegt(alice, rn, 1.0, 1).
+abgelegt(alice, db, 1.0, 1).
+abgelegt(alice, bus, 1.0, 1).
+abgelegt(alice, soi, 1.0, 1).
+abgelegt(alice, ins, 1.0, 1).
+abgelegt(alice, emi, 1.0, 1).
+abgelegt(alice, ecg, 1.0, 1).
+abgelegt(alice, liste1, 1.0, 1).
+abgelegt(alice, liste2, 1.0, 1).
+abgelegt(alice, vert1, 1.0, 1).
+abgelegt(alice, vert2, 1.0, 1).
+abgelegt(alice, spez1, 1.0, 1).
+abgelegt(alice, spez2, 1.0, 1).
 
 modul_bestanden(Person, ModulName):-
 
 	modul(ModulName, [Head|Tail]),
+	print(ModulName),
 	versuch_berech(Person, [Head|Tail], 0),
 	bestanden(Person, Head),
-	
-	print(Head),
-	print(Tail),
-	
 	modul_test(Person, Tail).
 
 versuch_berech(Person, [Pruefung|Tail], Sum):-
 	abgelegt(Person, Pruefung, Note, Attempt),
-	print(Attempt),
 	Temp is Sum+Attempt,
-	print(Sum),
 	Temp =< 3,
 	versuch_berech(Person, Tail, Temp).
 
@@ -109,7 +129,6 @@ versuch_berech(Person, [], Versuche).
 	
 
 modul_test(Person, [Head|Tail]):-
-	print(Head),
 	bestanden(Person, Head),
 	modul_test(Person, Tail).
 modul_test(Person, []).
