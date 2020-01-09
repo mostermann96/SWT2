@@ -1,3 +1,4 @@
+/*Facts*/
 pruefung(theolog).
 pruefung(mathe11).
 pruefung(mathe12).
@@ -26,6 +27,8 @@ pruefung(spez1).
 pruefung(spez2).
 pruefung(liste1).
 pruefung(liste2).
+
+/*modul(Name, Prüfungsliste[]) */
 modul(b_110, [mathe11, mathe12]).
 modul(b_120, [mathe21, mathe22]).
 modul(b_210, [aud]).
@@ -87,7 +90,7 @@ abgelegt(alice, mathe22, 1.0, 1).
 abgelegt(alice, aud, 1.0, 1).
 abgelegt(alice, robolab, 1.0, 1).
 abgelegt(alice, prog, 1.0, 1).
-abgelegt(alice, ikt, 1.0, 1).
+abgelegt(alice, ikt, 4.0, 1).
 abgelegt(alice, tgi, 1.0, 1).
 abgelegt(alice, fs, 1.0, 1).
 abgelegt(alice, swt, 1.0, 1).
@@ -108,30 +111,37 @@ abgelegt(alice, vert2, 1.0, 1).
 abgelegt(alice, spez1, 1.0, 1).
 abgelegt(alice, spez2, 1.0, 1).
 
+/* Theories */
+
+/* Testen einzelner Module, inkl Versuchsanzahl */
 modul_bestanden(Person, ModulName):-
 
 	modul(ModulName, [Head|Tail]),
 	print(ModulName),
-	versuch_berech(Person, [Head|Tail], 0),
+	versuchsanzahl(Person, [Head|Tail], 0),
 	bestanden(Person, Head),
 	modul_test(Person, Tail).
 
-versuch_berech(Person, [Pruefung|Tail], Sum):-
+/* Teste Versuchsanzahl <4 pro Modul
+versuchsanzahl(Person, Prüfungsliste[], Summe der Versuche)*/
+versuchsanzahl(Person, [Pruefung|Tail], Sum):-
 	abgelegt(Person, Pruefung, Note, Attempt),
 	Temp is Sum+Attempt,
 	Temp =< 3,
-	versuch_berech(Person, Tail, Temp).
+	versuchsanzahl(Person, Tail, Temp).
 
-versuch_berech(Person, [], Versuche).	
+versuchsanzahl(Person, [], Versuche).	
 
 
 	
 	
-
+/* Teste einzelne Prüfungen des Moduls */
+/* modultest(Person, Prüfungen[] */
 modul_test(Person, [Head|Tail]):-
 	bestanden(Person, Head),
 	modul_test(Person, Tail).
 modul_test(Person, []).
+
 
 bestanden(Person, Pruefung):-
 
@@ -139,6 +149,10 @@ bestanden(Person, Pruefung):-
 	Note =< 4.0,
 	Versuch =< 3.
 
+/* alle_bestanden(Person, modulliste[]) teste alle Module in Liste
+	 Module in Fact "modulliste" - bob = no, alice=yes
+	 alle_bestanden(alice, [b_110, b_120, b_210, b_230, b_240, b_260, b_290, b_270, b_310, b_320, b_330, b_370, b_390, b_3A0, b_3B0, b_410, b_420, b_510, b_520, b_610]).
+*/
 alle_bestanden(Person, [Head|Tail]) :-
 	modul_bestanden(Person, Head),
 	alle_bestanden(Person, Tail).
