@@ -1,10 +1,16 @@
 bezüglich Max' Lösung:
-- Predikat pruefung(\_) wird nie benutzt
-- Predikat modulliste(\_) wird nie benutzt
+- Praedikat pruefung(\_) wird nie benutzt
+  -- hautpsaechlich zwecks übersicht eingefuehrt, eigentlich egal
+- Praedikat modulliste(\_) wird nie benutzt
+  -- gelöscht, durch bachelor_bestanden ersetzt
 - Gewichtung zum Berechnen ob Modul bestanden mit einbeziehen?
-- "?-modul_bestanden(bob, b-240)." Evaluiert zu falsch, sollte aber eigentlich True sein
-- bei abgelegt(\_) sollten die nicht bestandenen Versuche auch mit hingeschrieben werden? (eher Designfrage)
+ --ToDo
 
+- "?-modul_bestanden(bob, b-240)." Evaluiert zu falsch, sollte aber eigentlich True sein
+ -- modul_bestanden(bob, b_240). evaluiert zu true?
+ 
+- bei abgelegt(\_) sollten die nicht bestandenen Versuche auch mit hingeschrieben werden? (eher Designfrage)
+  -- abgelegt(Person, Pruefung, Note, #Versuche) anzahl der versuche ist an 4. Stelle
 
 Änderungen bei meiner Version (im Vergleich zu Max' Lösung):
 - Modulliste aus Faktenbasis entfernt
