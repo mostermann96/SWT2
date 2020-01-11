@@ -1,32 +1,33 @@
 /*Facts*/
-pruefung(theolog).
-pruefung(mathe11).
-pruefung(mathe12).
-pruefung(mathe21).
-pruefung(mathe22).
-pruefung(aud).
-pruefung(robolab).
-pruefung(prog).
-pruefung(ikt).
-pruefung(fs).
-pruefung(swt).
-pruefung(swp).
-pruefung(ra).
-pruefung(db).
-pruefung(rn).
-pruefung(bus).
-pruefung(tgi).
-pruefung(hwp).
-pruefung(soi).
-pruefung(ins).
-pruefung(emi).
-pruefung(ecg).
-pruefung(vert1).
-pruefung(vert2).
-pruefung(spez1).
-pruefung(spez2).
-pruefung(liste1).
-pruefung(liste2).
+/* Pruefung(Kürzel, Gewicht im Modul) */
+pruefung(theolog, 1).
+pruefung(mathe11, 1).
+pruefung(mathe12, 2).
+pruefung(mathe21, 1).
+pruefung(mathe22, 2).
+pruefung(aud, 1).
+pruefung(robolab, 1).
+pruefung(prog, 1).
+pruefung(ikt, 1).
+pruefung(fs, 1).
+pruefung(swt, 1).
+pruefung(swp, 1).
+pruefung(ra, 1).
+pruefung(db, 1).
+pruefung(rn, 1).
+pruefung(bus, 1).
+pruefung(tgi, 1).
+pruefung(hwp, 1).
+pruefung(soi, 1).
+pruefung(ins, 1).
+pruefung(emi, 1).
+pruefung(ecg, 1).
+pruefung(vert1, 1).
+pruefung(vert2, 1).
+pruefung(spez1, 1).
+pruefung(spez2, 1).
+pruefung(liste1, 1).
+pruefung(liste2, 1).
 
 /*modul(Name, Prüfungsliste[]) */
 modul(b_110, [mathe11, mathe12]).
@@ -51,6 +52,8 @@ modul(b_510, [vert1, vert2]).
 modul(b_520, [spez1, spez2]).
 modul(b_610, [liste1, liste2]).
 
+/*abgelegt(Student, Pruefung, Note, Versuch)*/
+/* bob besteht durch die Anzahlsregel nicht */
 abgelegt(bob, theolog, 1.0, 1).
 abgelegt(bob, mathe11, 1.0, 2).
 abgelegt(bob, mathe12, 1.0, 1).
@@ -80,9 +83,10 @@ abgelegt(bob, vert2, 1.0, 1).
 abgelegt(bob, spez1, 1.0, 1).
 abgelegt(bob, spez2, 1.0, 1).
 
+/* Alice besteht, obwohl sie die Nikolausklausur nicht besteht, da Gewicht 1:2*/
 abgelegt(alice, theolog, 1.0, 1).
-abgelegt(alice, mathe11, 1.0, 2).
-abgelegt(alice, mathe12, 4.0, 1).
+abgelegt(alice, mathe11, 5.0, 1).
+abgelegt(alice, mathe12, 1.0, 2).
 abgelegt(alice, mathe21, 1.0, 1).
 abgelegt(alice, mathe22, 1.0, 1).
 abgelegt(alice, aud, 1.0, 1).
@@ -101,13 +105,44 @@ abgelegt(alice, bus, 1.0, 1).
 abgelegt(alice, soi, 1.0, 1).
 abgelegt(alice, ins, 1.0, 1).
 abgelegt(alice, emi, 1.0, 1).
-abgelegt(alice, ecg, 1.0, 1).
+abgelegt(alice, ecg, 4.0, 1).
 abgelegt(alice, liste1, 1.0, 1).
 abgelegt(alice, liste2, 1.0, 1).
 abgelegt(alice, vert1, 1.0, 1).
 abgelegt(alice, vert2, 1.0, 1).
 abgelegt(alice, spez1, 1.0, 1).
 abgelegt(alice, spez2, 1.0, 1).
+
+/* geklaut von Florian, Charlie besteht nicht, da das Modul RN&DB einen Schnitt > 4 hat */
+abgelegt(charlie, theolog, 1.0, 1).
+abgelegt(charlie, mathe11, 1.0, 2).
+abgelegt(charlie, mathe12, 4.0, 1).
+abgelegt(charlie, mathe21, 1.0, 1).
+abgelegt(charlie, mathe22, 1.0, 1).
+abgelegt(charlie, aud, 1.0, 1).
+abgelegt(charlie, robolab, 1.0, 1).
+abgelegt(charlie, prog, 1.0, 1).
+abgelegt(charlie, ikt, 4.0, 1).
+abgelegt(charlie, tgi, 1.0, 1).
+abgelegt(charlie, fs, 1.0, 1).
+abgelegt(charlie, swt, 1.0, 1).
+abgelegt(charlie, swp, 1.0, 0).
+abgelegt(charlie, hwp, 1.0, 0).
+abgelegt(charlie, ra, 1.0, 1).
+abgelegt(charlie, rn, 3.3, 1).
+abgelegt(charlie, db, 5.0, 1).
+abgelegt(charlie, bus, 1.0, 1).
+abgelegt(charlie, soi, 1.0, 1).
+abgelegt(charlie, ins, 1.0, 1).
+abgelegt(charlie, emi, 1.0, 1).
+abgelegt(charlie, ecg, 1.0, 1).
+abgelegt(charlie, liste1, 1.0, 1).
+abgelegt(charlie, liste2, 1.0, 1).
+abgelegt(charlie, vert1, 1.0, 1).
+abgelegt(charlie, vert2, 1.0, 1).
+abgelegt(charlie, spez1, 1.0, 1).
+abgelegt(charlie, spez2, 1.0, 1).
+
 
 /* Theories */
 
@@ -117,9 +152,8 @@ modul_bestanden(Person, ModulName):-
 	modul(ModulName, [Head|Tail]),
 	print(ModulName),
 	versuchsanzahl(Person, [Head|Tail], 0),
-	bestanden(Person, Head),
-	modul_test(Person, Tail).
-
+	modulnote(Person, [Head|Tail], 0, 0).
+	
 /* Teste Versuchsanzahl <4 pro Modul
 versuchsanzahl(Person, Prüfungsliste[], Summe der Versuche)*/
 versuchsanzahl(Person, [Pruefung|Tail], Sum):-
@@ -130,32 +164,25 @@ versuchsanzahl(Person, [Pruefung|Tail], Sum):-
 
 versuchsanzahl(Person, [], Versuche).	
 
-
+modulnote(Person, [Pruefung|Tail], GesNote, GesGewicht):-
+	abgelegt(Person, Pruefung, Note, Attempt),
+	pruefung(Pruefung, Gewicht),
+	TempNote is (Note*Gewicht) + GesNote,
+	TempGewicht is Gewicht + GesGewicht,
+	modulnote(Person, Tail, TempNote, TempGewicht).
 	
+modulnote(Person, [], GesNote, GesGewicht):-
+	(GesNote / GesGewicht) =< 4 .	
 	
-/* Teste einzelne Prüfungen des Moduls */
-/* modultest(Person, Prüfungen[] */
-modul_test(Person, [Head|Tail]):-
-	bestanden(Person, Head),
-	modul_test(Person, Tail).
-modul_test(Person, []).
 
+/* alle_bestanden(Person, modulliste[]) teste alle Module in Liste*/
 
-bestanden(Person, Pruefung):-
-
-	abgelegt(Person, Pruefung, Note, Versuch),
-	Note =< 4.0,
-	Versuch =< 3.
-
-/* alle_bestanden(Person, modulliste[]) teste alle Module in Liste
-	 Module in Fact "modulliste" - bob = no, alice=yes
-	 alle_bestanden(alice, [b_110, b_120, b_210, b_230, b_240, b_260, b_290, b_270, b_310, b_320, b_330, b_370, b_390, b_3A0, b_3B0, b_410, b_420, b_510, b_520, b_610]).
-*/
 alle_bestanden(Person, [Head|Tail]) :-
 	modul_bestanden(Person, Head),
 	alle_bestanden(Person, Tail).
 
 alle_bestanden(Person, []).
 
+/*bei nicht bestehen bleibt output am betroffenen modul stehen*/
 bachelor_bestanden(Person):-
 	alle_bestanden(Person, [b_110, b_120, b_210, b_230, b_240, b_260, b_290, b_270, b_310, b_320, b_330, b_370, b_390, b_3A0, b_3B0, b_410, b_420, b_510, b_520, b_610]).
