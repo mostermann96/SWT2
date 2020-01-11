@@ -51,8 +51,6 @@ modul(b_510, [vert1, vert2]).
 modul(b_520, [spez1, spez2]).
 modul(b_610, [liste1, liste2]).
 
-modulliste([b_110, b_120, b_210, b_230, b_240, b_260, b_290, b_270, b_310, b_320, b_330, b_370, b_390, b_3A0, b_3B0, b_410, b_420, b_510, b_520, b_610]).
-
 abgelegt(bob, theolog, 1.0, 1).
 abgelegt(bob, mathe11, 1.0, 2).
 abgelegt(bob, mathe12, 1.0, 1).
@@ -158,3 +156,6 @@ alle_bestanden(Person, [Head|Tail]) :-
 	alle_bestanden(Person, Tail).
 
 alle_bestanden(Person, []).
+
+bachelor_bestanden(Person):-
+	alle_bestanden(Person, [b_110, b_120, b_210, b_230, b_240, b_260, b_290, b_270, b_310, b_320, b_330, b_370, b_390, b_3A0, b_3B0, b_410, b_420, b_510, b_520, b_610]).
