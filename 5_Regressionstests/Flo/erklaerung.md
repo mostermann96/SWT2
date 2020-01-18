@@ -1,0 +1,4 @@
+- Das ist ein Windows command line Skript, dass für beide Versionen von Axis ein Output generiert und diese dann vergleicht
+- -> geht logischerweise nur unter windows
+- Ich hab es nicht geschafft, eigene Java-Klassen mit Java2WSDL in wsdl zu konvertieren, da muss ich mal Martin fragen warum da ein Error kommt
+- Die Ergebnisse des Vergleichs liegen dann unter results/result.txt
