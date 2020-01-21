@@ -1,3 +1,9 @@
+axis-1_4/
+build/
+dist/
+nbproject/
+test/
+
 *.zip
 *.aux
 *.log
@@ -5,6 +11,9 @@
 *.synctex.gz
 *.toc
 *.uxf
+*.xml
+*.jar
+*.mf
 
 # added by Flo. Those are files created by my latex package when building.
 *.fls
