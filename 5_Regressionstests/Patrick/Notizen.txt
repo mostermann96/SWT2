@@ -1,0 +1,87 @@
+-> If you compile your class with debug information, Java2WSDL will use the debug information to obtain the method parameter names.
+-> If your specified interface methods reference other classes, the Java2WSDL tool will generate the appropriate xml types to represent the classes and any nested/inherited types
+-> The tool supports JAX-RPC complex types (bean classes), extension classes, enumeration classes, arrays and Holder classes
+
+
+
+Java2WSDL emitter
+Usage: java org.apache.axis.wsdl.Java2WSDL [options] class-of-portType
+Options:
+	-h, --help
+		print this message and exit
+	-I, --input <argument>
+		input WSDL filename
+	-o, --output <argument>
+		output WSDL filename
+	-l, --location <argument>
+		service location url
+	-P, --portTypeName <argument>
+		portType name (obtained from class-of-portType if not specif
+		ied)
+	-b, --bindingName <argument>
+		binding name (--servicePortName value + "SOAPBinding" if not
+		 specified)
+	-S, --serviceElementName <argument>
+		service element name (defaults to --servicePortName value + 
+		"Service")
+	-s, --servicePortName <argument>
+		service port name (obtained from --location if not specified
+		)
+	-n, --namespace <argument>
+		target namespace
+	-p, --PkgtoNS <argument>=<value>
+		package=namespace, name value pairs
+	-m, --methods <argument>
+		space or comma separated list of methods to export
+	-a, --all
+		look for allowed methods in inherited class
+	-w, --outputWsdlMode <argument>
+		output WSDL mode: All, Interface, Implementation
+	-L, --locationImport <argument>
+		location of interface wsdl
+	-N, --namespaceImpl <argument>
+		target namespace for implementation wsdl
+	-O, --outputImpl <argument>
+		output Implementation WSDL filename, setting this causes --o
+		utputWsdlMode to be ignored
+	-i, --implClass <argument>
+		optional class that contains implementation of methods in cl
+		ass-of-portType.  The debug information in the class is used
+		 to obtain the method parameter names, which are used to set
+		 the WSDL part names.
+	-x, --exclude <argument>
+		space or comma separated list of methods not to export
+	-c, --stopClasses <argument>
+		space or comma separated list of class names which will stop
+		 inheritance search if --all switch is given
+	-T, --typeMappingVersion <argument>
+		indicate 1.1 or 1.2.  The default is 1.1 (SOAP 1.1 JAX-RPC c
+		ompliant  1.2 indicates SOAP 1.1 encoded.)
+	-A, --soapAction <argument>
+		value of the operation's soapAction field. Values are DEFAUL
+		T, OPERATION or NONE. OPERATION forces soapAction to the nam
+		e of the operation.  DEFAULT causes the soapAction to be set
+		 according to the operation's meta data (usually "").  NONE 
+		forces the soapAction to "".  The default is DEFAULT.
+	-y, --style <argument>
+		The style of binding in the WSDL, either DOCUMENT, RPC, or W
+		RAPPED.
+	-u, --use <argument>
+		The use of items in the binding, either LITERAL or ENCODED
+	-e, --extraClasses <argument>
+		A space or comma separated list of class names to be added t
+		o the type section.
+	-C, --importSchema
+		A file or URL to an XML Schema that should be physically imp
+		orted into the generated WSDL
+	-X, --classpath
+		additional classpath elements
+	-d, --deploy
+		generate wsdd and java classes for deploying  
+Details:
+   portType element name= <--portTypeName value> OR <class-of-portType name>
+   binding  element name= <--bindingName value> OR <--servicePortName value>SoapBinding
+   service  element name= <--serviceElementName value> OR <--portTypeName value>Service 
+   port     element name= <--servicePortName value>
+   address location     = <--location value>
+
