@@ -45,6 +45,7 @@ public class TestJava2WSDL {
         } catch (IOException | InterruptedException e){
             System.err.println("Prozess konnte nicht ausgeführt werden:");
             System.err.println(cmd.toString());
+            System.err.println(cp);
             System.err.println(e.toString());
             fail();     // Todo Review: möglicherweise soll hier nicht abgebrochen werden
             return 100;
