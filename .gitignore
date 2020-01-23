@@ -4,6 +4,7 @@ dist/
 nbproject/
 .idea/
 out/
+test_output/
 
 *.zip
 *.aux
@@ -16,6 +17,7 @@ out/
 *.jar
 *.mf
 *.iml
+*.class
 
 # added by Flo. Those are files created by my latex package when building.
 *.fls
