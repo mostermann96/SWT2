@@ -1,3 +1,4 @@
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
@@ -105,6 +106,15 @@ public class TestJava2WSDL {
                 return f.getPath();
         }
         return null;
+    }
+
+    @BeforeClass
+    public static void cleanOutDir(){
+        File[] files = new File(outputDir).listFiles(new CustomFilenameFilter());
+        if (files != null) {
+            for (File f : files)
+                f.delete();
+        }
     }
 
     /**
