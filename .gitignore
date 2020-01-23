@@ -5,6 +5,8 @@ nbproject/
 .idea/
 out/
 test_output/
+# brauchen wir nicht, kann zum Rumprobieren genutzt werden
+5_Regressionstests/Main/src/
 
 *.zip
 *.aux
