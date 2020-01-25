@@ -94,11 +94,11 @@ public class TestJava2WSDL {
 
     /**
      * Gibt den Pfad zur Datei zurück, die von der modifizierten Version ausgegeben wurde
-     * @param inPath Pfad der Eingabedatei
+     * @param inClass Name der Eingabeklasse, wie bei runJava2WSDL
      * @return relativen Pfad zur Ausgabedatei, null wenn nichts gefunden
      */
-    private String findOutputFile(String inPath) {
-        String base = getBaseFilename(inPath);
+    private String findOutputFile(String inClass) {
+        String base = getBaseFilename(inClass);
         for (File f : Objects.requireNonNull(new File(outputDir).listFiles(), "Ausgabeverzeichnis leer!")) {
             if (f.getPath().contains(base) && !f.getPath().contains("orig.wsdl"))
                 return f.getPath();
