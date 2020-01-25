@@ -3,7 +3,6 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.*;
 
 import static org.junit.Assert.assertTrue;
@@ -19,13 +18,12 @@ public class TestJava2WSDL {
     private static String cpOrig = "axis-1_4" + File.separator + "lib" + File.separator + "*" + File.pathSeparator + inputDir;
     private static String cpMod = "axis-modified.jar" + File.pathSeparator + "axis-1_4" + File.separator + "lib" + File.separator + "*" + File.pathSeparator + inputDir;
 
-    private String getBaseFilename(String path) {
-        String filename = Paths.get(path).getFileName().toString();
-        return filename.substring(0, filename.lastIndexOf("."));
+    private String getBaseFilename(String classString) {
+        return classString.substring(classString.lastIndexOf(".") + 1);
     }
 
-    private String[] getOutputFilenames(String inPath) {
-        String filename = getBaseFilename(inPath);
+    private String[] getOutputFilenames(String classString) {
+        String filename = getBaseFilename(classString);
         return new String[]{filename + ".orig.wsdl", filename + ".mod.wsdl"};
     }
 
@@ -55,14 +53,13 @@ public class TestJava2WSDL {
 
     /**
      * Ruft das Tool 2-Mal auf, einmal mit original axis.jar, einmal mit modifizierter axis.jar
-     * @param inPath Pfad zur Eingabedatei
-     * @param inClassName Name der Eingabeklasse (wegen Package-Informationen)
+     * @param inClassName Name der Eingabeklasse (mit Packages, z.B. example.app.SomeClass)
      * @param options Optionen für Java2WSDL
      * @return bool Array: [Original erfolgreich ausgeführt, Modifierte Version erfolgreich ausgeführt]
      */
-    private boolean[] runJava2WSDL(String inPath, String inClassName, List<String> options) {
+    private boolean[] runJava2WSDL(String inClassName, List<String> options) {
         // Ausgabe-Namen für WSDL-Dateien
-        String[] outFilenames = getOutputFilenames(inPath);
+        String[] outFilenames = getOutputFilenames(inClassName);
 
         // Befehle zusammensetzen
         ArrayList<String> cmdOrig = new ArrayList<>(cmdBase);
@@ -123,10 +120,10 @@ public class TestJava2WSDL {
      */
     @Test
     public void testCorrectOutputFiles() {
-        String inPath = inputDir + File.separator + "WidgetPrice.java";
-        requireSuccess(runJava2WSDL(inPath, "WidgetPrice", Arrays.asList("-l", "localhost:8000/hello")));
-        String outPath0 = outputDir + File.separator + getOutputFilenames(inPath)[0];
-        String outPath1 = outputDir + File.separator + getOutputFilenames(inPath)[1];
+        String className = "WidgetPrice";
+        requireSuccess(runJava2WSDL(className, Arrays.asList("-l", "localhost:8000/hello")));
+        String outPath0 = outputDir + File.separator + getOutputFilenames(className)[0];
+        String outPath1 = outputDir + File.separator + getOutputFilenames(className)[1];
         assertTrue(new File(outPath0).exists());
         assertTrue(new File(outPath1).exists());
     }
