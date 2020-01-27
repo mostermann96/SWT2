@@ -6,14 +6,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Java2WSDLRunner {
+public class ConsoleRunner {
     private final String inputDir = "test_input";
     private final String outputDir = "test_output";
-    private final List<String> cmdBase = Arrays.asList("java", "org.apache.axis.wsdl.Java2WSDL");
+
+
+
+    private final List<String> cmdBase;
     private final String cpOrig = "axis-1_4" + File.separator + "lib" + File.separator + "*";
     //private static String cpMod = "axis-modified.jar" + File.pathSeparator + "axis-1_4" + File.separator + "lib" + File.separator + "*" + File.pathSeparator + inputDir;
     private final String cpMod = "axis-1_4_modified" + File.separator + "lib" + File.separator + "*";
-
+    private ArrayList<String> cmdOrig;
+    private ArrayList<String> cmdMod;
+    public ConsoleRunner(List<String> cmdBase) {
+        this.cmdBase = cmdBase;
+        this.cmdOrig=new ArrayList<>(this.cmdBase);
+        this.cmdMod=this.cmdOrig;
+    }
     public ArrayList<String> getCmdOrig() {
         return cmdOrig;
     }
@@ -22,12 +31,7 @@ public class Java2WSDLRunner {
         return cmdMod;
     }
 
-    private ArrayList<String> cmdOrig = new ArrayList<>(cmdBase);
-    private ArrayList<String> cmdMod = new ArrayList<>(cmdBase);
 
-    public Java2WSDLRunner() {
-
-    }
 
     public String getBaseFilename(String path) {
         String filename = Paths.get(path).getFileName().toString();

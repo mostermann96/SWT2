@@ -43,14 +43,14 @@ public class TestJava2WSDL {
 
     @Test
     public void testCorrectOutputFilesURLEndpointWidget() {
-        Java2WSDLRunner java2WSDLRunner = new Java2WSDLRunner();
-        String inPath = java2WSDLRunner.getInputDir() + File.separator + "WidgetPrice.java";
+        ConsoleRunner consoleRunner = new ConsoleRunner(Arrays.asList("java","org.apache.axis.wsdl.WSDL2Java"));
+        String inPath = consoleRunner.getInputDir() + File.separator + "WidgetPrice.java";
         String fileExtention = "wsdl";
         String outPutCommand = "-o";
         List<String> forOutput = Arrays.asList("WidgetPrice", fileExtention, outPutCommand);
-        requireSuccess(java2WSDLRunner.runJava2WSDL(forOutput, "javax.xml.messaging.URLEndpoint", Arrays.asList("-l", "http://localhost:8080/axis/services/WidgetPrice")));
-        String outPath0 = java2WSDLRunner.getOutputDir() + File.separator + java2WSDLRunner.getOutputFilenames(forOutput)[0];
-        String outPath1 = java2WSDLRunner.getOutputDir() + File.separator + java2WSDLRunner.getOutputFilenames(forOutput)[1];
+        requireSuccess(consoleRunner.runJava2WSDL(forOutput, "javax.xml.messaging.URLEndpoint", Arrays.asList("-l", "http://localhost:8080/axis/services/WidgetPrice")));
+        String outPath0 = consoleRunner.getOutputDir() + File.separator + consoleRunner.getOutputFilenames(forOutput)[0];
+        String outPath1 = consoleRunner.getOutputDir() + File.separator + consoleRunner.getOutputFilenames(forOutput)[1];
         assertTrue(new File(outPath0).exists());
         assertFalse(new File(outPath1).exists());
         assertTrue(new File("test_output/WidgetPrice_mod_impl.wsdl").exists());
@@ -63,16 +63,16 @@ public class TestJava2WSDL {
      * java org.apache.axis.wsdl.Java2WSDL > test_output/help_mod.txt"
      */
     @Test
-    public void testCorrectOutputFilesHelp() throws IOException, InterruptedException {
-        Java2WSDLRunner java2WSDLRunner = new Java2WSDLRunner();
+    public void testCorrectOutputFilesHelp() {
+        ConsoleRunner consoleRunner = new ConsoleRunner(Arrays.asList("java","org.apache.axis.wsdl.WSDL2Java"));
         //String inPath = java2WSDLRunner.getInputDir() + File.separator + "Help.java";
         String fileExtension = "txt";
         String outPutCommand = ">";
 
         List<String> forOutput = Arrays.asList("help", fileExtension, outPutCommand);
-        requireSuccess(java2WSDLRunner.runJava2WSDL(forOutput,"", Collections.emptyList()));
-        String outPath0 = java2WSDLRunner.getOutputDir() + File.separator + java2WSDLRunner.getOutputFilenames(forOutput)[0];
-        String outPath1 = java2WSDLRunner.getOutputDir() + File.separator + java2WSDLRunner.getOutputFilenames(forOutput)[1];
+        requireSuccess(consoleRunner.runJava2WSDL(forOutput,"", Collections.emptyList()));
+        String outPath0 = consoleRunner.getOutputDir() + File.separator + consoleRunner.getOutputFilenames(forOutput)[0];
+        String outPath1 = consoleRunner.getOutputDir() + File.separator + consoleRunner.getOutputFilenames(forOutput)[1];
 
         assertTrue(new File(outPath0).exists());
         assertTrue(new File(outPath1).exists());
