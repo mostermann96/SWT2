@@ -107,6 +107,17 @@ public class TestJava2WSDL {
     }
 
     /**
+     * Übereinstimmung der WSDL-Ausgabe bei Eingabe mit Debug-Infos
+     */
+    @Test
+    public void testRunWithDebugInfo(){
+        String inClassName = "WidgetPriceDebug";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation")));
+        String[] outFilenames = runner.getOutputFilenames(inClassName);
+        assertEquals(readFile(outFilenames[0]), readFile(outFilenames[1]));
+    }
+
+    /**
      * Teste, ob Ausgabedateien unter korrektem Namen angelegt werden
      * java org.apache.axis.wsdl.Java2WSDL > test_output/help_orig.txt"
      * java org.apache.axis.wsdl.Java2WSDL > test_output/help_mod.txt"
