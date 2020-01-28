@@ -105,7 +105,7 @@ public class ConsoleRunner {
     /**
      * Ruft runJava2WSDL mit stdoutToFile = false auf
      */
-    public boolean[] runJava2WSDL(String inClassName, List<String> options) {
+    public int[] runJava2WSDL(String inClassName, List<String> options) {
         return runJava2WSDL(inClassName, options, false);
     }
 
@@ -116,7 +116,7 @@ public class ConsoleRunner {
      * @param options     Optionen für Java2WSDL
      * @return bool Array: [Original erfolgreich ausgeführt, Modifierte Version erfolgreich ausgeführt]
      */
-    public boolean[] runJava2WSDL(String inClassName, List<String> options, boolean stdoutToFile) {
+    public int[] runJava2WSDL(String inClassName, List<String> options, boolean stdoutToFile) {
         // Cmd zurücksetzen
         resetCommands();
 
@@ -148,13 +148,13 @@ public class ConsoleRunner {
         }
 
         // Prozesse ausführen
-//        System.out.println(cmdOrig);
-//        System.out.println(cmdMod);
+        System.out.println(cmdOrig);
+        System.out.println(cmdMod);
 //        System.out.println(cpOrig);
 //        System.out.println(cpMod);
-        boolean[] retVal = new boolean[2];
-        retVal[0] = runProcess(cmdOrig, cpOrig, outFiles[0]) == 0;
-        retVal[1] = runProcess(cmdMod, cpMod, outFiles[1]) == 0;
+        int[] retVal = new int[2];
+        retVal[0] = runProcess(cmdOrig, cpOrig, outFiles[0]);
+        retVal[1] = runProcess(cmdMod, cpMod, outFiles[1]);
 
         return retVal;
     }

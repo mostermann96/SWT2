@@ -2,9 +2,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 public class TestJava2WSDL {
@@ -12,13 +16,35 @@ public class TestJava2WSDL {
     static final ConsoleRunner runner = new ConsoleRunner(Arrays.asList("java","org.apache.axis.wsdl.Java2WSDL"));
 
     /**
-     * Stellt sicher, dass die Tool-Aufrufe erfolgreich sind
-     *
-     * @param succeeded Rückgabewert von runJava2WSDL
+     * Stellt sicher, dass die Java2WSDL Aufrufe erfolgreich sind
+     * @param retVals Rückgabewert von runJava2WSDL
      */
-    private void requireSuccess(boolean[] succeeded) {
-        assertTrue(succeeded[0]);
-        assertTrue(succeeded[1]);
+    private void requireSuccess(int[] retVals) {
+        assertEquals(0, retVals[0]);
+        assertEquals(0, retVals[1]);
+    }
+
+    /**
+     * Testet Gleichheit der Exit-Codes der Java2WSDL Aufrufe
+     * @param retVals Rückgabewert von runJava2WSDL
+     */
+    private void requireEqualExitCodes(int[] retVals){
+        assertEquals(retVals[0], retVals[1]);
+    }
+
+    /**
+     * Liest Datei in einen String
+     * @param path Pfad zu einer Text-Datei als String
+     * @return Inhalt der Datei als String
+     */
+    private String readFile(String path){
+        Scanner s = null;
+        try{
+            s = new Scanner(new File(path));
+        } catch (FileNotFoundException e){
+            return null;
+        }
+        return s.useDelimiter("\\Z").next();
     }
 
     @BeforeClass
@@ -67,6 +93,17 @@ public class TestJava2WSDL {
         String outPath1 = runner.getOutputDir() + File.separator + runner.getOutputFilenames(inClassName)[1];
         assertTrue(new File(outPath0).exists());
         assertTrue(new File(outPath1).exists());
+    }
+
+    /**
+     * Übereinstimmung von Konsolen-Ausgabe bei Angabe von Option --help
+     */
+    @Test
+    public void testOptionHelp(){
+        List<String> options = Arrays.asList("--help");
+        requireEqualExitCodes(runner.runJava2WSDL(null, options, true));
+        String[] outFilenames = runner.getConsoleOutputFilenames(null, options);
+        assertEquals(readFile(outFilenames[0]), readFile(outFilenames[1]));
     }
 
     /**
