@@ -10,7 +10,7 @@ public class ConsoleRunner {
 
     private final List<String> cmdBase;
 
-    private final String cpOrig = "axis-1_4" + File.separator + "lib" + File.separator + "*";
+    private final String cpOrig = "axis-1_4" + File.separator + "lib" + File.separator + "*" + File.pathSeparator + inputDir;
     private static String cpMod = "axis-modified.jar" + File.pathSeparator + "axis-1_4" + File.separator + "lib" + File.separator + "*" + File.pathSeparator + inputDir;
     //private final String cpMod = "axis-1_4_modified" + File.separator + "lib" + File.separator + "*";
 
