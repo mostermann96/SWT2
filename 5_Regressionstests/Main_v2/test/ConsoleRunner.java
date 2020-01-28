@@ -1,46 +1,51 @@
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class ConsoleRunner {
-    private final String inputDir = "test_input";
-    private final String outputDir = "test_output";
-
-
+    private static final String inputDir = "test_input";
+    private static final String outputDir = "test_output";
 
     private final List<String> cmdBase;
+
     private final String cpOrig = "axis-1_4" + File.separator + "lib" + File.separator + "*";
-    //private static String cpMod = "axis-modified.jar" + File.pathSeparator + "axis-1_4" + File.separator + "lib" + File.separator + "*" + File.pathSeparator + inputDir;
-    private final String cpMod = "axis-1_4_modified" + File.separator + "lib" + File.separator + "*";
+    private static String cpMod = "axis-modified.jar" + File.pathSeparator + "axis-1_4" + File.separator + "lib" + File.separator + "*" + File.pathSeparator + inputDir;
+    //private final String cpMod = "axis-1_4_modified" + File.separator + "lib" + File.separator + "*";
+
     private ArrayList<String> cmdOrig;
     private ArrayList<String> cmdMod;
+
     public ConsoleRunner(List<String> cmdBase) {
         this.cmdBase = cmdBase;
-        this.cmdOrig=new ArrayList<>(this.cmdBase);
-        this.cmdMod=this.cmdOrig;
-    }
-    public ArrayList<String> getCmdOrig() {
-        return cmdOrig;
+        this.cmdOrig = new ArrayList<>(this.cmdBase);
+        this.cmdMod = new ArrayList<>(this.cmdBase);
     }
 
-    public ArrayList<String> getCmdMod() {
-        return cmdMod;
+    private String getBaseFilename(String classString) {
+        return classString.substring(classString.lastIndexOf(".") + 1);
     }
 
-
-
-    public String getBaseFilename(String path) {
-        String filename = Paths.get(path).getFileName().toString();
-        return filename.substring(0, filename.lastIndexOf("."));
+    public String[] getOutputFilenames(String classString) {
+        String base = getBaseFilename(classString);
+        return new String[]{base + ".orig.wsdl", base + ".mod.wsdl"};
     }
 
-    public String[] getOutputFilenames(List<String> forOutput) {
-        //String filename = getBaseFilename(inPath);
-        return new String[]{forOutput.get(0) + "_orig." + forOutput.get(1), forOutput.get(0) + "_mod." + forOutput.get(1)};
+    public String[] getConsoleOutputFilenames(String inClassName, List<String> options){
+        String base = outputDir + File.separator;
+        if (inClassName != null)
+            base += getBaseFilename(inClassName);
+        else {
+            if (options != null) {
+                // Optionen werden als Dateiname verwendet, daher nur sichere Zeichen zulassen
+                String optionStr = options.toString().replaceAll("[^-,\\w]", "");
+                base += optionStr;
+            }
+            else
+                base += "no_input";
+        }
+        return new String[]{base + ".orig.txt", base + ".mod.txt"};
     }
 
     public static Process runCmdAsync(List<String> cmd) {
@@ -51,22 +56,23 @@ public class ConsoleRunner {
         }
     }
 
-    public int runProcess(List<String> cmd, String cp) {
+    public int runProcess(List<String> cmd, String cp, File outFile) {
         // in/out/err und Arbeitsverzeichnis von diesem Prozess übernehmen
-        ProcessBuilder builder = new ProcessBuilder();
-        builder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
-        Process process;
+        ProcessBuilder builder = new ProcessBuilder(cmd)
+                .inheritIO();
+        // classpath setzen
         builder.environment().put("CLASSPATH", cp);
-        if (cmd.contains(">")) {
-            runProcessWithStdOut(cmd, builder);
-        } else {
-            builder.command(cmd).inheritIO();
-        }
-        try {
 
-            //builder.redirectOutput(ProcessBuilder.Redirect.appendTo(new File(cmd.get(1))));
+        // Ausgabedatei setzen
+        if (outFile != null){
+            builder.redirectOutput(outFile);
+            builder.redirectError(outFile);
+        }
+
+        // Prozess ausführen
+        Process process;
+        try {
             process = builder.start();
-            //OutputStream stdin = process.getOutputStream ();
             process.waitFor();
         } catch (IOException | InterruptedException e) {
             System.err.println("Prozess konnte nicht ausgeführt werden:");
@@ -76,8 +82,9 @@ public class ConsoleRunner {
             //  fail();     // Todo Review: möglicherweise soll hier nicht abgebrochen werden
             return 100;
         }
+
         process.destroy();
-        return 0;
+        return process.exitValue();
     }
 
     private void runProcessWithStdOut(List<String> cmd, ProcessBuilder builder) {
@@ -96,48 +103,69 @@ public class ConsoleRunner {
     }
 
     /**
+     * Ruft runJava2WSDL mit stdoutToFile = false auf
+     */
+    public boolean[] runJava2WSDL(String inClassName, List<String> options) {
+        return runJava2WSDL(inClassName, options, false);
+    }
+
+    /**
      * Ruft das Tool 2-Mal auf, einmal mit original axis.jar, einmal mit modifizierter axis.jar
      *
-     * @param inPath      Pfad zur Eingabedatei
-     * @param inClassName Name der Eingabeklasse (wegen Package-Informationen)
+     * @param inClassName Name der Eingabeklasse (mit Package), null für keine Eingabeklasse
      * @param options     Optionen für Java2WSDL
      * @return bool Array: [Original erfolgreich ausgeführt, Modifierte Version erfolgreich ausgeführt]
      */
-    public boolean[] runJava2WSDL(List<String> forOutput, String inClassName, List<String> options) {
+    public boolean[] runJava2WSDL(String inClassName, List<String> options, boolean stdoutToFile) {
+        // Cmd zurücksetzen
+        resetCommands();
 
         // Optionen übernehmen
-        setPathCmdOrig(options);
-        setPathCmdMod(options);
+        if (options != null) {
+            cmdOrig.addAll(options);
+            cmdMod.addAll(options);
+        }
+
         // Ausgabedateien
-        setOutputPieceOfPaths(forOutput);
+        //setOutputPieceOfPaths(forOutput);
 
-        // Eingabeklassen
-        setSamePieceOfPaths(inClassName);
+        // Ausggabedateien und Eingabeklasse
+        if (inClassName != null){
+            String[] outFilenames = getOutputFilenames(inClassName);
+            cmdOrig.addAll(Arrays.asList("-o", outputDir + File.separator + outFilenames[0]));
+            cmdMod.addAll(Arrays.asList("-o", outputDir + File.separator + outFilenames[1]));
 
-        System.out.println(getCmdOrig().toString() + "\n" + getCmdMod().toString());
+            cmdOrig.add(inClassName);
+            cmdMod.add(inClassName);
+        }
+
+        // Stdout-Dateien für Subprozesse
+        File[] outFiles = new File[2];
+        if (stdoutToFile) {
+            String[] filenames = getConsoleOutputFilenames(inClassName, options);
+            outFiles[0] = new File(filenames[0]);
+            outFiles[1] = new File(filenames[1]);
+        }
 
         // Prozesse ausführen
-        System.out.println(cmdOrig);
-        System.out.println(cmdMod);
-        System.out.println(cpOrig);
-        System.out.println(cpMod);
+//        System.out.println(cmdOrig);
+//        System.out.println(cmdMod);
+//        System.out.println(cpOrig);
+//        System.out.println(cpMod);
         boolean[] retVal = new boolean[2];
-        retVal[0] = runProcess(getCmdOrig(), cpOrig) == 0;
-        retVal[1] = runProcess(getCmdMod(), cpMod) == 0;
-        System.out.println(cpOrig);
-        System.out.println(cpMod);
+        retVal[0] = runProcess(cmdOrig, cpOrig, outFiles[0]) == 0;
+        retVal[1] = runProcess(cmdMod, cpMod, outFiles[1]) == 0;
 
         return retVal;
     }
 
     /**
      * Gibt den Pfad zur Datei zurück, die von der modifizierten Version ausgegeben wurde
-     *
-     * @param inPath Pfad der Eingabedatei
+     * @param inClass Name der Eingabeklasse, wie bei runJava2WSDL
      * @return relativen Pfad zur Ausgabedatei, null wenn nichts gefunden
      */
-    private String findOutputFile(String inPath) {
-        String base = getBaseFilename(inPath);
+    private String findOutputFile(String inClass) {
+        String base = getBaseFilename(inClass);
         for (File f : Objects.requireNonNull(new File(outputDir).listFiles(), "Ausgabeverzeichnis leer!")) {
             if (f.getPath().contains(base) && !f.getPath().contains("orig.wsdl"))
                 return f.getPath();
@@ -165,6 +193,14 @@ public class ConsoleRunner {
         return cpMod;
     }
 
+    public ArrayList<String> getCmdOrig() {
+        return cmdOrig;
+    }
+
+    public ArrayList<String> getCmdMod() {
+        return cmdMod;
+    }
+
     //to set cmdOrigin path
     public void setPathCmdOrig(List<String> options) {
         if (!options.isEmpty()) {
@@ -182,11 +218,11 @@ public class ConsoleRunner {
     public void setOutputPieceOfPaths(List<String> forOutput) {
         if (!forOutput.get(0).isEmpty() && !forOutput.get(1).isEmpty() && !forOutput.get(2).isEmpty()) {
             // Ausgabe-Namen für WSDL-Dateien
-            String[] outFilenames = getOutputFilenames(forOutput);
+            //String[] outFilenames = getOutputFilenames(forOutput);
 
 
-            setPathCmdOrig(Arrays.asList(forOutput.get(2), outputDir + File.separator + outFilenames[0]));
-            setPathCmdMod(Arrays.asList(forOutput.get(2), outputDir + File.separator + outFilenames[1]));
+            //setPathCmdOrig(Arrays.asList(forOutput.get(2), outputDir + File.separator + outFilenames[0]));
+            //setPathCmdMod(Arrays.asList(forOutput.get(2), outputDir + File.separator + outFilenames[1]));
         }
 
     }
@@ -199,7 +235,7 @@ public class ConsoleRunner {
         }
     }
 
-    public void clearPaths() {
+    public void resetCommands() {
         cmdMod.clear();
         cmdMod.addAll(cmdBase);
         cmdOrig.clear();

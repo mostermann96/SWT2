@@ -7,6 +7,7 @@ out/
 test_output/
 # brauchen wir nicht, kann zum Rumprobieren genutzt werden
 5_Regressionstests/Main/src/
+5_Regressionstests/Main_v2/src/
 
 *.zip
 *.aux
