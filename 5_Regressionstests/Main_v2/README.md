@@ -11,8 +11,10 @@
 * Rechts-Click auf Verzeichnis `test` -> `Mark Directory As` -> `Test Sources Root`
 * Rechts-Click auf Projekt -> `Run all tests` (danach auch oben rechts mit dem grünen Pfeil)
 
+Für Groovy
+* Rechts-Click auf Projekt -> `Add Framework Support`   
+-> `Groovy` -> Groovy Install Path auswählen -> 'ok'
+
 ### Ein-/Ausgabe
 * Eingabe: Java-Interfaces werden in __test_input__ abgelegt
 * Ausgabe: .wsdl-Dateien werden in __test_output__ abgelegt
-
-repack axis_lib.zip
