@@ -117,25 +117,50 @@ public class TestJava2WSDL {
         assertEquals(readFile(outFilenames[0]), readFile(outFilenames[1]));
     }
 
+// ab hier 'neue' Testfälle von Flo
+
     /**
-     * Teste, ob Ausgabedateien unter korrektem Namen angelegt werden
-     * java org.apache.axis.wsdl.Java2WSDL > test_output/help_orig.txt"
-     * java org.apache.axis.wsdl.Java2WSDL > test_output/help_mod.txt"
+     * Übereinstimmung der Ausgabe bei Eingabe einer Input-WSDL Datei
      */
-    /*
     @Test
-    public void testCorrectOutputFilesHelp() {
-        //String inPath = java2WSDLRunner.getInputDir() + File.separator + "Help.java";
-        String fileExtension = "txt";
-        String outPutCommand = ">";
-
-        List<String> forOutput = Arrays.asList("help", fileExtension, outPutCommand);
-        requireSuccess(runner.runJava2WSDL(forOutput,"", Collections.emptyList()));
-        String outPath0 = runner.getOutputDir() + File.separator + runner.getOutputFilenames(forOutput)[0];
-        String outPath1 = runner.getOutputDir() + File.separator + runner.getOutputFilenames(forOutput)[1];
-
-        assertTrue(new File(outPath0).exists());
-        assertTrue(new File(outPath1).exists());
+    public void testOptionInput(){
+        String inClassName = "WidgetPrice";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation",
+                "-i", "test_input"+System.getProperty("file.separator")+"dummy_input.wsdl",
+                "-o", "test_output"+System.getProperty("file.separator")+"dummy_output.wsdl")));
+        String[] outFilenames = runner.getOutputFilenames(inClassName);
+        assertEquals(readFile(outFilenames[0]), readFile(outFilenames[1]));
+        //TODO: testen, ob auch wirklich gleich danach
     }
-    */
+
+    @Test
+    public void testPortNameOverwrite(){
+        String inClassName = "WidgetPrice";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
+                "-s", "alteredPortName")));
+        String[] outFilenames = runner.getOutputFilenames(inClassName);
+        assertEquals(readFile(outFilenames[0]), readFile(outFilenames[1]));
+        //TODO: testen, ob wsdl portname auch wirklich alteredPortName
+    }
+
+    @Test
+    public void testPortTypeNameOverwrite(){
+        String inClassName = "WidgetPrice";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation",
+                "-P", "alteredTypeName")));
+        String[] outFilenames = runner.getOutputFilenames(inClassName);
+        assertEquals(readFile(outFilenames[0]), readFile(outFilenames[1]));
+        //TODO: testen, ob wsdl portTypeName auch wirklich alteredTypeName
+    }
+
+    @Test
+    public void testBindingNameOverwrite(){
+        String inClassName = "WidgetPrice";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
+                "-s", "alteredPortName",
+                "-b", "someBindingName")));
+        String[] outFilenames = runner.getOutputFilenames(inClassName);
+        assertEquals(readFile(outFilenames[0]), readFile(outFilenames[1]));
+        //TODO: testen, ob wsdl bindingName auch wirklich someBindingName
+    }
 }

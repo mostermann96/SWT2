@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://messaging.xml.javax" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://messaging.xml.javax" xmlns:intf="http://messaging.xml.javax" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+
+   <wsdl:message name="getURLRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="getURLResponse">
+
+      <wsdl:part name="getURLReturn" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="URLEndpoint">
+
+      <wsdl:operation name="getURL">
+
+         <wsdl:input message="impl:getURLRequest" name="getURLRequest"/>
+
+         <wsdl:output message="impl:getURLResponse" name="getURLResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:dummy name="dummy"/>
+
+</wsdl:definitions>

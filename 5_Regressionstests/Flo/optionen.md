@@ -1,0 +1,37 @@
+-h
+-i <dummy-wsdl>
+-o (wird implizit schon bei den anderen Testfällen geprüft)
+-l (wird implizit schon bei den anderen Testfällen geprüft)
+-l with porttype overwritten by -s
+-p
+-b
+-S
+-n
+-p once
+-p multiple times
+-m with one method
+-m with multiple methods
+-a with once extended class
+-w with all
+-w with interface
+-w with Implementation and -L
+-N
+-O
+-O with -w specified (-w should be ignored)
+-i ?
+-x with one
+-x with multiple
+-c ?
+-T 1.1
+-T 1.2
+-A with DEFAULT
+-A with OPERATION
+-A with NONE
+-y RPC
+-y DOCUMENT
+-y WRAPPED
+-u LITERAL
+-u ENCODED
+-e ?
+-c ?
+-X ?

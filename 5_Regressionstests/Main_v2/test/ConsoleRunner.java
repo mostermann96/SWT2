@@ -132,8 +132,11 @@ public class ConsoleRunner {
         // Ausggabedateien und Eingabeklasse
         if (inClassName != null){
             String[] outFilenames = getOutputFilenames(inClassName);
-            cmdOrig.addAll(Arrays.asList("-o", outputDir + File.separator + outFilenames[0]));
-            cmdMod.addAll(Arrays.asList("-o", outputDir + File.separator + outFilenames[1]));
+            if(!options.contains("-o")){
+                cmdOrig.addAll(Arrays.asList("-o", outputDir + File.separator + outFilenames[0]));
+                cmdMod.addAll(Arrays.asList("-o", outputDir + File.separator + outFilenames[1]));
+            }
+
 
             cmdOrig.add(inClassName);
             cmdMod.add(inClassName);
