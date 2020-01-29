@@ -28,7 +28,7 @@ public class ConsoleRunner {
     }
 
     public String[] getOutputFilenames(String classString) {
-        String base = getBaseFilename(classString);
+        String base = outputDir + File.separator + getBaseFilename(classString);
         return new String[]{base + ".orig.wsdl", base + ".mod.wsdl"};
     }
 
@@ -132,8 +132,8 @@ public class ConsoleRunner {
         // Ausggabedateien und Eingabeklasse
         if (inClassName != null){
             String[] outFilenames = getOutputFilenames(inClassName);
-            cmdOrig.addAll(Arrays.asList("-o", outputDir + File.separator + outFilenames[0]));
-            cmdMod.addAll(Arrays.asList("-o", outputDir + File.separator + outFilenames[1]));
+            cmdOrig.addAll(Arrays.asList("-o", outFilenames[0]));
+            cmdMod.addAll(Arrays.asList("-o", outFilenames[1]));
 
             cmdOrig.add(inClassName);
             cmdMod.add(inClassName);
@@ -164,7 +164,7 @@ public class ConsoleRunner {
      * @param inClass Name der Eingabeklasse, wie bei runJava2WSDL
      * @return relativen Pfad zur Ausgabedatei, null wenn nichts gefunden
      */
-    private String findOutputFile(String inClass) {
+    public String findOutputFile(String inClass) {
         String base = getBaseFilename(inClass);
         for (File f : Objects.requireNonNull(new File(outputDir).listFiles(), "Ausgabeverzeichnis leer!")) {
             if (f.getPath().contains(base) && !f.getPath().contains("orig.wsdl"))
