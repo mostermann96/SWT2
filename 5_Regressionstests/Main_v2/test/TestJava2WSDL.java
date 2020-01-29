@@ -134,7 +134,7 @@ public class TestJava2WSDL {
                 "-i", "test_input"+System.getProperty("file.separator")+"dummy_input.wsdl",
                 "-o", "test_output"+System.getProperty("file.separator")+"dummy_output.wsdl")));
         String[] outFilenames = runner.getOutputFilenames(inClassName);
-        assertEquals(readFile(outFilenames[0]), readFile(outFilenames[1]));
+        assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.findOutputFile(inClassName)));
         //TODO: testen, ob auch wirklich gleich danach
     }
 
@@ -144,7 +144,7 @@ public class TestJava2WSDL {
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-s", "alteredPortName")));
         String[] outFilenames = runner.getOutputFilenames(inClassName);
-        assertEquals(readFile(outFilenames[0]), readFile(outFilenames[1]));
+        assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.findOutputFile(inClassName)));
         //TODO: testen, ob wsdl portname auch wirklich alteredPortName
     }
 
@@ -154,7 +154,7 @@ public class TestJava2WSDL {
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation",
                 "-P", "alteredTypeName")));
         String[] outFilenames = runner.getOutputFilenames(inClassName);
-        assertEquals(readFile(outFilenames[0]), readFile(outFilenames[1]));
+        assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.findOutputFile(inClassName)));
         //TODO: testen, ob wsdl portTypeName auch wirklich alteredTypeName
     }
 
@@ -165,7 +165,7 @@ public class TestJava2WSDL {
                 "-s", "alteredPortName",
                 "-b", "someBindingName")));
         String[] outFilenames = runner.getOutputFilenames(inClassName);
-        assertEquals(readFile(outFilenames[0]), readFile(outFilenames[1]));
+        assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.findOutputFile(inClassName)));
         //TODO: testen, ob wsdl bindingName auch wirklich someBindingName
     }
 }
