@@ -167,7 +167,8 @@ public class ConsoleRunner {
     public String findOutputFile(String inClass) {
         String base = getBaseFilename(inClass);
         for (File f : Objects.requireNonNull(new File(outputDir).listFiles(), "Ausgabeverzeichnis leer!")) {
-            if (f.getPath().contains(base) && !f.getPath().contains("orig.wsdl"))
+            String outClass = f.getName().substring(0, f.getName().indexOf("."));
+            if (outClass.equals(base) && f.getPath().contains(".wsdl") && !f.getPath().contains("orig.wsdl"))
                 return f.getPath();
         }
         return null;
