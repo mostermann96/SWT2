@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -17,35 +18,96 @@ public class ConsoleRunner {
     private ArrayList<String> cmdOrig;
     private ArrayList<String> cmdMod;
 
+    private static final String[] endingWsdl = new String[]{".orig.wsdl", ".mod.wsdl"};
+    private static final String[] endingWsdlImpl = new String[]{".orig.wsdlimpl", ".mod.wsdlimpl"};
+    private static final String[] endingTxt = new String[]{".orig.txt", ".mod.txt"};
+
+    private static final String optionOut = "-o";
+    private static final String optionOutImpl = "-O";
+
+    private String[] wsdlOut;
+    private String[] wsdlImplOut;
+    private String[] consoleOut;
+
     public ConsoleRunner(List<String> cmdBase) {
         this.cmdBase = cmdBase;
         this.cmdOrig = new ArrayList<>(this.cmdBase);
         this.cmdMod = new ArrayList<>(this.cmdBase);
     }
 
-    private String getBaseFilename(String classString) {
-        return classString.substring(classString.lastIndexOf(".") + 1);
+    /**
+     * Gibt Wsdl Ausgabedateipfade zurück
+     */
+    public String[] getWsdlOut() {
+        return wsdlOut;
     }
 
-    public String[] getOutputFilenames(String classString) {
-        String base = outputDir + File.separator + getBaseFilename(classString);
-        return new String[]{base + ".orig.wsdl", base + ".mod.wsdl"};
+    /**
+     * Gibt Wsdl-Impl Ausgabedateipfade zurück
+     */
+    public String[] getWsdlImplOut() {
+        return wsdlImplOut;
     }
 
-    public String[] getConsoleOutputFilenames(String inClassName, List<String> options){
-        String base = outputDir + File.separator;
-        if (inClassName != null)
-            base += getBaseFilename(inClassName);
-        else {
-            if (options != null) {
-                // Optionen werden als Dateiname verwendet, daher nur sichere Zeichen zulassen
-                String optionStr = options.toString().replaceAll("[^-,\\w]", "");
-                base += optionStr;
-            }
-            else
-                base += "no_input";
+    /**
+     * Gibt Konsolen-Ausgabedateipfade zurück
+     */
+    public String[] getConsoleOut(){
+        return consoleOut;
+    }
+
+    /**
+     * Gibt den Pfad zur Datei zurück, die von der modifizierten Version ausgegeben wurde
+     * @return relativen Pfad zur Ausgabedatei, null wenn nichts gefunden
+     */
+    public String findModWsdlOut() {
+        if (wsdlOut != null) {
+            String path = wsdlOut[1];
+            return findModWsdlOut(path);
         }
-        return new String[]{base + ".orig.txt", base + ".mod.txt"};
+        throw new IllegalArgumentException("wsdlOut ist nicht gesetzt, benutze findModWsdlOut(String)");
+    }
+
+    /**
+     * Wie oben
+     * Kann bei inferOutFilenames = false (siehe runJava2WSDL) benutzt werden, um Ausgabedatei zu finden
+     */
+    public String findModWsdlOut(String customOutFilename) {
+        if (!customOutFilename.contains(".")){
+            throw new IllegalArgumentException("Java2WSDL sollte zuvor schon eine Exception geworfen haben");
+        }
+
+        String out = customOutFilename.substring(0, customOutFilename.indexOf("."));
+        out += "_impl.wsdl";
+
+        if (!(new File(out).exists())) {
+            System.err.println("Modifizierte Axis sollte " + out + " geschrieben haben, aber Datei existiert nicht");
+            return null;
+        }
+        return out;
+    }
+
+    /**
+     * für Kompatibilität - nicht weiter verwenden
+     */
+    public String findOutputFile(){
+        return findModWsdlOut();
+    }
+
+    /**
+     * Nicht weiter benutzen
+     * Gibt Wsdl Ausgabedateipfade zurück - für Kompatibilität
+     */
+    public String[] getOutputFilenames(String classString) {
+        return wsdlOut;
+    }
+
+    /**
+     * Nicht weiter benutzen
+     * Gibt Konsolen-Ausgabedateipfade zurück - für Kompatibilität
+     */
+    public String[] getConsoleOutputFilenames(String inClassName, List<String> options){
+        return consoleOut;
     }
 
     public static Process runCmdAsync(List<String> cmd) {
@@ -87,26 +149,11 @@ public class ConsoleRunner {
         return process.exitValue();
     }
 
-    private void runProcessWithStdOut(List<String> cmd, ProcessBuilder builder) {
-        ArrayList<String> cmd_new = new ArrayList<>();
-        for (String i : cmd) {
-            if (!i.equals(">") && !i.startsWith(outputDir)) {
-                cmd_new.add(i);
-            }
-        }
-        System.out.println(cmd_new + "cmd_new");
-        System.out.println(cmd.toString().substring(0, cmd.toString().lastIndexOf(">")));
-        builder.command(cmd_new).inheritIO();
-        int last_elem = cmd.size() - 1;
-        File output = new File(cmd.get(last_elem));
-        builder.redirectOutput(output);
-    }
-
     /**
-     * Ruft runJava2WSDL mit stdoutToFile = false auf
+     * Ruft runJava2WSDL auf mit stdoutToFile = false, inferOutFilenames = true
      */
     public int[] runJava2WSDL(String inClassName, List<String> options) {
-        return runJava2WSDL(inClassName, options, false);
+        return runJava2WSDL(inClassName, options, false, true);
     }
 
     /**
@@ -114,27 +161,31 @@ public class ConsoleRunner {
      *
      * @param inClassName Name der Eingabeklasse (mit Package), null für keine Eingabeklasse
      * @param options     Optionen für Java2WSDL
+     * @param stdoutToFile true -> leite Konsolenausgabe nach Datei um
+     * @param inferOutFilenames true -> Dateinamen werden generiert basierend auf angegebenen Dateinamen
      * @return bool Array: [Original erfolgreich ausgeführt, Modifierte Version erfolgreich ausgeführt]
      */
-    public int[] runJava2WSDL(String inClassName, List<String> options, boolean stdoutToFile) {
+    public int[] runJava2WSDL(String inClassName, List<String> options, boolean stdoutToFile, boolean inferOutFilenames) {
         // Cmd zurücksetzen
         resetCommands();
 
-        // Optionen übernehmen
-        if (options != null) {
-            cmdOrig.addAll(options);
-            cmdMod.addAll(options);
+        if (options == null)
+            options = new LinkedList<>();
+        else
+            options = new LinkedList<>(options);
+
+        // wsdl Ausgabedateien
+        if (inClassName != null && inferOutFilenames) {
+            setWSDLOutputFiles(inClassName, (LinkedList<String>) options);
+            setWSDLImplOutputFiles(inClassName, (LinkedList<String>) options);
         }
 
-        // Ausgabedateien
-        //setOutputPieceOfPaths(forOutput);
+        // restliche Optionen übernehmen
+        cmdOrig.addAll(options);
+        cmdMod.addAll(options);
 
-        // Ausggabedateien und Eingabeklasse
+        // Eingabeklasse
         if (inClassName != null){
-            String[] outFilenames = getOutputFilenames(inClassName);
-            cmdOrig.addAll(Arrays.asList("-o", outFilenames[0]));
-            cmdMod.addAll(Arrays.asList("-o", outFilenames[1]));
-
             cmdOrig.add(inClassName);
             cmdMod.add(inClassName);
         }
@@ -142,10 +193,12 @@ public class ConsoleRunner {
         // Stdout-Dateien für Subprozesse
         File[] outFiles = new File[2];
         if (stdoutToFile) {
-            String[] filenames = getConsoleOutputFilenames(inClassName, options);
-            outFiles[0] = new File(filenames[0]);
-            outFiles[1] = new File(filenames[1]);
+            consoleOut = generateConsoleOutputFilenames(inClassName, options);
+            outFiles[0] = new File(consoleOut[0]);
+            outFiles[1] = new File(consoleOut[1]);
         }
+        else
+            consoleOut = null;
 
         // Prozesse ausführen
         System.out.println(cmdOrig);
@@ -159,19 +212,84 @@ public class ConsoleRunner {
         return retVal;
     }
 
-    /**
-     * Gibt den Pfad zur Datei zurück, die von der modifizierten Version ausgegeben wurde
-     * @param inClass Name der Eingabeklasse, wie bei runJava2WSDL
-     * @return relativen Pfad zur Ausgabedatei, null wenn nichts gefunden
-     */
-    public String findOutputFile(String inClass) {
-        String base = getBaseFilename(inClass);
-        for (File f : Objects.requireNonNull(new File(outputDir).listFiles(), "Ausgabeverzeichnis leer!")) {
-            String outClass = f.getName().substring(0, f.getName().indexOf("."));
-            if (outClass.equals(base) && f.getPath().contains(".wsdl") && !f.getPath().contains("orig.wsdl"))
-                return f.getPath();
+    private String getBaseFilename(String classString) {
+        return classString.substring(classString.lastIndexOf(".") + 1);
+    }
+
+    private String[] generateConsoleOutputFilenames(String inClassName, List<String> options){
+        String base = outputDir + File.separator;
+        if (inClassName != null)
+            base += getBaseFilename(inClassName);
+        else {
+            if (options != null) {
+                // Optionen werden als Dateiname verwendet, daher nur sichere Zeichen zulassen
+                String optionStr = options.toString().replaceAll("[^-,\\w]", "");
+                base += optionStr;
+            }
+            else
+                base += "no_input";
         }
-        return null;
+        return new String[]{base + endingTxt[0], base + endingTxt[1]};
+    }
+
+    private String removeOption(LinkedList<String> options, String option){
+        int i = options.indexOf(option);
+        if (i == -1){
+            return null;
+        }
+        else{
+            options.remove(i);
+            return options.remove(i);
+        }
+    }
+
+    private String[] setOutputFiles(String option, String inClassName, String base, String[] ending){
+        String filename = base;
+        if (filename.equals(""))
+            filename = getBaseFilename(inClassName);
+
+        if (!base.startsWith(outputDir))
+            filename = outputDir + File.separator + filename;
+
+        if (filename.contains("."))
+            filename = filename.substring(0, filename.indexOf("."));
+
+        String[] filenames = new String[]{filename + ending[0], filename + ending[1]};
+        cmdOrig.addAll(Arrays.asList(option, filenames[0]));
+        cmdMod.addAll(Arrays.asList(option, filenames[1]));
+
+        return filenames;
+    }
+
+    private void setWSDLOutputFiles(String inClassName, LinkedList<String> options){
+        String out = removeOption(options, optionOut);
+        if (out == null || out.equals(""))
+            out = getBaseFilename(inClassName);
+        wsdlOut = setOutputFiles(optionOut, inClassName, out, endingWsdl);
+    }
+
+    private void setWSDLImplOutputFiles(String inClassName, LinkedList<String> options){
+        String out = removeOption(options, optionOutImpl);
+        if (out != null){
+            wsdlImplOut = setOutputFiles(optionOutImpl, inClassName, out, endingWsdlImpl);
+        }
+        else
+            wsdlImplOut = null;
+    }
+
+    private void runProcessWithStdOut(List<String> cmd, ProcessBuilder builder) {
+        ArrayList<String> cmd_new = new ArrayList<>();
+        for (String i : cmd) {
+            if (!i.equals(">") && !i.startsWith(outputDir)) {
+                cmd_new.add(i);
+            }
+        }
+        System.out.println(cmd_new + "cmd_new");
+        System.out.println(cmd.toString().substring(0, cmd.toString().lastIndexOf(">")));
+        builder.command(cmd_new).inheritIO();
+        int last_elem = cmd.size() - 1;
+        File output = new File(cmd.get(last_elem));
+        builder.redirectOutput(output);
     }
 
     public String getOutputDir() {
