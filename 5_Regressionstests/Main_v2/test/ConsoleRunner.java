@@ -106,7 +106,7 @@ public class ConsoleRunner {
      * Ruft runJava2WSDL mit stdoutToFile = false auf
      */
     public int[] runJava2WSDL(String inClassName, List<String> options) {
-        return runJava2WSDL(inClassName, options, false);
+        return runJava2WSDL(true,inClassName, options, false, true);
     }
 
     /**
@@ -115,8 +115,10 @@ public class ConsoleRunner {
      * @param inClassName Name der Eingabeklasse (mit Package), null für keine Eingabeklasse
      * @param options     Optionen für Java2WSDL
      * @return bool Array: [Original erfolgreich ausgeführt, Modifierte Version erfolgreich ausgeführt]
+     * so es gibt ein Unterschied, ob wir -o oder -O benutzen!!!
      */
-    public int[] runJava2WSDL(String inClassName, List<String> options, boolean stdoutToFile) {
+    public int[] runJava2WSDL(boolean inClassNameAtTheEnd, String inClassName, List<String> options, boolean stdoutToFile, boolean oSmall) {
+
         // Cmd zurücksetzen
         resetCommands();
 
@@ -126,17 +128,26 @@ public class ConsoleRunner {
             cmdMod.addAll(options);
         }
 
-        // Ausgabedateien
-        //setOutputPieceOfPaths(forOutput);
+        //Wir Eintscheiden, welche o benutzen wir
+        String o="-o";
+        if(!oSmall){
+            o="-O";
+        }
 
         // Ausggabedateien und Eingabeklasse
-        if (inClassName != null){
-            String[] outFilenames = getOutputFilenames(inClassName);
-            cmdOrig.addAll(Arrays.asList("-o", outFilenames[0]));
-            cmdMod.addAll(Arrays.asList("-o", outFilenames[1]));
+        if (inClassName != null&&inClassNameAtTheEnd){
+
+            String[] outFilenames = getOutputFilenames(inClassName+getEndOfFileName(options,o));
+            cmdOrig.addAll(Arrays.asList(o, outFilenames[0]));
+            cmdMod.addAll(Arrays.asList(o, outFilenames[1]));
 
             cmdOrig.add(inClassName);
             cmdMod.add(inClassName);
+        }
+        else if(!inClassNameAtTheEnd){
+            String[] outFilenames = getOutputFilenames(inClassName+getEndOfFileName(options,o));
+            cmdOrig.addAll(Arrays.asList(o, outFilenames[0]));
+            cmdMod.addAll(Arrays.asList(o, outFilenames[1]));
         }
 
         // Stdout-Dateien für Subprozesse
@@ -146,6 +157,7 @@ public class ConsoleRunner {
             outFiles[0] = new File(filenames[0]);
             outFiles[1] = new File(filenames[1]);
         }
+
 
         // Prozesse ausführen
         System.out.println(cmdOrig);
@@ -157,6 +169,17 @@ public class ConsoleRunner {
         retVal[1] = runProcess(cmdMod, cpMod, outFiles[1]);
 
         return retVal;
+    }
+
+    public String getEndOfFileName(List<String> options, String o){
+        String end_of_file_name="";
+
+        for(String i:options){
+            if (i.startsWith("-")){
+                end_of_file_name=end_of_file_name+i;
+            }
+        }
+        return end_of_file_name+o;
     }
 
     /**

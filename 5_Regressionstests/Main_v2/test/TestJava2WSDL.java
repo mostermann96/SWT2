@@ -68,14 +68,14 @@ public class TestJava2WSDL {
      *      siehe ConsoleRunner.getOutputFilenames und .getConsoleOutputFilenames
      */
     public void exampleRunnerCalls(){
-        runner.runJava2WSDL("javax.xml.messaging.URLEndpoint", Arrays.asList("-l", "http://localhost:8080/axis/services/WidgetPrice"), true);
+        runner.runJava2WSDL(false,"javax.xml.messaging.URLEndpoint", Arrays.asList("-l", "http://localhost:8080/axis/services/WidgetPrice"), true, true);
         // schreibt gleiche wsdl wie Zeile bevor
-        runner.runJava2WSDL("javax.xml.messaging.URLEndpoint", null, true);
-        runner.runJava2WSDL(null, Arrays.asList("-l", "http://localhost:8080/axis/services/WidgetPrice"), true);
-        runner.runJava2WSDL(null, null, true);
+        runner.runJava2WSDL(false,"javax.xml.messaging.URLEndpoint", null, true, true);
+        runner.runJava2WSDL(false,null, Arrays.asList("-l", "http://localhost:8080/axis/services/WidgetPrice"), true, true);
+        runner.runJava2WSDL(false,null, null, true, true);
         // schreibt gleiche txt wie Zeile bevor
         runner.runJava2WSDL(null, null);
-        runner.runJava2WSDL(null, Arrays.asList("--help"), true);
+        runner.runJava2WSDL(false,null, Arrays.asList("--help"), true, true);
         // schreibt gleiche txt wie Zeile bevor
         runner.runJava2WSDL(null, Arrays.asList("--help"));
     }
@@ -86,11 +86,13 @@ public class TestJava2WSDL {
      * java org.apache.axis.wsdl.Java2WSDL -o test_output/WidgetPrice.mod.wsdl -l"http://localhost:8080/axis/services/WidgetPrice" javax.xml.messaging.URLEndpoint
      */
     @Test
-    public void testCorrectOutputFilesURLEndpointWidget() {
+    public void testCorrectOutputFilesURLEndpointWidget_l_o() {
         String inClassName = "javax.xml.messaging.URLEndpoint";
-        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "http://localhost:8080/axis/services/WidgetPrice")));
-        assertTrue(new File(runner.getOutputFilenames(inClassName)[0]).exists());
-        assertTrue(new File(runner.getOutputFilenames(inClassName)[1]).exists());
+        List<String> options = Arrays.asList("-l", "http://localhost:8080/axis/services/WidgetPrice");
+        requireSuccess(runner.runJava2WSDL(inClassName, options));
+        //assertTrue(new File(runner.getOutputFilenames(inClassName)[0]).exists());
+        //assertTrue(new File(runner.getOutputFilenames(inClassName)[1]).exists());
+        assertEquals(readFile(runner.getOutputFilenames("URLEndpoint"+runner.getEndOfFileName(options,"-o"))[0]), readFile(runner.findOutputFile("URLEndpoint"+runner.getEndOfFileName(options,"-o"))));
     }
 
     /**
@@ -99,7 +101,7 @@ public class TestJava2WSDL {
     @Test
     public void testOptionHelp(){
         List<String> options = Arrays.asList("--help");
-        requireEqualExitCodes(runner.runJava2WSDL(null, options, true));
+        requireEqualExitCodes(runner.runJava2WSDL(false,null, options, true,true));
         String[] outFilenames = runner.getConsoleOutputFilenames(null, options);
         assertEquals(readFile(outFilenames[0]), readFile(outFilenames[1]));
     }
@@ -111,15 +113,29 @@ public class TestJava2WSDL {
      * TODO robuster WSDL Vergleich (Vergleich schlägt schon wegen verschiedenen Erstellungs-Zeiten der Dateien im Header fehl)
      */
     @Test
-    public void testRunWithDebugInfo(){
+    public void testRunWithDebugInfo_l_o(){
         String inClassName = "WidgetPriceDebug";
-        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation")));
+        List<String> options=Arrays.asList("-l", "someLocation");
+        requireSuccess(runner.runJava2WSDL(inClassName,options));
 
         // Test, ob sich normale wsdl von wsdl mit Debug-Infos unterscheidet (sie tun es nicht)
         //requireSuccess(runner.runJava2WSDL("WidgetPrice", Arrays.asList("-l", "someLocation")));
         //assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.getOutputFilenames("WidgetPrice")[0]));
 
-        assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.findOutputFile(inClassName)));
+        assertEquals(readFile(runner.getOutputFilenames(inClassName+runner.getEndOfFileName(options,"-o"))[0]), readFile(runner.findOutputFile(inClassName+runner.getEndOfFileName(options,"-o"))));
+    }
+
+    @Test
+    public void testRunWithDebugInfo_l_O(){
+        String inClassName = "WidgetPriceDebug";
+        List<String> options=Arrays.asList("-l", "someLocation");
+        requireSuccess(runner.runJava2WSDL(true,inClassName,options,false,false));
+
+        // Test, ob sich normale wsdl von wsdl mit Debug-Infos unterscheidet (sie tun es nicht)
+        //requireSuccess(runner.runJava2WSDL("WidgetPrice", Arrays.asList("-l", "someLocation")));
+        //assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.getOutputFilenames("WidgetPrice")[0]));
+
+        assertEquals(readFile(runner.getOutputFilenames(inClassName+runner.getEndOfFileName(options,"-O"))[0]), readFile(runner.findOutputFile(inClassName+runner.getEndOfFileName(options,"-O"))));
     }
 
     /**
@@ -143,4 +159,86 @@ public class TestJava2WSDL {
         assertTrue(new File(outPath1).exists());
     }
     */
+
+    /**
+     * Übereinstimmung der WSDL-Ausgabe bei Eingabe mit Debug-Infos
+     * Die Referenz gibt an, dass bei Eingabe einer Klasse, die mit allen Debug-Informationen kompiliert wurde,
+     * die Methoden-Parameternamen ausgelesen und benutzt werden.
+     * TODO robuster WSDL Vergleich (Vergleich schlägt schon wegen verschiedenen Erstellungs-Zeiten der Dateien im Header fehl)
+     */
+    @Test
+    public void testRunWithCalculatorClass_l_o(){
+        String inClassName = "Calculator";
+        List<String> options=Arrays.asList("-l", "someLocation");
+        requireSuccess(runner.runJava2WSDL(inClassName,options));
+
+        // Test, ob sich normale wsdl von wsdl mit Debug-Infos unterscheidet (sie tun es nicht)
+        //requireSuccess(runner.runJava2WSDL("WidgetPrice", Arrays.asList("-l", "someLocation")));
+        //assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.getOutputFilenames("WidgetPrice")[0]));
+
+        assertEquals(readFile(runner.getOutputFilenames(inClassName+runner.getEndOfFileName(options,"-o"))[0]), readFile(runner.findOutputFile(inClassName+runner.getEndOfFileName(options,"-o"))));
+    }
+    @Test
+    public void testRunWithCalculatorClass_l_O(){
+        String inClassName = "Calculator";
+        List<String> options=Arrays.asList("-l", "someLocation");
+        requireSuccess(runner.runJava2WSDL(true,inClassName,options,false,false));
+
+        // Test, ob sich normale wsdl von wsdl mit Debug-Infos unterscheidet (sie tun es nicht)
+        //requireSuccess(runner.runJava2WSDL("WidgetPrice", Arrays.asList("-l", "someLocation")));
+        //assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.getOutputFilenames("WidgetPrice")[0]));
+
+        assertEquals(readFile(runner.getOutputFilenames(inClassName+runner.getEndOfFileName(options,"-O"))[0]), readFile(runner.findOutputFile(inClassName+runner.getEndOfFileName(options,"-O"))));
+    }
+
+    @Test
+    public void testRunWithCalculatorClass_l_n_o(){
+        String inClassName = "Calculator";
+        List<String> options=Arrays.asList("-l", "someLocation", "-n", "calc");
+        requireSuccess(runner.runJava2WSDL(inClassName,options));
+
+        // Test, ob sich normale wsdl von wsdl mit Debug-Infos unterscheidet (sie tun es nicht)
+        //requireSuccess(runner.runJava2WSDL("WidgetPrice", Arrays.asList("-l", "someLocation")));
+        //assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.getOutputFilenames("WidgetPrice")[0]));
+
+        assertEquals(readFile(runner.getOutputFilenames(inClassName+runner.getEndOfFileName(options,"-o"))[0]), readFile(runner.findOutputFile(inClassName+runner.getEndOfFileName(options,"-o"))));
+    }
+
+    /**
+     * java org.apache.axis.wsdl.Java2WSDL -a Calculator -l "someLocation" -o Calculator-a.orig.wsdl oder Calculator-a.mod.wsdl
+     * --all or -a look for allowed methods in inherited class
+     */
+    @Test
+    public void testRunWithCalculatorClass_a_l_o(){
+        String inClassName = "Calculator";
+        List<String> options= Arrays.asList("-a", inClassName,"-l", "someLocation");
+        requireSuccess(runner.runJava2WSDL(false,inClassName, options
+                ,false, true));
+
+        // Test, ob sich normale wsdl von wsdl mit Debug-Infos unterscheidet (sie tun es nicht)
+        //requireSuccess(runner.runJava2WSDL("WidgetPrice", Arrays.asList("-l", "someLocation")));
+        //assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.getOutputFilenames("WidgetPrice")[0]));
+
+        assertEquals(readFile(runner.getOutputFilenames(inClassName+runner.getEndOfFileName(options,"-o"))[0]), readFile(runner.findOutputFile(inClassName+runner.getEndOfFileName(options,"-o"))));
+    }
+
+
+    /**
+     * java org.apache.axis.wsdl.Java2WSDL -a Calculator -l "someLocation" -o Calculator-a.orig.wsdl oder Calculator-a.mod.wsdl
+     * --all or -a look for allowed methods in inherited class
+     */
+    @Test
+    public void testRunWithCalculatorImpl_i_l_o(){
+        String inClassName = "Calculator";
+        List<String> options=Arrays.asList("-i","CalculatorImpl","-l", "someLocation");
+        requireSuccess(runner.runJava2WSDL(true,inClassName, options
+                ,false,true));
+
+        // Test, ob sich normale wsdl von wsdl mit Debug-Infos unterscheidet (sie tun es nicht)
+        //requireSuccess(runner.runJava2WSDL("WidgetPrice", Arrays.asList("-l", "someLocation")));
+        //assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.getOutputFilenames("WidgetPrice")[0]));
+
+        assertEquals(readFile(runner.getOutputFilenames(inClassName+runner.getEndOfFileName(options,"-o"))[0]), readFile(runner.findOutputFile(inClassName+runner.getEndOfFileName(options,"-o"))));
+    }
+
 }
