@@ -3,7 +3,6 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -20,8 +19,8 @@ public class TestJava2WSDL {
      * @param retVals Rückgabewert von runJava2WSDL
      */
     private void requireSuccess(int[] retVals) {
-        assertEquals(0, retVals[0]);
-        assertEquals(0, retVals[1]);
+        assertEquals("Original: Ausführung nicht erfolgreich", 0, retVals[0]);
+        assertEquals("Modifiziert: Ausführung nicht erfolgreich", 0, retVals[1]);
     }
 
     /**
@@ -29,7 +28,7 @@ public class TestJava2WSDL {
      * @param retVals Rückgabewert von runJava2WSDL
      */
     private void requireEqualExitCodes(int[] retVals){
-        assertEquals(retVals[0], retVals[1]);
+        assertEquals("Exit-Codes der Java2WSDL-Aufrufe unterschiedlich", retVals[0], retVals[1]);
     }
 
     /**
@@ -42,7 +41,7 @@ public class TestJava2WSDL {
         try{
             s = new Scanner(new File(path));
         } catch (FileNotFoundException e){
-            fail();
+            fail("Zu lesende Datei ist nicht vorhanden");
         }
         return s.useDelimiter("\\Z").next();
     }
@@ -68,29 +67,35 @@ public class TestJava2WSDL {
      *      siehe ConsoleRunner.getOutputFilenames und .getConsoleOutputFilenames
      */
     public void exampleRunnerCalls(){
-        runner.runJava2WSDL("javax.xml.messaging.URLEndpoint", Arrays.asList("-l", "http://localhost:8080/axis/services/WidgetPrice"), true);
+        runner.runJava2WSDL("javax.xml.messaging.URLEndpoint", Arrays.asList("-l", "http://localhost:8080/axis/services/WidgetPrice"), true, true);
         // schreibt gleiche wsdl wie Zeile bevor
-        runner.runJava2WSDL("javax.xml.messaging.URLEndpoint", null, true);
-        runner.runJava2WSDL(null, Arrays.asList("-l", "http://localhost:8080/axis/services/WidgetPrice"), true);
-        runner.runJava2WSDL(null, null, true);
+        runner.runJava2WSDL("javax.xml.messaging.URLEndpoint", null, true, true);
+        runner.runJava2WSDL(null, Arrays.asList("-l", "http://localhost:8080/axis/services/WidgetPrice"), true, true);
+        runner.runJava2WSDL(null, null, true, true);
         // schreibt gleiche txt wie Zeile bevor
         runner.runJava2WSDL(null, null);
-        runner.runJava2WSDL(null, Arrays.asList("--help"), true);
-        // schreibt gleiche txt wie Zeile bevor
+        runner.runJava2WSDL(null, Arrays.asList("--help"), true, true);
         runner.runJava2WSDL(null, Arrays.asList("--help"));
     }
 
     /**
-     * Teste, ob Ausgabedateien unter korrektem Namen angelegt werden
-     * java org.apache.axis.wsdl.Java2WSDL -o test_output/WidgetPrice.orig.wsdl -l"http://localhost:8080/axis/services/WidgetPrice" javax.xml.messaging.URLEndpoint
-     * java org.apache.axis.wsdl.Java2WSDL -o test_output/WidgetPrice.mod.wsdl -l"http://localhost:8080/axis/services/WidgetPrice" javax.xml.messaging.URLEndpoint
+     * Java2WSDL-Aufrufe ohne Angabe einer Ausgabedatei
      */
     @Test
-    public void testCorrectOutputFilesURLEndpointWidget() {
+    public void testNoOutputFile(){
+        String inClassName = "javax.xml.messaging.URLEndpoint";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation"), false, false));
+    }
+
+    /**
+     * Teste, ob Ausgabedateien unter korrektem Namen angelegt werden
+     */
+    @Test
+    public void testCorrectOutputFiles() {
         String inClassName = "javax.xml.messaging.URLEndpoint";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "http://localhost:8080/axis/services/WidgetPrice")));
-        assertTrue(new File(runner.getOutputFilenames(inClassName)[0]).exists());
-        assertTrue(new File(runner.getOutputFilenames(inClassName)[1]).exists());
+        assertTrue("Original: Ausgabedatei nicht vorhanden", new File(runner.getWsdlOut()[0]).exists());
+        assertTrue("Modifiziert: Ausgabedatei nicht vorhanden", new File(runner.getWsdlOut()[1]).exists());
     }
 
     /**
@@ -99,9 +104,9 @@ public class TestJava2WSDL {
     @Test
     public void testOptionHelp(){
         List<String> options = Arrays.asList("--help");
-        requireEqualExitCodes(runner.runJava2WSDL(null, options, true));
-        String[] outFilenames = runner.getConsoleOutputFilenames(null, options);
-        assertEquals(readFile(outFilenames[0]), readFile(outFilenames[1]));
+        requireEqualExitCodes(runner.runJava2WSDL(null, options, true, true));
+        String[] outFilenames = runner.getConsoleOut();
+        assertEquals("Help Ausgabe unterscheidet sich", readFile(outFilenames[0]), readFile(outFilenames[1]));
     }
 
     /**
@@ -119,7 +124,7 @@ public class TestJava2WSDL {
         //requireSuccess(runner.runJava2WSDL("WidgetPrice", Arrays.asList("-l", "someLocation")));
         //assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.getOutputFilenames("WidgetPrice")[0]));
 
-        assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.findOutputFile(inClassName)));
+        assertEquals("Ausgabe unterscheidet sich", readFile(runner.getWsdlOut()[0]), readFile(runner.findOutputFile()));
     }
 
 // ab hier 'neue' Testfälle von Flo
@@ -134,7 +139,7 @@ public class TestJava2WSDL {
                 "-i", "test_input"+System.getProperty("file.separator")+"dummy_input.wsdl",
                 "-o", "test_output"+System.getProperty("file.separator")+"dummy_output.wsdl")));
         String[] outFilenames = runner.getOutputFilenames(inClassName);
-        assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.findOutputFile(inClassName)));
+        assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.findOutputFile()));
         //TODO: testen, ob auch wirklich gleich danach
     }
 
@@ -144,7 +149,7 @@ public class TestJava2WSDL {
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-s", "alteredPortName")));
         String[] outFilenames = runner.getOutputFilenames(inClassName);
-        assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.findOutputFile(inClassName)));
+        assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.findOutputFile()));
         //TODO: testen, ob wsdl portname auch wirklich alteredPortName
     }
 
@@ -154,7 +159,7 @@ public class TestJava2WSDL {
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation",
                 "-P", "alteredTypeName")));
         String[] outFilenames = runner.getOutputFilenames(inClassName);
-        assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.findOutputFile(inClassName)));
+        assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.findOutputFile()));
         //TODO: testen, ob wsdl portTypeName auch wirklich alteredTypeName
     }
 
@@ -165,7 +170,7 @@ public class TestJava2WSDL {
                 "-s", "alteredPortName",
                 "-b", "someBindingName")));
         String[] outFilenames = runner.getOutputFilenames(inClassName);
-        assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.findOutputFile(inClassName)));
+        assertEquals(readFile(runner.getOutputFilenames(inClassName)[0]), readFile(runner.findOutputFile()));
         //TODO: testen, ob wsdl bindingName auch wirklich someBindingName
     }
 }
