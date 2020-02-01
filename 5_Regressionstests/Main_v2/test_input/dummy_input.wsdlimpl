@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://DefaultNamespace-impl" xmlns:apachesoap="http://xml.apache.org/xml-soap2" xmlns:impl="http://DefaultNamespace-impl" xmlns:intf="http://DefaultNamespace" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <wsdl:service name="Dummy">
+
+        <wsdl:port binding="intf:portNameSoapBinding" name="portName">
+
+            <wsdlsoap:address location="testLocation/testPortName"/>
+
+        </wsdl:port>
+
+    </wsdl:service>
+
+</wsdl:definitions>

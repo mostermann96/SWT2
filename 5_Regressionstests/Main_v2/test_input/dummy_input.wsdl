@@ -1,30 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions targetNamespace="http://messaging.xml.javax" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://messaging.xml.javax" xmlns:intf="http://messaging.xml.javax" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<!--WSDL created by Apache Axis version: 1.4
-Built on Apr 22, 2006 (06:55:48 PDT)-->
+<wsdl:definitions targetNamespace="http://DefaultNamespace" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://DefaultNamespace" xmlns:intf="http://DefaultNamespace" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <!--WSDL created by Apache Axis version: 1.4
+   Built on Apr 22, 2006 (06:55:48 PDT)-->
 
-   <wsdl:message name="getURLRequest">
+   <wsdl:message name="getWidgetPriceResponse">
+
+      <wsdl:part name="getWidgetPriceReturn" type="soapenc:string"/>
 
    </wsdl:message>
 
-   <wsdl:message name="getURLResponse">
+   <wsdl:message name="getWidgetPriceRequest">
 
+      <wsdl:part name="in0" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="dummy">
       <wsdl:part name="getURLReturn" type="soapenc:string"/>
+   </wsdl:message>
+
+   <wsdl:message name="setWidgetPriceResponse">
 
    </wsdl:message>
 
-   <wsdl:portType name="URLEndpoint">
+   <wsdl:message name="setWidgetPriceRequest">
 
-      <wsdl:operation name="getURL">
+      <wsdl:part name="in0" type="soapenc:string"/>
 
-         <wsdl:input message="impl:getURLRequest" name="getURLRequest"/>
+      <wsdl:part name="in1" type="soapenc:string"/>
 
-         <wsdl:output message="impl:getURLResponse" name="getURLResponse"/>
+   </wsdl:message>
+
+   <wsdl:portType name="WidgetPrice">
+
+      <wsdl:operation name="setWidgetPrice" parameterOrder="in0 in1">
+
+         <wsdl:input message="impl:setWidgetPriceRequest" name="setWidgetPriceRequest"/>
+
+         <wsdl:output message="impl:setWidgetPriceResponse" name="setWidgetPriceResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getWidgetPrice" parameterOrder="in0">
+
+         <wsdl:input message="impl:getWidgetPriceRequest" name="getWidgetPriceRequest"/>
+
+         <wsdl:output message="impl:getWidgetPriceResponse" name="getWidgetPriceResponse"/>
 
       </wsdl:operation>
 
    </wsdl:portType>
-
-   <wsdl:dummy name="dummy"/>
 
 </wsdl:definitions>
