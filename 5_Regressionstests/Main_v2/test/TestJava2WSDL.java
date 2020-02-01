@@ -317,7 +317,7 @@ public class TestJava2WSDL {
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-w", "All",
                 "-N", "http://example.org")));
-        assertEquals("-W \"All\" hat portType nicht richtig generiert",
+        assertEquals("-N hat implementation Namespace nicht richtig generiert",
                 getTag(runner.getWsdlOut()[0], "wsdl:definitions"),
                 getTag(runner.findOutputFile(), "wsdl:definitions"));
         //TODO: wieder definitions noch filtern, um nur xmlns:impl zu testen
@@ -386,4 +386,96 @@ public class TestJava2WSDL {
                 "-T", "1.2")));
         //TODO: herausfinden, welche tags hier zu testen sind
     }
+
+    @Test
+    public void testSoapActionDefault(){
+        String inClassName = "WidgetPrice";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
+                "-A", "DEFAULT")));
+        assertEquals("-A \"DEFAULT\" hat soapAction nicht richtig generiert",
+                getTag(runner.getWsdlOut()[0], "wsdl:binding"),
+                getTag(runner.findOutputFile(), "wsdl:binding"));
+        //TODO: hier muss wahrscheinlich noch mehr Logik angewandt werden.
+        //TODO: Ziel: nur wsdlsoap:operation soapAction testen, aber alle Vorkommen davon
+    }
+
+    @Test
+    public void testSoapActionOperation(){
+        String inClassName = "WidgetPrice";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
+                "-A", "OPERATION")));
+        assertEquals("-A \"OPERATION\" hat soapAction nicht richtig generiert",
+                getTag(runner.getWsdlOut()[0], "wsdl:binding"),
+                getTag(runner.findOutputFile(), "wsdl:binding"));
+        //TODO: hier muss wahrscheinlich noch mehr Logik angewandt werden.
+        //TODO: Ziel: nur wsdlsoap:operation soapAction testen, aber alle Vorkommen davon
+    }
+
+    @Test
+    public void testSoapActionNone(){
+        String inClassName = "WidgetPrice";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
+                "-A", "NONE")));
+        assertEquals("-A \"NONE\" hat soapAction nicht richtig generiert",
+                getTag(runner.getWsdlOut()[0], "wsdl:binding"),
+                getTag(runner.findOutputFile(), "wsdl:binding"));
+        //TODO: hier muss wahrscheinlich noch mehr Logik angewandt werden.
+        //TODO: Ziel: nur wsdlsoap:operation soapAction testen, aber alle Vorkommen davon
+    }
+
+    @Test
+    public void testRPCStyle(){
+        String inClassName = "WidgetPrice";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
+                "-y", "RPC")));
+        assertEquals("-y \"RPC\" wurde nicht richtig generiert",
+                getTag(runner.getWsdlOut()[0], "wsdl:definitions"),
+                getTag(runner.findOutputFile(), "wsdl:definitions"));
+        //testet gesamtes Dokument, also falls irgendwo ein Fehler, dann schlägt dieser Test fehl
+    }
+
+    @Test
+    public void testDOCUMENTStyle(){
+        String inClassName = "WidgetPrice";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
+                "-y", "DOCUMENT")));
+        assertEquals("-y \"DOCUMENT\" wurde nicht richtig generiert",
+                getTag(runner.getWsdlOut()[0], "wsdl:definitions"),
+                getTag(runner.findOutputFile(), "wsdl:definitions"));
+        //testet gesamtes Dokument, also falls irgendwo ein Fehler, dann schlägt dieser Test fehl
+    }
+
+    @Test
+    public void testWRAPPEDStyle(){
+        String inClassName = "WidgetPrice";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
+                "-y", "WRAPPED")));
+        assertEquals("-y \"WRAPPED\" wurde nicht richtig generiert",
+                getTag(runner.getWsdlOut()[0], "wsdl:definitions"),
+                getTag(runner.findOutputFile(), "wsdl:definitions"));
+        //testet gesamtes Dokument, also falls irgendwo ein Fehler, dann schlägt dieser Test fehl
+    }
+
+    @Test
+    public void testLITERALUse(){
+        String inClassName = "WidgetPrice";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
+                "-u", "LITERAL")));
+        assertEquals("-u \"LITERAL\" wurde nicht richtig generiert",
+                getTag(runner.getWsdlOut()[0], "wsdl:definitions"),
+                getTag(runner.findOutputFile(), "wsdl:definitions"));
+        //testet gesamtes Dokument, also falls irgendwo ein Fehler, dann schlägt dieser Test fehl
+    }
+
+    @Test
+    public void testENCODEDUse(){
+        String inClassName = "WidgetPrice";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
+                "-u", "ENCODED")));
+        assertEquals("-u \"ENCODED\" wurde nicht richtig generiert",
+                getTag(runner.getWsdlOut()[0], "wsdl:definitions"),
+                getTag(runner.findOutputFile(), "wsdl:definitions"));
+        //testet gesamtes Dokument, also falls irgendwo ein Fehler, dann schlägt dieser Test fehl
+    }
+
 }

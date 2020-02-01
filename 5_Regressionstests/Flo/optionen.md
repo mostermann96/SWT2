@@ -3,7 +3,7 @@
 | option    | tags to test | done | Testname|
 |-----------|--------------|------|---------|
 | -h    |  Keine; sondern output txt Datei            |done | testOptionHelp
-| -i <dummy-wsdl>  |  sowohl in input vorhandene, also auch neue   |done, aber geht noch nicht |testOptionInput|
+| -I <dummy-wsdl>  |  sowohl in input vorhandene, also auch neue   |done |testOptionInput|
 | -o | ist location richtig?  |implizit done |
 | -l | wsdlsoap:address + wsdl:service name=inClassFileName   |done | testLocationOption
 | -l with porttype overwritten by -s | wsdl:port|done|testPortNameOverwrite
@@ -11,8 +11,8 @@
 | -b \<name> |  wsdl:binding name=\<name>   |done|testBindingNameOverwrite
 | -S \<name>  |  wsdl:service name=\<name>   |done|testServiceElementNameOverwrite
 | -n \<target namespace>   | wsdl:definitions |done  |testTargetNameSpaceOverwrite
-| -p \<package> \<namespace>   |  ??            |
-| -p \<pack1> \<name1> -p \<pack2> \<name2> |  ??            |
+| -p \<package> \<namespace>   |  ??            |not done, da ich das nicht zum Laufen bekommen habe
+| -p \<pack1> \<name1> -p \<pack2> \<name2> |  ??            |not done, da ich das nicht zum Laufen bekommen habe
 | -m w/ one method that exists | TODO |done            |testMethodsOnce
 | -m w/ two methods that exist | TODO  |done         |testMethodsTwice
 |-m with a method that doesn't exist | TODO | done| testNonExistentMethod
@@ -28,15 +28,15 @@
 | -c \<List>  |   |done|testStopClasses
 | -T \<1.1>  |   |done|testVersion1_1
 | -T \<1.2>  |   |done|testVersion1_2
-| -A with DEFAULT  |   |
-| -A with OPERATION |   |
-| -A with NONE  |   |
-| -y RPC | |
-| -y DOCUMENT | |
-| -y WRAPPED | |
-| -u LITERAL | |
-| -u ENCODED | |
-| -e ? | |
-| -c ? | |
-| -X ? | |
-| -d ? | |
+| -A with DEFAULT  |   |done|testSoapActionDefault
+| -A with OPERATION |   |done|testSoapActionOperation
+| -A with NONE  |   |done|testSoapActionNone
+| -y RPC | |done|testRPCStyle
+| -y DOCUMENT | |done|testDOCUMENTStyle
+| -y WRAPPED | |done|testWRAPPEDStyle
+| -u LITERAL | |done|testLITERALUse
+| -u ENCODED | |done|testENCODEDUse
+| -e ? | |not done, da ich das Argument nicht verstehe
+| -c ? | |not done, da ich das nicht zum Laufen bekommen habe
+| -X ? | |not done, da ich das nicht zum Laufen bekommen habe
+| -d ? | |not done, da ich das nicht zum Laufen bekommen habe
