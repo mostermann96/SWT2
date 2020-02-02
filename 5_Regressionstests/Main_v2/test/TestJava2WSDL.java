@@ -299,14 +299,18 @@ public class TestJava2WSDL {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation",
                 "-I", "test_input"+File.separator+"dummy_input.wsdl")));
-        /*assertEquals("-I hat nicht richtig importiert",
-                getTag(runner.getWsdlOut()[0], "wsdl:message", "dummy"),
-                getTag(runner.findOutputFile(), "wsdl:message", "dummy"));
-        assertEquals("-I hat nicht richtig importiert",
-                getTag(runner.getWsdlOut()[0], "wsdl:service"),
-                getTag(runner.findOutputFile(), "wsdl:service"));*/
-        assertTrue(nodeListsAreEqual(getNodeList(runner.getWsdlOut()[0],"wsdl:service"),
-                getNodeList(runner.findOutputFile(), "wsdl:service")));
+        if(!nodeListsAreEqual(getNodeList(runner.getWsdlOut()[0],"wsdl:message"),
+                getNodeList(runner.findOutputFile(), "wsdl:message"))){
+            assertEquals("-I hat nicht richtig importiert",
+                    getTag(runner.getWsdlOut()[0], "wsdl:message"),
+                    getTag(runner.findOutputFile(), "wsdl:message"));
+        }
+        if(!nodeListsAreEqual(getNodeList(runner.getWsdlOut()[0],"wsdl:service"),
+                getNodeList(runner.findOutputFile(), "wsdl:service"))){
+            assertEquals("-I hat nicht richtig importiert",
+                    getTag(runner.getWsdlOut()[0], "wsdl:service"),
+                    getTag(runner.findOutputFile(), "wsdl:service"));
+        }
     }
 
     @Test
@@ -323,11 +327,22 @@ public class TestJava2WSDL {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation",
                 "-P", "alteredTypeName")));
-        assertTrue(nodeListsAreEqual(getNodeList(runner.getWsdlOut()[0],"wsdl:portType"),
-                getNodeList(runner.findOutputFile(), "wsdl:portType")));
-        //assertEquals("-P hat portTypeName nicht richtig überschrieben",
-        //        getTag(runner.getWsdlOut()[0], "wsdl:portType"),
-        //       getTag(runner.findOutputFile(), "wsdl:portType"));
+        if(!nodeListsAreEqual(getNodeList(runner.getWsdlOut()[0],"wsdl:portType"),
+                getNodeList(runner.findOutputFile(), "wsdl:portType"))){
+            assertEquals("-P hat PortTypeName nicht richtig überschrieben",
+                    getTag(runner.getWsdlOut()[0], "wsdl:portType"),
+                    getTag(runner.findOutputFile(), "wsdl:portType"));
+        }
+    }
+
+    @Test
+    public void testPortTypeNameOverwriteOLD() throws IOException, SAXException, ParserConfigurationException {
+        String inClassName = "WidgetPrice";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation",
+                "-P", "alteredTypeName")));
+        assertEquals("-P hat PortTypeName nicht richtig überschrieben",
+                getTag(runner.getWsdlOut()[0], "wsdl:portType"),
+                getTag(runner.findOutputFile(), "wsdl:portType"));
     }
 
     @Test
