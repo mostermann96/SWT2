@@ -12,9 +12,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+
+
 
 import static org.junit.Assert.*;
 
@@ -55,57 +55,74 @@ public class TestJava2WSDL {
         return s.useDelimiter("\\Z").next();
     }
 
-    private String getTag(String inputFile, String tag) throws IOException, SAXException, ParserConfigurationException {
-        try{
+    /**
+     *
+     * @param inputFile Dateipfad der zu untersuchenden WSDL Datei
+     * @param tag der zu findende Tag
+     * @return ein Set aller relevanten Tags
+     */
+    private Set<String> getTag(String inputFile, String tag) throws IOException, SAXException, ParserConfigurationException {
         DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document doc = dBuilder.parse(inputFile);
-        if(tag == "" || tag == null) {
+        if (tag == "" || tag == null) {
             tag = "wsdl:definitions";
         }
-        return printNode(doc.getElementsByTagName(tag), "");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
+        Set<String> tags = new HashSet<>();
+        NodeList list = doc.getElementsByTagName(tag);
+        for (int j = 0; j < list.getLength(); j++) {
+            tags.add(printNode(list.item(j), "", 0));
         }
-            return null;
+        return tags;
+    }
 
-}
-
-    public static String getTag(String file, String tag, String attr) throws ParserConfigurationException, IOException, SAXException {
+    /**
+     *
+     * @param file Dateipfad der zu untersuchenden WSDL Datei
+     * @param tag der zu findende Tag
+     * @param attr name des Attributes
+     * @return ein Set aller relevanten Tags
+     */
+    private static Set<String> getTag(String file, String tag, String attr) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document doc = dBuilder.parse(file);
         if(tag == "" || tag == null){
             tag = "wsdl:definitions";
         }
-        return printNode(doc.getElementsByTagName(tag), attr);
-
+        Set<String> tags = new HashSet<>();
+        NodeList list =doc.getElementsByTagName(tag);
+        for(int j=0; j<list.getLength();j++) {
+            tags.add(printNode(list.item(j), attr, 0));
+        }
+        return tags;
     }
 
-    public static String printNode(NodeList list, String filter){
+    /**
+     * @param node der zu untersuchende DOM-Node
+     * @param filter Attributname
+     * @param indention zur übersichtlicheren Darstellung
+     * @return eine Stringrepräsentation des tags
+     */
+    private static String printNode(Node node, String filter, int indention) {
         String temp = "";
-        for(int j=0; j<list.getLength();j++){
-            Node node = list.item(j);
-            if(node.getNodeType()==Node.ELEMENT_NODE){
-                if(filter==""|filter==null){
-                    temp+=("Node Name: "+ node.getNodeName() + " Value: "+ node.getNodeValue()+ "\n");}
-                if(node.hasAttributes()){
-                    NamedNodeMap nodeMap = node.getAttributes();
-                    for(int i=0; i<nodeMap.getLength(); i++){
-                        Node tempNode = nodeMap.item(i);
-                        if(filter==""|filter==null){
-                            temp+=("Node Attribute:" + tempNode.getNodeName()+ " Value:" + tempNode.getNodeValue() +"\n");}
-                        else if(tempNode.getNodeName()==filter){
-                            temp+=("Node Attribute:" + tempNode.getNodeName()+ " Value:" + tempNode.getNodeValue() +"\n");
-                        }
+        if (node.getNodeType() == Node.ELEMENT_NODE) {
+            if (filter == "" || filter == null) {
+                temp += String.join("", Collections.nCopies(indention, "\t"));
+                temp += ("Node Name: " + node.getNodeName() + " Value: " + node.getNodeValue() + "\n");
+            }
+            if (node.hasAttributes()) {
+                NamedNodeMap nodeMap = node.getAttributes();
+                for (int i = 0; i < nodeMap.getLength(); i++) {
+                    Node tempNode = nodeMap.item(i);
+                    if (filter == "" | filter == null || tempNode.getNodeName() == filter || tempNode.getNodeName() == filter) {
+                        temp += String.join("", Collections.nCopies(indention, "\t"));
+                        temp += ("\tNode Attribute:" + tempNode.getNodeName() + " Value:" + tempNode.getNodeValue() + "\n");
                     }
                 }
             }
-            if(node.hasChildNodes()){
-                temp+=printNode(node.getChildNodes(), filter);
-            }
+        }
+        if (node.hasChildNodes()) {
+            for(int i=0; i<node.getChildNodes().getLength();i++)
+            temp += printNode(node.getChildNodes().item(i), filter, indention+1);
         }
         return temp;
     }
