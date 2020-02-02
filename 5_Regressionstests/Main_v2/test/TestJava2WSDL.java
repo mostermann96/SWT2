@@ -96,6 +96,75 @@ public class TestJava2WSDL {
         return tags;
     }
 
+    private static NodeList getNodeList(String file, String tag) throws IOException, SAXException, ParserConfigurationException {
+        DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document doc = dBuilder.parse(file);
+        if(tag == "" || tag == null){
+            tag = "wsdl:definitions";
+        }
+        return doc.getElementsByTagName(tag);
+
+    }
+
+    private static boolean nodesAreEqual(Node node1, Node node2){
+        if(!Objects.equals(node1.getNodeName(), node2.getNodeName())) {
+            return false;
+        }
+        if(!Objects.equals(node1.getNodeValue(), node2.getNodeValue())){
+            return false;
+        }
+        if(node1.hasAttributes() || node2.hasAttributes()){
+            if(!node1.hasAttributes()){
+                return false;
+            }
+            if(!node2.hasAttributes()){
+                return false;
+            }
+            if(node1.getAttributes().getLength()!=node2.getAttributes().getLength()){
+                return false;
+            }
+            for(int i=0;i<node1.getAttributes().getLength();i++){
+                if(!nodesAreEqual(node1.getAttributes().item(i),node2.getAttributes().item(i))){
+                    return false;
+                }
+            }
+        }
+        if(!nodeListsAreEqual(node1.getChildNodes(), node2.getChildNodes())){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     *
+     * @param list1
+     * @param list2
+     * @return true iff die Nodes der Liste gleich sind, oder nur vertauscht
+     */
+    private static boolean nodeListsAreEqual(NodeList list1, NodeList list2){
+        if(list1.getLength()!=list2.getLength()) {
+            System.out.println("different length of lists");
+            return false;
+        }
+        //checks if there is every node in list1 is also contained in list2
+        for(int i=0; i<list1.getLength();i++){
+            Node node1 = list1.item(i);
+
+            for(int j=0;j<list2.getLength();j++){
+                Node node2 = list2.item(j);
+                if(nodesAreEqual(node1,node2)){
+                    break;
+                }
+                //if this is true, then there is no element node1 in list2
+                if(j==list2.getLength()-1){
+                    System.out.println("The node "+node1.getNodeName()+" isn't either not contained in the modified version, or has some changed attributes there");
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     /**
      * @param node der zu untersuchende DOM-Node
      * @param filter Attributname
@@ -230,12 +299,14 @@ public class TestJava2WSDL {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation",
                 "-I", "test_input"+File.separator+"dummy_input.wsdl")));
-        assertEquals("-I hat nicht richtig importiert",
+        /*assertEquals("-I hat nicht richtig importiert",
                 getTag(runner.getWsdlOut()[0], "wsdl:message", "dummy"),
                 getTag(runner.findOutputFile(), "wsdl:message", "dummy"));
         assertEquals("-I hat nicht richtig importiert",
                 getTag(runner.getWsdlOut()[0], "wsdl:service"),
-                getTag(runner.findOutputFile(), "wsdl:service"));
+                getTag(runner.findOutputFile(), "wsdl:service"));*/
+        assertTrue(nodeListsAreEqual(getNodeList(runner.getWsdlOut()[0],"wsdl:service"),
+                getNodeList(runner.findOutputFile(), "wsdl:service")));
     }
 
     @Test
@@ -252,9 +323,11 @@ public class TestJava2WSDL {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation",
                 "-P", "alteredTypeName")));
-        assertEquals("-P hat portTypeName nicht richtig überschrieben",
-                getTag(runner.getWsdlOut()[0], "wsdl:portType", "alteredTypeName"),
-                getTag(runner.findOutputFile(), "wsdl:portType", "alteredTypeName"));
+        assertTrue(nodeListsAreEqual(getNodeList(runner.getWsdlOut()[0],"wsdl:portType"),
+                getNodeList(runner.findOutputFile(), "wsdl:portType")));
+        //assertEquals("-P hat portTypeName nicht richtig überschrieben",
+        //        getTag(runner.getWsdlOut()[0], "wsdl:portType"),
+        //       getTag(runner.findOutputFile(), "wsdl:portType"));
     }
 
     @Test
