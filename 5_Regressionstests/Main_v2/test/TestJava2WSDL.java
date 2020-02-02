@@ -56,39 +56,58 @@ public class TestJava2WSDL {
     }
 
     private String getTag(String inputFile, String tag) throws IOException, SAXException, ParserConfigurationException {
+        try{
         DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document doc = dBuilder.parse(inputFile);
-        if(tag == "" || tag == null){
-        tag = "wsdl:definitions";
-    }
-        return printNode(doc.getElementsByTagName(tag));
+        if(tag == "" || tag == null) {
+            tag = "wsdl:definitions";
+        }
+        return printNode(doc.getElementsByTagName(tag), "");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+            return null;
 
 }
 
-    public static String printNode(NodeList list){
+    public static String getTag(String file, String tag, String attr) throws ParserConfigurationException, IOException, SAXException {
+        DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document doc = dBuilder.parse(file);
+        if(tag == "" || tag == null){
+            tag = "wsdl:definitions";
+        }
+        return printNode(doc.getElementsByTagName(tag), attr);
+
+    }
+
+    public static String printNode(NodeList list, String filter){
         String temp = "";
         for(int j=0; j<list.getLength();j++){
             Node node = list.item(j);
             if(node.getNodeType()==Node.ELEMENT_NODE){
-                temp+=("Node Name: "+ node.getNodeName() + " Value: "+ node.getNodeValue()+ "\n");
+                if(filter==""|filter==null){
+                    temp+=("Node Name: "+ node.getNodeName() + " Value: "+ node.getNodeValue()+ "\n");}
                 if(node.hasAttributes()){
                     NamedNodeMap nodeMap = node.getAttributes();
                     for(int i=0; i<nodeMap.getLength(); i++){
                         Node tempNode = nodeMap.item(i);
-                        temp+=("Node Attribute:" + tempNode.getNodeName()+ " Value:" + tempNode.getNodeValue() +"\n");
+                        if(filter==""|filter==null){
+                            temp+=("Node Attribute:" + tempNode.getNodeName()+ " Value:" + tempNode.getNodeValue() +"\n");}
+                        else if(tempNode.getNodeName()==filter){
+                            temp+=("Node Attribute:" + tempNode.getNodeName()+ " Value:" + tempNode.getNodeValue() +"\n");
+                        }
                     }
                 }
             }
             if(node.hasChildNodes()){
-                temp+=printNode(node.getChildNodes());
+                temp+=printNode(node.getChildNodes(), filter);
             }
         }
         return temp;
-    }
-
-    private String getTag(String inputFile, String tag, String name){
-        //TODO: implement this method
-        return "";
     }
 
     @BeforeClass
@@ -212,7 +231,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testPortTypeNameOverwrite(){
+    public void testPortTypeNameOverwrite() throws IOException, SAXException, ParserConfigurationException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation",
                 "-P", "alteredTypeName")));
@@ -222,7 +241,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testBindingNameOverwrite(){
+    public void testBindingNameOverwrite() throws IOException, SAXException, ParserConfigurationException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-s", "alteredPortName",
@@ -233,7 +252,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testServiceElementNameOverwrite(){
+    public void testServiceElementNameOverwrite() throws IOException, SAXException, ParserConfigurationException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-S", "alteredServiceElementName")));
@@ -255,7 +274,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testMethodsOnce(){
+    public void testMethodsOnce() throws IOException, SAXException, ParserConfigurationException {
         String inClassName = "TestFile1";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-m", "setMethod1")));
@@ -270,7 +289,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testMethodsTwice(){
+    public void testMethodsTwice() throws IOException, SAXException, ParserConfigurationException {
         String inClassName = "TestFile1";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-m", "setMethod1 getMethod1")));
@@ -309,7 +328,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testOutputModeAll(){
+    public void testOutputModeAll() throws IOException, SAXException, ParserConfigurationException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-w", "All")));
@@ -323,7 +342,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testOutputModeInterface(){
+    public void testOutputModeInterface() throws IOException, SAXException, ParserConfigurationException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-w", "Interface")));
