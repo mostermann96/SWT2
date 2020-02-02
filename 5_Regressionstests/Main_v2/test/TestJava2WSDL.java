@@ -1,8 +1,17 @@
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -46,8 +55,35 @@ public class TestJava2WSDL {
         return s.useDelimiter("\\Z").next();
     }
 
-    private String getTag(String inputFile, String tag){
-        return getTag(inputFile, tag, "");
+    private String getTag(String inputFile, String tag) throws IOException, SAXException, ParserConfigurationException {
+        DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document doc = dBuilder.parse(inputFile);
+        if(tag == "" || tag == null){
+        tag = "wsdl:definitions";
+    }
+        return printNode(doc.getElementsByTagName(tag));
+
+}
+
+    public static String printNode(NodeList list){
+        String temp = "";
+        for(int j=0; j<list.getLength();j++){
+            Node node = list.item(j);
+            if(node.getNodeType()==Node.ELEMENT_NODE){
+                temp+=("Node Name: "+ node.getNodeName() + " Value: "+ node.getNodeValue()+ "\n");
+                if(node.hasAttributes()){
+                    NamedNodeMap nodeMap = node.getAttributes();
+                    for(int i=0; i<nodeMap.getLength(); i++){
+                        Node tempNode = nodeMap.item(i);
+                        temp+=("Node Attribute:" + tempNode.getNodeName()+ " Value:" + tempNode.getNodeValue() +"\n");
+                    }
+                }
+            }
+            if(node.hasChildNodes()){
+                temp+=printNode(node.getChildNodes());
+            }
+        }
+        return temp;
     }
 
     private String getTag(String inputFile, String tag, String name){
@@ -139,7 +175,7 @@ public class TestJava2WSDL {
 // ab hier 'neue' Testfälle von Flo
 
     @Test
-    public void testLocationOption(){
+    public void testLocationOption() throws ParserConfigurationException, SAXException, IOException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName")));
         assertEquals("-l hat Name der SOAP Adresse nicht richtig geschrieben",
@@ -154,7 +190,7 @@ public class TestJava2WSDL {
      * Übereinstimmung der Ausgabe bei Eingabe einer Input-WSDL Datei
      */
     @Test
-    public void testOptionInput(){
+    public void testOptionInput() throws ParserConfigurationException, SAXException, IOException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation",
                 "-I", "test_input"+File.separator+"dummy_input.wsdl")));
@@ -167,7 +203,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testPortNameOverwrite(){
+    public void testPortNameOverwrite() throws ParserConfigurationException, SAXException, IOException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-s", "alteredPortName")));
@@ -207,7 +243,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testTargetNameSpaceOverwrite(){
+    public void testTargetNameSpaceOverwrite() throws ParserConfigurationException, SAXException, IOException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-n", "http://example.org")));
@@ -301,7 +337,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testOutputModeImplementation(){
+    public void testOutputModeImplementation() throws ParserConfigurationException, SAXException, IOException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-w", "Implementation",
@@ -312,7 +348,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testImplementationNameSpace(){
+    public void testImplementationNameSpace() throws ParserConfigurationException, SAXException, IOException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-w", "All",
@@ -388,7 +424,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testSoapActionDefault(){
+    public void testSoapActionDefault() throws ParserConfigurationException, SAXException, IOException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-A", "DEFAULT")));
@@ -400,7 +436,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testSoapActionOperation(){
+    public void testSoapActionOperation() throws ParserConfigurationException, SAXException, IOException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-A", "OPERATION")));
@@ -412,7 +448,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testSoapActionNone(){
+    public void testSoapActionNone() throws ParserConfigurationException, SAXException, IOException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-A", "NONE")));
@@ -424,7 +460,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testRPCStyle(){
+    public void testRPCStyle() throws ParserConfigurationException, SAXException, IOException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-y", "RPC")));
@@ -435,7 +471,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testDOCUMENTStyle(){
+    public void testDOCUMENTStyle() throws ParserConfigurationException, SAXException, IOException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-y", "DOCUMENT")));
@@ -446,7 +482,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testWRAPPEDStyle(){
+    public void testWRAPPEDStyle() throws ParserConfigurationException, SAXException, IOException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-y", "WRAPPED")));
@@ -457,7 +493,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testLITERALUse(){
+    public void testLITERALUse() throws ParserConfigurationException, SAXException, IOException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-u", "LITERAL")));
@@ -468,7 +504,7 @@ public class TestJava2WSDL {
     }
 
     @Test
-    public void testENCODEDUse(){
+    public void testENCODEDUse() throws ParserConfigurationException, SAXException, IOException {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-u", "ENCODED")));
