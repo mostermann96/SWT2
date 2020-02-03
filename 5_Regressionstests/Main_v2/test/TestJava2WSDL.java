@@ -456,7 +456,7 @@ public class TestJava2WSDL {
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-a")));
 
-        //Erwartung: sollte jeweils 6x da sein
+        //Erwartung: sollte jeweils 12x da sein
         assertEquals("Anzahl der message-tags ist in den beiden Versionen unterschiedlich. \nAnzahl in original: "+
                         getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength()+"\nAnzahl in modified: "+
                         getNodeList(runner.findOutputFile(), "wsdl:message").getLength(),
@@ -564,9 +564,14 @@ public class TestJava2WSDL {
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-w", "Interface",
                 "-O", "test_output/testOutputImplName.wsdlimpl")));
-        //TODO: hier zu testen:
-        //TODO: - name der Interface Dateien
-        //TODO: - name der Implementation Dateien
+        assertTrue("Original: wsdl-Datei nicht vorhanden",
+                new File(runner.getWsdlOut()[0]).exists());
+        assertTrue("Modifizierte: wsdlimpl-Datei nicht vorhanden oder in falschem Verzeichnis",
+                new File(runner.getWsdlOut()[1]).exists());
+        assertTrue("Original: wsdl-Datei nicht vorhanden",
+                new File("test_output/testOutputImplName.orig.wsdlimpl").exists());
+        assertTrue("Modifizierte: wsdlimpl-Datei nicht vorhanden oder in falschem Verzeichnis",
+                new File("test_output/testOutputImplName.mod.wsdlimpl").exists());
     }
 
     @Test
@@ -629,7 +634,6 @@ public class TestJava2WSDL {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-T", "1.1")));
-        assertEquals("Ausgabe unterscheidet sich", readFile(runner.getWsdlOut()[0]), readFile(runner.findOutputFile()));
         //TODO: herausfinden, welche tags hier zu testen sind
     }
 
@@ -638,7 +642,6 @@ public class TestJava2WSDL {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-T", "1.2")));
-        assertEquals("Ausgabe unterscheidet sich", readFile(runner.getWsdlOut()[0]), readFile(runner.findOutputFile()));
         //TODO: herausfinden, welche tags hier zu testen sind
     }
 
@@ -647,14 +650,21 @@ public class TestJava2WSDL {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-A", "DEFAULT")));
-        //assertEquals("Ausgabe unterscheidet sich", readFile(runner.getWsdlOut()[0]), readFile(runner.findOutputFile()));
-        assertEquals("-A \"DEFAULT\" hat soapAction nicht richtig generiert",
-                getTag(runner.getWsdlOut()[0], "wsdl:definitions"),
-                getTag(runner.findOutputFile(), "wsdl:definitions"));
-        //TODO: hier muss wahrscheinlich noch mehr Logik angewandt werden.
-        //TODO: Ziel: nur wsdlsoap:operation soapAction testen, aber alle Vorkommen davon
 
-
+        List<String> soap1 = new LinkedList<>();
+        for(String tag:readFile(runner.getWsdlOut()[0]).split("\n")){
+            if (tag.contains("soapAction")){
+                soap1.add(tag);
+            }
+        }
+        List<String> soap2 = new LinkedList<>();
+        for(String tag:readFile(runner.findOutputFile()).split("\n")){
+            if (tag.contains("soapAction")){
+                soap2.add(tag);
+            }
+        }
+        assertEquals("-A DEFAULT hat soapAction nicht richtig modifiziert",
+                soap1, soap2);
     }
 
     @Test
@@ -662,11 +672,20 @@ public class TestJava2WSDL {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-A", "OPERATION")));
-        assertEquals("-A \"OPERATION\" hat soapAction nicht richtig generiert",
-                getTag(runner.getWsdlOut()[0], "wsdl:binding", ""),
-                getTag(runner.findOutputFile(), "wsdl:binding", ""));
-        //TODO: hier muss wahrscheinlich noch mehr Logik angewandt werden.
-        //TODO: Ziel: nur wsdlsoap:operation soapAction testen, aber alle Vorkommen davon
+        List<String> soap1 = new LinkedList<>();
+        for(String tag:readFile(runner.getWsdlOut()[0]).split("\n")){
+            if (tag.contains("soapAction")){
+                soap1.add(tag);
+            }
+        }
+        List<String> soap2 = new LinkedList<>();
+        for(String tag:readFile(runner.findOutputFile()).split("\n")){
+            if (tag.contains("soapAction")){
+                soap2.add(tag);
+            }
+        }
+        assertEquals("-A OPERATION hat soapAction nicht richtig modifiziert",
+                soap1, soap2);
     }
 
     @Test
@@ -674,11 +693,20 @@ public class TestJava2WSDL {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-A", "NONE")));
-        assertEquals("-A \"NONE\" hat soapAction nicht richtig generiert",
-                getTag(runner.getWsdlOut()[0], "wsdl:binding").iterator().next(),
-                getTag(runner.findOutputFile(), "wsdl:binding").iterator().next());
-        //TODO: hier muss wahrscheinlich noch mehr Logik angewandt werden.
-        //TODO: Ziel: nur wsdlsoap:operation soapAction testen, aber alle Vorkommen davon
+        List<String> soap1 = new LinkedList<>();
+        for(String tag:readFile(runner.getWsdlOut()[0]).split("\n")){
+            if (tag.contains("soapAction")){
+                soap1.add(tag);
+            }
+        }
+        List<String> soap2 = new LinkedList<>();
+        for(String tag:readFile(runner.findOutputFile()).split("\n")){
+            if (tag.contains("soapAction")){
+                soap2.add(tag);
+            }
+        }
+        assertEquals("-A NONE hat soapAction nicht richtig modifiziert",
+                soap1, soap2);
     }
 
     @Test
