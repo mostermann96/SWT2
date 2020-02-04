@@ -1,3 +1,3 @@
 #!/bin/bash
 
-java -cp "lib/*:test/" org.junit.runner.JUnitCore Test1
+java -cp "lib/*:out/test/Main_v2" org.junit.runner.JUnitCore TestJava2WSDL

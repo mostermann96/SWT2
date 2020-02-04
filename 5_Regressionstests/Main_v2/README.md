@@ -1,3 +1,7 @@
+### Abgabe / Für Martin
+* Skript `run_tests.sh` führt alle Tests aus, die Ausgabe ist leider nicht besonders nützlich
+* Für besseren Output ist wahrscheinlich ein Import in eine IDE mit JUnit-Support der beste Weg. (Sorry.)
+
 ### Benutzung
 * __axis-1_4__-Verzeichnis und __axis-modified.jar__ hier ablegen
 * Skripte/Batches __run_tests__ und __compile_tests__ von hier ausführen
