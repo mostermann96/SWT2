@@ -1,4 +1,3 @@
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -63,7 +62,7 @@ public class TestJava2WSDL {
     private Set<String> getTag(String inputFile, String tag) throws IOException, SAXException, ParserConfigurationException {
         DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document doc = dBuilder.parse(inputFile);
-        if (tag == "" || tag == null) {
+        if (tag == null || tag.equals("")) {
             tag = "wsdl:definitions";
         }
         Set<String> tags = new HashSet<>();
@@ -84,7 +83,7 @@ public class TestJava2WSDL {
     private static Set<String> getTag(String file, String tag, String attr) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document doc = dBuilder.parse(file);
-        if(tag == "" || tag == null){
+        if(tag == null || tag.equals("")){
             tag = "wsdl:definitions";
         }
         Set<String> tags = new HashSet<>();
@@ -98,7 +97,7 @@ public class TestJava2WSDL {
     private static NodeList getNodeList(String file, String tag) throws IOException, SAXException, ParserConfigurationException {
         DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document doc = dBuilder.parse(file);
-        if(tag == "" || tag == null){
+        if(tag == null || tag.equals("")){
             tag = "wsdl:definitions";
         }
         return doc.getElementsByTagName(tag);
@@ -173,19 +172,19 @@ public class TestJava2WSDL {
     private static String printNode(Node node, String filter, int indention) {
         String temp = "";
         if (node.getNodeType() == Node.ELEMENT_NODE) {
-            if (filter == "" || filter == null) {
+            if (filter == null || filter.equals("")) {
                 temp += String.join("", Collections.nCopies(indention, "\t"));
-                temp += ("Node Name: " + node.getNodeName() + " Value: " + node.getNodeValue() + "\n");
+                temp += ("Node Name: " + node.getNodeName() + " Value: " + node.getNodeValue() + System.lineSeparator());
             }
             if (node.hasAttributes()) {
                 NamedNodeMap nodeMap = node.getAttributes();
                 for (int i = 0; i < nodeMap.getLength(); i++) {
                     Node tempNode = nodeMap.item(i);
-                    if (filter == "" | filter == null || tempNode.getNodeValue().equals(filter)) {
+                    if (filter == null || filter.equals("") || tempNode.getNodeValue().equals(filter)) {
                         temp += String.join("", Collections.nCopies(indention, "\t"));
-                        temp+= ("Node Name: " + node.getNodeName() + " Value: " + node.getNodeValue() + "\n");
+                        temp+= ("Node Name: " + node.getNodeName() + " Value: " + node.getNodeValue() + System.lineSeparator());
                         temp += String.join("", Collections.nCopies(indention, "\t"));
-                        temp += ("\tNode Attribute:" + tempNode.getNodeName() + " Value:" + tempNode.getNodeValue() + "\n");
+                        temp += ("\tNode Attribute:" + tempNode.getNodeName() + " Value:" + tempNode.getNodeValue() + System.lineSeparator());
                         if (node.hasChildNodes()) {
                             for(int j=0; j<node.getChildNodes().getLength();j++)
                                 temp += printNode(node.getChildNodes().item(j), "", indention+1);
@@ -196,7 +195,7 @@ public class TestJava2WSDL {
         }
         if (node.hasChildNodes()) {
             for(int i=0; i<node.getChildNodes().getLength();i++)
-            temp += printNode(node.getChildNodes().item(i), filter, indention+1);
+                temp += printNode(node.getChildNodes().item(i), filter, indention+1);
         }
         return temp;
     }
@@ -380,13 +379,13 @@ public class TestJava2WSDL {
                 "-n", "http://example.org")));
 
         Set<String> namespace1 = new HashSet<>();
-        for(String tag:getTag(runner.getWsdlOut()[0], "wsdl:definitions").iterator().next().split("\n")){
+        for(String tag:getTag(runner.getWsdlOut()[0], "wsdl:definitions").iterator().next().split(System.lineSeparator())){
             if (tag.contains("targetNamespace")){
                 namespace1.add(tag);
             }
         }
         Set<String> namespace2 = new HashSet<>();
-        for(String tag:getTag(runner.findOutputFile(), "wsdl:definitions").iterator().next().split("\n")){
+        for(String tag:getTag(runner.findOutputFile(), "wsdl:definitions").iterator().next().split(System.lineSeparator())){
             if (tag.contains("targetNamespace")){
                 namespace2.add(tag);
             }
@@ -429,8 +428,8 @@ public class TestJava2WSDL {
                 getTag(runner.getWsdlOut()[0], "wsdl:message", "getMethod1Request"),
                 getTag(runner.findOutputFile(), "wsdl:message", "getMethod1Request"));
 
-        assertEquals("Anzahl der Methoden ist in den beiden Versionen unterschiedlich. \nAnzahl in original: "+
-                        getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength()+"\nAnzahl in modified: "+
+        assertEquals("Anzahl der Methoden ist in den beiden Versionen unterschiedlich. "+System.lineSeparator()+"Anzahl in original: "+
+                        getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength()+System.lineSeparator()+"Anzahl in modified: "+
                         getNodeList(runner.findOutputFile(), "wsdl:message").getLength(),
                 getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength(),
                 getNodeList(runner.findOutputFile(), "wsdl:message").getLength());
@@ -443,8 +442,8 @@ public class TestJava2WSDL {
                 "-m", "nonExistentMethod")));
 
         //Erwartung: sollte jeweils 0x da sein
-        assertEquals("Anzahl der Methoden ist in den beiden Versionen unterschiedlich. \nAnzahl in original: "+
-                        getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength()+"\nAnzahl in modified: "+
+        assertEquals("Anzahl der Methoden ist in den beiden Versionen unterschiedlich. "+System.lineSeparator()+"Anzahl in original: "+
+                        getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength()+System.lineSeparator()+"Anzahl in modified: "+
                         getNodeList(runner.findOutputFile(), "wsdl:message").getLength(),
                 getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength(),
                 getNodeList(runner.findOutputFile(), "wsdl:message").getLength());
@@ -457,8 +456,8 @@ public class TestJava2WSDL {
                 "-a")));
 
         //Erwartung: sollte jeweils 12x da sein
-        assertEquals("Anzahl der message-tags ist in den beiden Versionen unterschiedlich. \nAnzahl in original: "+
-                        getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength()+"\nAnzahl in modified: "+
+        assertEquals("Anzahl der message-tags ist in den beiden Versionen unterschiedlich. "+System.lineSeparator()+"Anzahl in original: "+
+                        getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength()+System.lineSeparator()+"Anzahl in modified: "+
                         getNodeList(runner.findOutputFile(), "wsdl:message").getLength(),
                 getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength(),
                 getNodeList(runner.findOutputFile(), "wsdl:message").getLength());
@@ -471,14 +470,14 @@ public class TestJava2WSDL {
                 "-w", "All")));
 
         //Erwartung: sollte jeweils 4x da sein
-        assertEquals("Anzahl der message-tags ist in den beiden Versionen unterschiedlich. \nAnzahl in original: "+
-                        getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength()+"\nAnzahl in modified: "+
+        assertEquals("Anzahl der message-tags ist in den beiden Versionen unterschiedlich. "+System.lineSeparator()+"Anzahl in original: "+
+                        getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength()+System.lineSeparator()+"Anzahl in modified: "+
                         getNodeList(runner.findOutputFile(), "wsdl:message").getLength(),
                 getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength(),
                 getNodeList(runner.findOutputFile(), "wsdl:message").getLength());
 
-        assertEquals("Anzahl der Methoden ist in den beiden Versionen unterschiedlich. \nAnzahl in original: "+
-                        getNodeList(runner.getWsdlOut()[0], "wsdl:operation").getLength()+"\nAnzahl in modified: "+
+        assertEquals("Anzahl der Methoden ist in den beiden Versionen unterschiedlich. "+System.lineSeparator()+"Anzahl in original: "+
+                        getNodeList(runner.getWsdlOut()[0], "wsdl:operation").getLength()+System.lineSeparator()+"Anzahl in modified: "+
                         getNodeList(runner.findOutputFile(), "wsdl:operation").getLength(),
                 getNodeList(runner.getWsdlOut()[0], "wsdl:operation").getLength(),
                 getNodeList(runner.findOutputFile(), "wsdl:operation").getLength());
@@ -496,8 +495,8 @@ public class TestJava2WSDL {
                 "-w", "Interface")));
 
         //Erwartung: sollte jeweils 4x da sein
-        assertEquals("Anzahl der message-tags ist in den beiden Versionen unterschiedlich. \nAnzahl in original: "+
-                        getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength()+"\nAnzahl in modified: "+
+        assertEquals("Anzahl der message-tags ist in den beiden Versionen unterschiedlich. "+System.lineSeparator()+"Anzahl in original: "+
+                        getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength()+""+System.lineSeparator()+"Anzahl in modified: "+
                         getNodeList(runner.findOutputFile(), "wsdl:message").getLength(),
                 getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength(),
                 getNodeList(runner.findOutputFile(), "wsdl:message").getLength());
@@ -507,14 +506,14 @@ public class TestJava2WSDL {
                 getTag(runner.findOutputFile(), "wsdl:portType", "alteredTypeName"));
 
         //Erwartung: sollte 0 sein
-        assertEquals("Anzahl der message-tags ist in den beiden Versionen unterschiedlich. \nAnzahl in original: "+
-                        getNodeList(runner.getWsdlOut()[0], "wsdl:service").getLength()+"\nAnzahl in modified: "+
+        assertEquals("Anzahl der message-tags ist in den beiden Versionen unterschiedlich. "+System.lineSeparator()+"Anzahl in original: "+
+                        getNodeList(runner.getWsdlOut()[0], "wsdl:service").getLength()+""+System.lineSeparator()+"Anzahl in modified: "+
                         getNodeList(runner.findOutputFile(), "wsdl:service").getLength(),
                 getNodeList(runner.getWsdlOut()[0], "wsdl:service").getLength(),
                 getNodeList(runner.findOutputFile(), "wsdl:service").getLength());
 
-        assertEquals("Anzahl der message-tags ist in den beiden Versionen unterschiedlich. \nAnzahl in original: "+
-                        getNodeList(runner.getWsdlOut()[0], "wsdl:operation").getLength()+"\nAnzahl in modified: "+
+        assertEquals("Anzahl der message-tags ist in den beiden Versionen unterschiedlich. "+System.lineSeparator()+"Anzahl in original: "+
+                        getNodeList(runner.getWsdlOut()[0], "wsdl:operation").getLength()+""+System.lineSeparator()+"Anzahl in modified: "+
                         getNodeList(runner.findOutputFile(), "wsdl:operation").getLength(),
                 getNodeList(runner.getWsdlOut()[0], "wsdl:operation").getLength(),
                 getNodeList(runner.findOutputFile(), "wsdl:operation").getLength());
@@ -543,13 +542,13 @@ public class TestJava2WSDL {
                 "-N", "http://example.org")));
 
         Set<String> impl1 = new HashSet<>();
-        for(String tag:getTag(runner.getWsdlOut()[0], "wsdl:definitions").iterator().next().split("\n")){
+        for(String tag:getTag(runner.getWsdlOut()[0], "wsdl:definitions").iterator().next().split(System.lineSeparator())){
             if (tag.contains("xmlns:impl")){
                 impl1.add(tag);
             }
         }
         Set<String> impl2 = new HashSet<>();
-        for(String tag:getTag(runner.findOutputFile(), "wsdl:definitions").iterator().next().split("\n")){
+        for(String tag:getTag(runner.findOutputFile(), "wsdl:definitions").iterator().next().split(System.lineSeparator())){
             if (tag.contains("xmlns:impl")){
                 impl2.add(tag);
             }
@@ -589,8 +588,8 @@ public class TestJava2WSDL {
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-x", "setWidgetPrice")));
 
-        assertEquals("Anzahl der message-tags ist in den beiden Versionen unterschiedlich. \nAnzahl in original: "+
-                        getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength()+"\nAnzahl in modified: "+
+        assertEquals("Anzahl der message-tags ist in den beiden Versionen unterschiedlich. "+System.lineSeparator()+"Anzahl in original: "+
+                        getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength()+""+System.lineSeparator()+"Anzahl in modified: "+
                         getNodeList(runner.findOutputFile(), "wsdl:message").getLength(),
                 getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength(),
                 getNodeList(runner.findOutputFile(), "wsdl:message").getLength());
@@ -603,8 +602,8 @@ public class TestJava2WSDL {
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-x", "setWidgetPrice getWidgetPrice")));
 
-        assertEquals("Anzahl der message-tags ist in den beiden Versionen unterschiedlich. \nAnzahl in original: "+
-                        getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength()+"\nAnzahl in modified: "+
+        assertEquals("Anzahl der message-tags ist in den beiden Versionen unterschiedlich. "+System.lineSeparator()+"Anzahl in original: "+
+                        getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength()+""+System.lineSeparator()+"Anzahl in modified: "+
                         getNodeList(runner.findOutputFile(), "wsdl:message").getLength(),
                 getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength(),
                 getNodeList(runner.findOutputFile(), "wsdl:message").getLength());
@@ -616,14 +615,14 @@ public class TestJava2WSDL {
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-c", "WidgetPrice")));
 
-        assertEquals("Anzahl der message-tags ist in den beiden Versionen unterschiedlich. \nAnzahl in original: "+
-                        getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength()+"\nAnzahl in modified: "+
+        assertEquals("Anzahl der message-tags ist in den beiden Versionen unterschiedlich. "+System.lineSeparator()+"Anzahl in original: "+
+                        getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength()+""+System.lineSeparator()+"Anzahl in modified: "+
                         getNodeList(runner.findOutputFile(), "wsdl:message").getLength(),
                 getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength(),
                 getNodeList(runner.findOutputFile(), "wsdl:message").getLength());
 
-        assertEquals("Anzahl der operation-tags ist in den beiden Versionen unterschiedlich. \nAnzahl in original: "+
-                        getNodeList(runner.getWsdlOut()[0], "wsdl:operation").getLength()+"\nAnzahl in modified: "+
+        assertEquals("Anzahl der operation-tags ist in den beiden Versionen unterschiedlich. "+System.lineSeparator()+"Anzahl in original: "+
+                        getNodeList(runner.getWsdlOut()[0], "wsdl:operation").getLength()+""+System.lineSeparator()+"Anzahl in modified: "+
                         getNodeList(runner.findOutputFile(), "wsdl:operation").getLength(),
                 getNodeList(runner.getWsdlOut()[0], "wsdl:operation").getLength(),
                 getNodeList(runner.findOutputFile(), "wsdl:operation").getLength());
@@ -652,13 +651,13 @@ public class TestJava2WSDL {
                 "-A", "DEFAULT")));
 
         List<String> soap1 = new LinkedList<>();
-        for(String tag:readFile(runner.getWsdlOut()[0]).split("\n")){
+        for(String tag:readFile(runner.getWsdlOut()[0]).split(System.lineSeparator())){
             if (tag.contains("soapAction")){
                 soap1.add(tag);
             }
         }
         List<String> soap2 = new LinkedList<>();
-        for(String tag:readFile(runner.findOutputFile()).split("\n")){
+        for(String tag:readFile(runner.findOutputFile()).split(System.lineSeparator())){
             if (tag.contains("soapAction")){
                 soap2.add(tag);
             }
@@ -674,13 +673,13 @@ public class TestJava2WSDL {
                 "-A", "OPERATION")));
         //assertEquals("test", readFile(runner.getWsdlOut()[0]), readFile(runner.findModWsdlOut()));
         List<String> soap1 = new LinkedList<>();
-        for(String tag1:readFile(runner.getWsdlOut()[0]).split("\n")){
+        for(String tag1:readFile(runner.getWsdlOut()[0]).split(System.lineSeparator())){
             if (tag1.contains("soapAction")){
                 soap1.add(tag1);
             }
         }
         List<String> soap2 = new LinkedList<>();
-        for(String tag2:readFile(runner.findOutputFile()).split("\n")){
+        for(String tag2:readFile(runner.findOutputFile()).split(System.lineSeparator())){
             if (tag2.contains("soapAction")){
                 soap2.add(tag2);
             }
@@ -696,13 +695,13 @@ public class TestJava2WSDL {
                 "-A", "NONE")));
         List<String> soap1 = new LinkedList<>();
 
-        for(String tag:readFile(runner.getWsdlOut()[0]).split("\n")){
+        for(String tag:readFile(runner.getWsdlOut()[0]).split(System.lineSeparator())){
             if (tag.contains("soapAction")){
                 soap1.add(tag);
             }
         }
         List<String> soap2 = new LinkedList<>();
-        for(String tag:readFile(runner.findOutputFile()).split("\n")){
+        for(String tag:readFile(runner.findOutputFile()).split(System.lineSeparator())){
             if (tag.contains("soapAction")){
                 soap2.add(tag);
             }
@@ -764,6 +763,42 @@ public class TestJava2WSDL {
                 getTag(runner.getWsdlOut()[0], "wsdl:definitions"),
                 getTag(runner.findOutputFile(), "wsdl:definitions"));
         //testet gesamtes Dokument, also falls irgendwo ein Fehler, dann schlägt dieser Test fehl
+    }
+
+    @Test
+    public void testTagMessage() throws ParserConfigurationException, SAXException, IOException {
+        String inClassName = "CalculatorImpl";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName")));
+        assertEquals("message Tags unterscheiden sich",
+                getTag(runner.getWsdlOut()[0], "wsdl:message"),
+                getTag(runner.findOutputFile(), "wsdl:message"));
+    }
+
+    @Test
+    public void testTagPortType() throws ParserConfigurationException, SAXException, IOException {
+        String inClassName = "CalculatorImpl";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName")));
+        assertEquals("portType Tags unterscheiden sich",
+                getTag(runner.getWsdlOut()[0], "wsdl:portType"),
+                getTag(runner.findOutputFile(), "wsdl:portType"));
+    }
+
+    @Test
+    public void testTagBinding() throws ParserConfigurationException, SAXException, IOException {
+        String inClassName = "CalculatorImpl";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName")));
+        assertEquals("binding Tags unterscheiden sich",
+                getTag(runner.getWsdlOut()[0], "wsdl:binding"),
+                getTag(runner.findOutputFile(), "wsdl:binding"));
+    }
+
+    @Test
+    public void testTagService() throws ParserConfigurationException, SAXException, IOException {
+        String inClassName = "CalculatorImpl";
+        requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName")));
+        assertEquals("service Tags unterscheiden sich",
+                getTag(runner.getWsdlOut()[0], "wsdl:service"),
+                getTag(runner.findOutputFile(), "wsdl:service"));
     }
 
 }
