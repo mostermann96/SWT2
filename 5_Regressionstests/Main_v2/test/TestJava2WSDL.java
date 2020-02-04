@@ -614,7 +614,7 @@ public class TestJava2WSDL {
     public void testStopClasses() throws ParserConfigurationException, SAXException, IOException {
         String inClassName = "TestFile1";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
-                "-x", "WidgetPrice")));
+                "-c", "WidgetPrice")));
 
         assertEquals("Anzahl der message-tags ist in den beiden Versionen unterschiedlich. \nAnzahl in original: "+
                         getNodeList(runner.getWsdlOut()[0], "wsdl:message").getLength()+"\nAnzahl in modified: "+
@@ -672,16 +672,17 @@ public class TestJava2WSDL {
         String inClassName = "WidgetPrice";
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-A", "OPERATION")));
+        //assertEquals("test", readFile(runner.getWsdlOut()[0]), readFile(runner.findModWsdlOut()));
         List<String> soap1 = new LinkedList<>();
-        for(String tag:readFile(runner.getWsdlOut()[0]).split("\n")){
-            if (tag.contains("soapAction")){
-                soap1.add(tag);
+        for(String tag1:readFile(runner.getWsdlOut()[0]).split("\n")){
+            if (tag1.contains("soapAction")){
+                soap1.add(tag1);
             }
         }
         List<String> soap2 = new LinkedList<>();
-        for(String tag:readFile(runner.findOutputFile()).split("\n")){
-            if (tag.contains("soapAction")){
-                soap2.add(tag);
+        for(String tag2:readFile(runner.findOutputFile()).split("\n")){
+            if (tag2.contains("soapAction")){
+                soap2.add(tag2);
             }
         }
         assertEquals("-A OPERATION hat soapAction nicht richtig modifiziert",
@@ -694,6 +695,7 @@ public class TestJava2WSDL {
         requireSuccess(runner.runJava2WSDL(inClassName, Arrays.asList("-l", "someLocation/portName",
                 "-A", "NONE")));
         List<String> soap1 = new LinkedList<>();
+
         for(String tag:readFile(runner.getWsdlOut()[0]).split("\n")){
             if (tag.contains("soapAction")){
                 soap1.add(tag);
